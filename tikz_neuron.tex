@@ -1,0 +1,18 @@
+\begin{tikzpicture}[
+neuron/.style={circle, draw=black, very thick, minimum size=1.5cm},
+dot/.style={circle, draw=black, fill=black, minimum size=0.1cm, inner sep=0pt},
+VLineVertex/.style={circle, draw=black, minimum size=0cm, inner sep=0pt},
+]
+
+\node[neuron] (neuron) {$a, \vec{w}, b$};
+\node (x2) [left=2cm of neuron] {$x_2$};
+\node (x1) [above=0.5cm of x2] {$x_1$};
+\node (x3) [below=0.5cm of x2] {$x_3$};
+\node (out) [right=2cm of neuron] {$a(\vec{w}\cdot\vec{x}+b)$};
+
+\draw (x1.east) -- (neuron.west);
+\draw (x2.east) -- (neuron.west);
+\draw (x3.east) -- (neuron.west);
+\draw [->] (neuron.east) -- (out.west);
+
+\end{tikzpicture}

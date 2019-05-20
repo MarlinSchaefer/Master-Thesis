@@ -1,0 +1,267 @@
+\documentclass[11pt,a4paper]{article}
+
+\includeonly{neural_networks}
+
+%Provides the ability to customize colors to a certain degree
+\usepackage{color}
+%Provides more named colors and the ability to color tables
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+%Provides alot of usefull maths related symbols like the set of real numbers etc.
+\usepackage{amssymb}
+%Basic math-features and symbols
+\usepackage{amsmath}
+%extensible brackets, showing not numbered equations etc.
+\usepackage{mathtools}
+%This package is needed in order to include pictures via \includegraphics[scale=x]{y}
+\usepackage{graphicx}
+%Used to have more control over 'figure'
+\usepackage[font=footnotesize,labelfont=bf]{caption}
+%Provides the H parameter for floating "objects" like tables and figures. (Does more as well)
+\usepackage{float}
+%The following three packages are used so that letters like ä, ö, ü are printed out correctly
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+%The following package handels the bibliography. Biber is needed to run this. The option 'style=numeric' lets the citation have a number within their occurence within the text, the option 'doi=true' prints the doi to the bibliography, if there is one in the .bib file. The option 'backref' backreferences the page numbers in the bibliography to the pages where the citation occurs. 'backrefstyle=none' is a stylingoption for the backreferences.
+%\usepackage[doi=true,url=false,sorting=none,backref,backrefstyle=none]{biblatex}
+\usepackage[doi=true,url=false,sorting=none,backref,backrefstyle=none]{biblatex}
+%Provides the ability to have colored links and change their color
+\usepackage[colorlinks,urlcolor=blue,citecolor=blue,linkcolor=black]{hyperref}
+%Provides the ability to change page layout and sizes
+\usepackage{geometry}
+%This package handles the Glossary, the option 'toc' adds it to the table of contents, 'nonumberlist' makes it so that the glossary doesn't link to the page(s) the abbreviations were used.
+\usepackage[toc,nonumberlist]{glossaries}
+%Used for better enumerations
+\usepackage{multicol}
+%
+\usepackage[inline]{enumitem}
+%Package for theorems
+\usepackage{amsthm}
+%For correct translations into german
+\usepackage[english]{babel}
+%To get acces to the \begin{comment}/\end{comment} commands
+\usepackage{verbatim}
+%Used to cross out parts of equations using the \cancel command
+\usepackage[makeroom]{cancel}
+%Used to get the half-space between the quantity and the unit
+\usepackage{siunitx}
+%Use this package to visualize the boarders of each region
+%\usepackage{showframe}
+%For the command \bm printing stuff bold in math-mode
+\usepackage{bm}
+%Create tikz-pictures
+\usepackage{tikz}
+%make positional arguments (such as 'above') available to tikz
+\usetikzlibrary{positioning}
+
+\graphicspath{ {images/} }
+
+%The following is a macro to handle the links within the bibliography
+\newbibmacro{string+doiurlisbn}[1]{%
+  \iffieldundef{doi}{%
+    \iffieldundef{url}{%
+      \iffieldundef{isbn}{%
+        \iffieldundef{issn}{%
+          #1%
+        }{%
+          \href{http://books.google.com/books?vid=ISSN\thefield{issn}}{#1}%
+        }%
+      }{%
+        \href{http://books.google.com/books?vid=ISBN\thefield{isbn}}{#1}%
+      }%
+    }{%
+      \href{\thefield{url}}{#1}%
+    }%
+  }{%
+    \href{http://dx.doi.org/\thefield{doi}}{#1}%
+  }%
+}
+
+\DeclareFieldFormat{title}{\usebibmacro{string+doiurlisbn}{\mkbibemph{#1}}}
+\DeclareFieldFormat[article,incollection]{title}%
+    {\usebibmacro{string+doiurlisbn}{\mkbibquote{#1}}}
+
+\makeglossaries
+\numberwithin{equation}{section}
+\addbibresource{bibliography.bib}
+%\nocite{*}
+
+\renewcommand{\glossaryname}{Glossar}
+
+\newcommand{\mbe}{\overset{!}{=}}
+\newcommand{\chrs}[3]{{\Gamma}_{#2 #3}^#1}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\mn}{{\mu\nu}}
+\newcommand{\restr}[2]{{\left.\kern-\nulldelimiterspace #1\vphantom{\big|}\right|_{#2}}}
+\newcommand{\TM}{\mathit{TM}}
+\newcommand{\oh}{\mathcal{O}\left(h\right)}
+\newcommand{\ohsq}{\mathcal{O}\left(h^2\right)}
+\newcommand{\diff}{\mathop{}\!\mathrm{d}}
+\newcommand{\Diff}[1]{\mathop{}\!\mathrm{d^#1}}
+\newcommand{\eit}{Energie-Impuls-Tensor\ }
+\newcommand{\eg}{Einsteingleichung\ }
+\newcommand{\egn}{Einsteingleichungen\ }
+\newcommand{\lr}[1]{{\left( #1 \right)}}
+\newcommand{\norm}[1]{{\left|\left| #1 \right|\right|}}
+\newcommand{\cm}{{Chirp-Masse\ }}
+\newcommand{\co}{\text{c}}
+\newcommand{\s}{\text{s}}
+
+%To get the \lambdabar Character. Source: https://tex.stackexchange.com/questions/96479/how-can-i-type-lambda-bar
+\makeatletter
+\newcommand{\lambdabar}{{\mathchoice
+  {\smash@bar\textfont\displaystyle{0.25}{1.2}\lambda}
+  {\smash@bar\textfont\textstyle{0.25}{1.2}\lambda}
+  {\smash@bar\scriptfont\scriptstyle{0.25}{1.2}\lambda}
+  {\smash@bar\scriptscriptfont\scriptscriptstyle{0.25}{1.2}\lambda}
+}}
+\newcommand{\smash@bar}[4]{%
+  \smash{\rlap{\raisebox{-#3\fontdimen5#10}{$\m@th#2\mkern#4mu\mathchar'26$}}}%
+}
+\makeatother
+
+\newtheoremstyle{mystyle}{0.8\baselineskip}{0.8\baselineskip}{\normalfont}{}{\bfseries}{:}{3pt}{}
+
+\swapnumbers
+\theoremstyle{mystyle}
+\newtheorem{thm}{Theorem}
+\numberwithin{thm}{subsection}
+\newtheorem{prop}[thm]{Satz}
+\newtheorem{cor}[thm]{Korollar}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{bsp}[thm]{Beispiel}
+\newtheorem{bem}[thm]{Bemerkung}
+\newtheorem{defi}[thm]{Definition}
+
+\author{Marlin Benedikt Schäfer}
+
+\begin{document}
+
+\newglossaryentry{sr}{name=SR, description={special relativity}}
+\newglossaryentry{gw}{name=GW, description={gravitational wave}}
+\newglossaryentry{gr}{name=GR, description={general relativity}}
+\newglossaryentry{pn}{name=PN, description={post Newtonian approximation}}
+\newglossaryentry{ligo}{name=LIGO, description=Laser Interferometer Gravitational-Wave Observatory (USA)}
+\newglossaryentry{utc}{name=UTC, description=Coordinated Universal Time}
+\newglossaryentry{dgl}{name=DGL, description=Differenzialgleichung/en}
+\newglossaryentry{mf}{name=MF, description=manifold}
+\newglossaryentry{tt}{name=TT, description=transversal-traceless gauge}
+\newglossaryentry{obda}{name=o.B.d.A. , description=ohne Beschränkung der Allgemeinheit}
+\newglossaryentry{onb}{name=ONB, description=Orthonormalbasis}
+\newglossaryentry{ns}{name=NS, description=neutron star}
+\newglossaryentry{bh}{name=BH, description=black hole}
+\newglossaryentry{isco}{name=ISCO, description=innermost stable circular orbit}
+\newglossaryentry{virgo}{name=VIRGO, description=earthbound gravitational wave detector in Italy}
+\newglossaryentry{pdf}{name=PDF, description=probability density function}
+\newglossaryentry{skp}{name=SKP, description=Skalarprodukt}
+\newglossaryentry{gpu}{name=GPU, description=Graphics processing unit}
+\newglossaryentry{pm}{name=PM, description=Post-Minkowski'sche Näherung}
+\newglossaryentry{eob}{name=EOB, description=effective one body problem}
+\newglossaryentry{nn}{name=NN, description=Neural network}
+\newglossaryentry{cnn}{name=CNN, description=Convolution neural network}
+
+\pagenumbering{Roman}
+%\maketitle
+%\setcounter{page}{0}
+\begin{titlepage}
+\raggedbottom
+\raggedright
+%\hspace{-2cm}
+\includegraphics[width=0.4\textwidth]{Logo.png}\par
+\vspace{0.7cm}
+\centering
+{\scshape\LARGE Leibniz Universität Hannover\\and\\Max Planck Institute for Gravitational Physics (Albert Einstein Institute)\par}
+\vspace{1cm}
+{\scshape\Large Master thesis\par}
+\vspace{1.2cm}
+{\bfseries\huge Analysis of Gravitational-Wave Signals from Binary Neutron Star Mergers Using Machine Learning\par}
+\vspace{2cm}
+{\itshape\Large Marlin Benedikt Schäfer\par}
+\vfill
+{\itshape Supervisors: Dr. Frank Ohme and Dr. Alexander Harvey Nitz\par}
+\vfill
+{\large\today\par}
+\vfill
+\end{titlepage}
+\thispagestyle{empty}
+\newpage
+
+\setcounter{page}{2}
+$\ $
+\textcolor{red}{This page is intentionally left blank. LÖSCHEN!!! Damit Eigenständigkeitserklärung nicht auf Rückseite gedruckt ist.}
+\thispagestyle{empty}
+\newpage
+
+\setcounter{page}{3}
+\noindent I hereby assure that the thesis at hand has been constituted independently and without the use of any other than the cited sources. I furthermore assure, that all passages taken textually or analogously from other sources are marked as such.\\
+This thesis, in its current or a similar form, has not been submitted to any other examination office.\par
+\vspace{1.25cm}
+\noindent\makebox[\textwidth]{\hrulefill}\\
+\vspace{1.25cm}\\
+\noindent Hiermit versichere ich, dass die vorliegende Arbeit selbständig und ohne Verwendung anderer Quellen, als den angegebenen, verfasst wurde. Zudem versichere ich, dass alle Stellen, die wörtlich oder sinngemäß aus anderen Quellen entnommen wurden, als solche gekennzeichnet sind.\\
+Diese Arbeit hat so oder in einer ähnlichen Form noch keiner anderen Prüfungsbehörde vorgelegen.
+\vfill
+\noindent\begin{tabular}{ll}
+\makebox[6.5cm]{\hrulefill} & \makebox[6.5cm]{\hrulefill}\\
+Ort, Datum & Marlin Benedikt Schäfer\\
+\end{tabular}
+\thispagestyle{empty}
+\newpage
+
+\setcounter{page}{4}
+$\ $
+\textcolor{red}{This page is intentionally left blank. LÖSCHEN!!! Damit Inhaltsverzeichnis nicht auf Rückseite gedruckt ist.}
+\thispagestyle{empty}
+\newpage
+
+\setcounter{page}{5}
+\section*{Abstract}\label{sec_abstract}
+\textcolor{red}{Put the abstract here}
+
+\thispagestyle{empty}
+\newpage
+
+\setcounter{page}{6}
+$\ $
+\textcolor{red}{This page is intentionally left blank. LÖSCHEN!!! Damit Inhaltsverzeichnis nicht auf Rückseite gedruckt ist.}
+\thispagestyle{empty}
+\newpage
+
+\setcounter{page}{7}
+\tableofcontents
+\thispagestyle{empty}
+\newpage
+
+\setcounter{page}{8}
+$\ $
+\textcolor{red}{This page is intentionally left blank. LÖSCHEN!!! Damit erste Seite nicht auf Rückseite gedruckt ist.}
+\thispagestyle{empty}
+\newpage
+
+\pagenumbering{arabic}
+\setcounter{section}{0}
+
+\include{introduction}
+
+\include{gw_signals}
+
+\include{neural_networks}
+
+\include{network_specifics}
+
+\include{conclusion}
+
+\include{acknowledgments}
+
+\newpage
+$\ $
+\newpage
+
+\printglossaries
+
+\newpage
+$\ $
+\newpage
+\printbibliography[heading=bibintoc]
+
+\end{document}

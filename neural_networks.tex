@@ -1,0 +1,52 @@
+\section{Neural networks}
+\textcolor{blue}{Explain the use for this section.}\\
+\noindent Neural networks are machine learning algorithms inspired by research on the structure and inner workings of brains. \textcolor{red}{[Insert quote (Rosenblatt?)]} Though in the beginning \gls{nn} were not used in computer sciences due to computational limitations \textcolor{red}{[Citation]} they are now a major source of innovation across multiple disciplines. Their capability of pattern recognition and classification has already been successfully applied to a wide range of problems not only in commercial applications but also many scientific fields. \textcolor{red}{[Quote a few scientific usecases here. Of course using the one for gw but also other disciplines.]} Major use cases in the realm of gravitational wave analysis have been classification of glitches in the strain data of \gls{gw}-detectors \textcolor{red}{[Citation]} and classification of strain data containing a \gls{gw} versus pure noise \textcolor{red}{[Citation]}. \textcolor{red}{A few more notable examples include [list of citations].}\\
+In this section the basic principles of \gls{nn} will be introduced and notation will be set. The concept of backpropagation will be introduced \textcolor{red}{and extended to a special and for this work important kind of \gls{nn}. (maybe use the term ''convolution'' here already?)} It will be shown that learning in \gls{nn} is simply a mathematical minimization of errors that can largely be understood analytically.
+
+\begin{comment}
+Neural networks have become a new and major player in data sciences over the past few years. They have proven to be very good at classification and interpolation. \textcolor{red}{[Insert ref]} Therefore and due to their computational efficiency they seem to be a compelling option even for scientific use cases and have been successfully applied to the classification and basic parameter estimation of \gls{gw}-data.\\
+This sections aims to convey the basics of neural networks and the layers that are being utilized in this work. After having read this section it should be clear that neural networks are simply a mathematical model and that there is no magic involved. \textcolor{red}{(Maybe this is too prosa-like and/or should be put into the introduction)}
+\end{comment}
+
+\subsection{Neurons, layers and networks}
+\textcolor{blue}{What is the general concept of a neural network? How does it work? How does backpropagation work? How can one replicate logic gates? (cite online book)}\\
+\noindent The basic building block of a \gls{nn} is - as the name suggests - a neuron. This neuron is a function mapping inputs to a single output. In the early days this output was always either $1$ or $0$ \textcolor{red}{[Citation]}, whereas nowadays it is usually some real number.\\
+In general there are two different kind of inputs. Those that are specific to the neuron itself and those that the neuron receives as an outside stimulus. We write the neuron as
+\begin{equation}\label{def:neuron}
+f: \R^n\times\R^n\times\R\to\R ;\ \ \ (\vec{x}, \vec{w}, b)\mapsto f(\vec{x}, \vec{w}, b)\coloneqq a(\vec{w}\cdot\vec{x}+b),
+\end{equation}
+where $\vec{x}$ is the outside stimulus, $\vec{w}$ are called weights, $b$ is a bias value and $a$ is a function known as the \emph{activation function}\textcolor{red}{ (change this to not be emphasized if it is not used for the first time here)}. The activation function is a scalar function
+\begin{equation}\label{def:activation_function}
+a:\ \R\to\R
+\end{equation}
+determining the scale of the output of the neuron. To understand the role of part of the neuron, consider the following activation function:
+\begin{equation}\label{def:step_activation}
+a(y) = 
+\begin{cases}
+	1,& y> 0\\
+	0,& y\leq 0
+\end{cases}.
+\end{equation}
+This tells us, that the neuron will only send out a signal if the input to the activation function is greater than 0. Therefore in order for the neuron to activate, the weighted sum of the inputs $\vec{w}\cdot\vec{x}$ has to be larger than the negative bias $b$. When a \gls{nn} is training, i.e. learning, it tweaks these weights and biases to achieve its goal.\\
+The effects of changing the weights make some input more or less important. The closer a weight $w_i$ is to zero, the less impact the corresponding input value $x_i$ will have. Choosing a negative weight $w_i$ results in the corresponding input $x_i$ being inverted, i.e. the smaller the value of $x_i$ the more likely the neuron is to activate and vice versa.\\
+\textcolor{red}{Explain what changing the bias does.}
+\begin{figure}
+\centering
+\input{tikz_neuron}
+\caption{Depiction of a neuron with inputs $\vec{x}={(x_1, x_2, x_3)}^T$, weights $\vec{w}$, bias $b$ and activation function $a$.}\label{fig:neuron}
+\end{figure}
+
+\subsection{Specific layers}
+\textcolor{blue}{Explain that there are not just dense layers.}
+\subsubsection{Dense layer}
+\textcolor{blue}{What is a dense layer, how does it work (can maybe be omitted)}
+\subsubsection{Convolution layer}
+\textcolor{blue}{What are the advantages of convolution layers and why do we use them? Disadvantages?}
+\subsubsection{Inception layer}
+\textcolor{blue}{Explain what it is, how it works. (cite google paper) ONLY IF IT IS REALLY USED IN THE FINAL ARCHITECTURE!}
+\subsubsection{Batch Normalization layer}
+\textcolor{blue}{Explain how batch normalization works and why it is useful. (cite according paper)}
+\subsubsection{Dropout layer}
+\textcolor{blue}{Explain what a dropout layer is, what it does, why it is useful.}
+\subsubsection{Max Pooling layer}
+\textcolor{blue}{Explain what max pooling does and why it is useful, even when it is counter intuitive.}
