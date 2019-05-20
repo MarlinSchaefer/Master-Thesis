@@ -1,0 +1,14 @@
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.glg
+*.glo
+*.gls
+*.glsdefs
+*.ist
+*.log
+*.out
+*.gz
+*.xml
+*.toc
