@@ -1,0 +1,17 @@
+\begin{tikzpicture}[
+neuron/.style={circle, draw=black, very thick, minimum size=1.0cm},
+dot/.style={circle, draw=black, fill=black, minimum size=0.1cm, inner sep=0pt},
+VLineVertex/.style={circle, draw=black, minimum size=0cm, inner sep=0pt},
+]
+
+\node[neuron] (neuron) {\textbf{and}};
+\node (place) [left=1cm of neuron] {};
+\node (x1) [above=0.25cm of place] {$x_1$};
+\node (x3) [below=0.25cm of place] {$x_3$};
+\node (out) [right=0.75cm of neuron] {$x_1\land x_2$};
+
+\draw (x1.east) -- (neuron.west);
+\draw (x3.east) -- (neuron.west);
+\draw [->] (neuron.east) -- (out.west);
+
+\end{tikzpicture}

@@ -8,18 +8,18 @@ Neural networks have become a new and major player in data sciences over the pas
 This sections aims to convey the basics of neural networks and the layers that are being utilized in this work. After having read this section it should be clear that neural networks are simply a mathematical model and that there is no magic involved. \textcolor{red}{(Maybe this is too prosa-like and/or should be put into the introduction)}
 \end{comment}
 
-\subsection{Neurons, layers and networks}
+\subsection{Neurons, layers and networks}\label{sec:basics_neuron_network}
 \textcolor{blue}{What is the general concept of a neural network? How does it work? How does backpropagation work? How can one replicate logic gates? (cite online book)}\\
-\noindent The basic building block of a \gls{nn} is - as the name suggests - a neuron. This neuron is a function mapping inputs to a single output. In the early days this output was always either $1$ or $0$ \textcolor{red}{[Citation]}, whereas nowadays it is usually some real number.\\
-In general there are two different kind of inputs. Those that are specific to the neuron itself and those that the neuron receives as an outside stimulus. We write the neuron as
+\noindent The basic building block of a \gls{nn} is - as the name suggests - a \emph{neuron}. This neuron is a function mapping inputs to a single output. In the early days this output was always either $1$ or $0$ \textcolor{red}{[Citation]}, whereas nowadays it is usually some real number.\\
+In general there are two different kinds of inputs. Those that are specific to the neuron itself and those that the neuron receives as an outside stimulus. We write the neuron as
 \begin{equation}\label{def:neuron}
 f: \R^n\times\R^n\times\R\to\R ;\ \ \ (\vec{x}, \vec{w}, b)\mapsto f(\vec{x}, \vec{w}, b)\coloneqq a(\vec{w}\cdot\vec{x}+b),
 \end{equation}
-where $\vec{x}$ is the outside stimulus, $\vec{w}$ are called weights, $b$ is a bias value and $a$ is a function known as the \emph{activation function}\textcolor{red}{ (change this to not be emphasized if it is not used for the first time here)}. The activation function is a scalar function
+where $\vec{x}$ is the outside stimulus, $\vec{w}$ are called weights, $b$ is a bias value and $a$ is a function known as the \emph{activation function}\textcolor{red}{ (change this to not be emphasized if it is not used for the first time here)}. A usual depiction of a neuron and its structure is shown in \autoref{fig:neuron}. The activation function is a scalar function
 \begin{equation}\label{def:activation_function}
 a:\ \R\to\R
 \end{equation}
-determining the scale of the output of the neuron. To understand the role of part of the neuron, consider the following activation function:
+determining the scale of the output of the neuron. To understand the role of each part of the neuron, consider the following activation function:
 \begin{equation}\label{def:step_activation}
 a(y) = 
 \begin{cases}
@@ -27,14 +27,34 @@ a(y) =
 	0,& y\leq 0
 \end{cases}.
 \end{equation}
-This tells us, that the neuron will only send out a signal if the input to the activation function is greater than 0. Therefore in order for the neuron to activate, the weighted sum of the inputs $\vec{w}\cdot\vec{x}$ has to be larger than the negative bias $b$. When a \gls{nn} is training, i.e. learning, it tweaks these weights and biases to achieve its goal.\\
-The effects of changing the weights make some input more or less important. The closer a weight $w_i$ is to zero, the less impact the corresponding input value $x_i$ will have. Choosing a negative weight $w_i$ results in the corresponding input $x_i$ being inverted, i.e. the smaller the value of $x_i$ the more likely the neuron is to activate and vice versa.\\
-\textcolor{red}{Explain what changing the bias does.}
+With this activation function, the neuron will only send out a signal (or ''fire'') if the input $y$ is greater than 0. Therefore, in order for the neuron to fire, the weighted sum of the inputs $\vec{w}\cdot\vec{x}$ has to be larger than the negative bias $b$. This means, that the weights and biases control the behavior of the neuron and can be optimized to get a specific output.\\
+The effects of changing the weights makes individual inputs more or less important. The closer a weight $w_i$ is to zero, the less impact the corresponding input value $x_i$ will have. Choosing a negative weight $w_i$ results in the corresponding input $x_i$ being inverted, i.e. the smaller the value of $x_i$ the more likely the neuron is to activate and vice versa.\\
+Changing the bias to a more negative value will result in the neuron having fewer inputs it will fire upon, i.e. the neuron is more difficult to activate. The opposite is true for larger bias values. So increasing it will result in the neuron firing for a larger set of inputs.\\
+As an example consider a neuron with activation function \eqref{def:step_activation}, weights $\vec{w}={(w_1, w_2)}^T=(1, 1)$, bias $b=-1.5$ and inputs $(x_1,x_2)\in{\{0,1\}}^2$. Choosing the weights and biases in this way results in the outputs shown in \autoref{tab:and_neuron}. This goes to show, that neurons can replicate the behavior of an ''and''-gate. Other logical gates can be replicated by choosing the weights and biases in a similar fashion (See first section of \autoref{app:Full_adder}).
+\begin{table}
+\begin{center}
+\begin{tabular}{c c|c}
+$x_1$ & $x_2$ & $a(\vec{w}\cdot\vec{x}+b)$\\
+\hline
+$0$ & $0$ & $0$\\
+$0$ & $1$ & $0$\\
+$1$ & $0$ & $0$\\
+$1$ & $1$ & $1$\\
+\end{tabular}
+\caption{Neuron activation with activation function \eqref{def:step_activation}, weights $\vec{w}={(w_1, w_2)}^T=(1, 1)$, bias $b=-1.5$ and inputs $(x_1,x_2)\in{\{0,1\}}^2$. Choosing the weights and biases in this way replicates an ''and''-gate.}\label{tab:and_neuron}
+\end{center}
+\end{table}
+
 \begin{figure}
 \centering
-\input{tikz_neuron}
+\input{tikzgraphics/tikz_neuron}
 \caption{Depiction of a neuron with inputs $\vec{x}={(x_1, x_2, x_3)}^T$, weights $\vec{w}$, bias $b$ and activation function $a$.}\label{fig:neuron}
 \end{figure}
+
+\medskip
+\textcolor{blue}{Use the introduction of the and-neuron from above to introduce the concept of networks in a familiar way. Having logic gates enables us to build more complex structures, such as full adders and hence we can, in principle, calculate any function a computer can calculate. Only afterwards introduce layers as a way of structuring and formalizing networks.}\\
+\noindent Since all basic logic gates can be replicated by a neuron, it is a straight forward idea to connect them into more complicated structures, like a full-adder (see \autoref{app:Full_adder}). When doing this we connect multiple neurons, which therefore form a network - a neural network. The example of the full-adder demonstrates the principle of a \gls{nn} perfectly. It's premise is to connect multiple simple functions to form a network, that can solve difficult tasks.\\
+The example of a full-adder-network however shows another thing: Sufficiently complicated networks can - in principle - calculate any function an ordinary computer can calculate, as a computer is mostly a machine consisting of multiple adders and logic gates. 
 
 \subsection{Specific layers}
 \textcolor{blue}{Explain that there are not just dense layers.}

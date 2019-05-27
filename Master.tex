@@ -53,6 +53,8 @@
 \usepackage{tikz}
 %make positional arguments (such as 'above') available to tikz
 \usetikzlibrary{positioning}
+%To get figure counting within sections
+\usepackage{chngcntr}
 
 \graphicspath{ {images/} }
 
@@ -83,6 +85,8 @@
 
 \makeglossaries
 \numberwithin{equation}{section}
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
 \addbibresource{bibliography.bib}
 %\nocite{*}
 
@@ -252,6 +256,10 @@ $\ $
 \include{conclusion}
 
 \include{acknowledgments}
+
+\appendix
+
+\include{appendix}
 
 \newpage
 $\ $

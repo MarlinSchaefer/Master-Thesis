@@ -1,0 +1,14 @@
+\begin{tikzpicture}[
+neuron/.style={circle, draw=black, very thick, minimum size=1.0cm},
+dot/.style={circle, draw=black, fill=black, minimum size=0.1cm, inner sep=0pt},
+VLineVertex/.style={circle, draw=black, minimum size=0cm, inner sep=0pt},
+]
+
+\node[neuron] (neuron) {\textbf{not}};
+\node (x1) [left=0.65cm of neuron] {$x_1$};
+\node (out) [right=0.65cm of neuron] {$\lnot x_1$};
+
+\draw (x1.east) -- (neuron.west);
+\draw [->] (neuron.east) -- (out.west);
+
+\end{tikzpicture}

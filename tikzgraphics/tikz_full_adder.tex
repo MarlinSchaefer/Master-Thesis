@@ -1,0 +1,50 @@
+\begin{tikzpicture}[
+neuron/.style={circle, draw=black, very thick, minimum size=1.4cm},
+dot/.style={circle, draw=black, fill=black, minimum size=0.1cm, inner sep=0pt},
+VLineVertex/.style={circle, draw=black, minimum size=0cm, inner sep=0pt},
+]
+
+\node[neuron] (x1) {$x_1$};
+\node[neuron] (x2) [below=0.5cm of x1] {$x_2$};
+\node[neuron] (x3) [below=0.5cm of x2] {$x_3$};
+\node (center_xor1) [below=0.25cm of x1] {};
+\node[neuron] (xor1) [right=1.5cm of center_xor1] {\textbf{XOR}};
+\node[neuron] (xor2) [right=4.1cm of x2] {\textbf{XOR}};
+\node[neuron] (and1) [below=0.5cm of xor2] {\textbf{and}};
+\node[neuron] (and2) [below=0.5cm of and1] {\textbf{and}};
+\node (center_or1) [below=0.25cm of and1] {};
+\node[neuron] (or1) [right=1cm of center_or1] {\textbf{or}};
+\node (out_sum) [right=2.5cm of xor2] {Sum};
+\node (out_car) [right=0.5cm of or1] {$\text{Carry}_\text{out}$};
+
+%Inputs
+\node (x1_in) [left=0.5cm of x1] {$x_1$};
+\node (x2_in) [left=0.5cm of x2] {$x_2$};
+\node (car_in) [left=0.5cm of x3] {$\text{Carry}_\text{in}$};
+
+%Draw lines
+%Input arrows
+\draw[->] (x1_in.east) -- (x1.west);
+\draw[->] (x2_in.east) -- (x2.west);
+\draw[->] (car_in.east) -- (x3.west);
+
+%Input connections
+\draw (x1.east) -- (xor1.west);
+\draw (x1.east) -- (and2.west);
+\draw (x2.east) -- (xor1.west);
+\draw (x2.east) -- (and2.west);
+\draw (x3.east) -- (xor2.west);
+\draw (x3.east) -- (and1.west);
+
+%xor1 connections
+\draw (xor1.east) -- (xor2.west);
+\draw (xor1.east) -- (and1.west);
+
+%Third layer connections
+\draw[->] (xor2.east) -- (out_sum.west);
+\draw (and1.east) -- (or1.west);
+\draw (and2.east) -- (or1.west);
+
+%Or out
+\draw[->] (or1.east) -- (out_car.west);
+\end{tikzpicture}

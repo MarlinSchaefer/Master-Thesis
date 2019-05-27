@@ -1,0 +1,76 @@
+\section{Full adder as network}\label{app:Full_adder}
+To create a full adder from basic neurons, the corresponding logic gates need to be defined. The equivalent neuron for an ''and''-gate was defined in \autoref{sec:basics_neuron_network}. There are two more basic neurons which need to be defined. The neuron corresponding to the ''or''-gate, which is given by the same activation function \eqref{def:step_activation}, weights $\vec{w}={(w_1, w_2)}^T=(1,1)$ and bias $b=-0.5$, and the equivalent neuron for the ''not''-gate, which is given by the activation function \eqref{def:step_activation}, weight $w=-1$ and bias $b=0.5$. These definitions are summarized in \autoref{tab:neuron_logic_gates}.
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{c|c|c}
+''and''-neuron & ''or''-neuron & ''not''-neuron\\
+\hline
+\input{tikzgraphics/tikz_and_neuron} & \input{tikzgraphics/tikz_or_neuron} & \input{tikzgraphics/tikz_not_neuron}\\
+\hline
+\begin{tabular}{c c}
+$\vec{w}=(1,1)$ & $b=-1.5$
+\end{tabular} &
+\begin{tabular}{c c}
+$\vec{w}=(1,1)$ & $b=-0.5$
+\end{tabular} &
+\begin{tabular}{c c}
+$w=-1$ & $b=0.5$
+\end{tabular}\\
+\hline
+\begin{tabular}{c c|c}
+$x_1$ & $x_2$ & $a(x_1+x_2-1.5)$\\
+\hline
+$0$ & $0$ & $0$\\
+$0$ & $1$ & $0$\\
+$1$ & $0$ & $0$\\
+$1$ & $1$ & $1$\\
+\end{tabular} &
+\begin{tabular}{c c|c}
+$x_1$ & $x_2$ & $a(x_1+x_2-0.5)$\\
+\hline
+$0$ & $0$ & $0$\\
+$0$ & $1$ & $1$\\
+$1$ & $0$ & $1$\\
+$1$ & $1$ & $1$\\
+\end{tabular} &
+\begin{tabular}{c|c}
+$x_1$ & $a(-x_1+0.5)$\\
+\hline
+$0$ & $1$\\
+$1$ & $0$\\
+\end{tabular}
+\end{tabular}
+\end{center}
+\caption{A summary and depiction of the main logic gates written as neurons. All of them share the same activation function \eqref{def:step_activation}.}\label{tab:neuron_logic_gates}
+\end{table}
+\medskip
+\noindent Using the basic logic gates a more complex structure - the ''XOR''-gate - can be built. A ''XOR''-gate is defined by its truth table (see \autoref{tab:xor}).
+\begin{table}[H]
+\centering
+\begin{tabular}{c c|c}
+$x_1$ & $x_2$ & $x_1\veebar x_2$\\
+\hline
+$0$ & $0$ & $0$\\
+$0$ & $1$ & $1$\\
+$1$ & $0$ & $1$\\
+$1$ & $1$ & $0$
+\end{tabular}
+\caption{Truth table for the ''XOR''-gate.}\label{tab:xor}
+\end{table}
+It can be constructed from the three basic logic operations ''and'', ''or'' and ''not''
+\begin{equation}
+x_1\veebar x_2 = \lnot\lr{\lr{x_1\land x_2}\lor\lnot\lr{x_1\lor x_2}}.
+\end{equation}
+Therefore the basic neurons from \autoref{tab:neuron_logic_gates} can be combined to create a ''XOR''-network (see \autoref{fig:xor_net}).\\
+To simplify readability from here on out a neuron called ''XOR'' will be used. It is defined by the network of \autoref{fig:xor_net} and has to be replaced by it, whenever it is used.\\
+With this ''XOR''-neuron a network, that behaves like a full-adder, can be defined. A full-adder is a binary adder with carry in and carry out, as seen in \autoref{fig:full_adder}.
+\begin{figure}[H]
+\centering
+\input{tikzgraphics/tikz_xor_net}
+\caption{The definition of a network that is equivalent to an ''XOR''-gate.}\label{fig:xor_net}
+\end{figure}
+\begin{figure}[H]
+\centering
+\input{tikzgraphics/tikz_full_adder}
+\caption{A network replicating the behavior of a binary full adder.}\label{fig:full_adder}
+\end{figure}

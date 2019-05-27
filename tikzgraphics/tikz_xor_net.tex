@@ -1,0 +1,33 @@
+\begin{tikzpicture}[
+neuron/.style={circle, draw=black, very thick, minimum size=1.0cm},
+dot/.style={circle, draw=black, fill=black, minimum size=0.1cm, inner sep=0pt},
+VLineVertex/.style={circle, draw=black, minimum size=0cm, inner sep=0pt},
+]
+
+\node[neuron] (out_not) {\textbf{not}};
+\node[neuron] (final_or) [left=1cm of out_not] {\textbf{or}};
+\node (between) [left=1cm of final_or] {};
+\node[neuron] (bot_not) [below=0.25cm of between] {\textbf{not}};
+\node[neuron] (bot_or) [left=1cm of bot_not] {\textbf{or}};
+\node[neuron] (x2) [left=1cm of bot_or] {$x_2$};
+\node[neuron] (x1) [above=0.5cm of x2] {$x_1$};
+\node[neuron] (top_and) [right=2cm of x1] {\textbf{and}};
+\node (out) [right=0.5cm of out_not] {$x_1\veebar x_2$};
+
+%Input
+\draw (x1.east) -- (top_and.west);
+\draw (x2.east) -- (top_and.west);
+\draw (x1.east) -- (bot_or.west);
+\draw (x2.east) -- (bot_or.west);
+
+%First and second layer connections
+\draw (top_and.east) -- (final_or.west);
+\draw (bot_or.east) -- (bot_not.west);
+\draw (bot_not.east) -- (final_or.west);
+
+%Final connection
+\draw (final_or.east) -- (out_not.west);
+
+%Output
+\draw [->] (out_not.east) -- (out.west);
+\end{tikzpicture}
