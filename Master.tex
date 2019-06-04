@@ -1,6 +1,6 @@
 \documentclass[11pt,a4paper]{article}
 
-\includeonly{neural_networks}
+\includeonly{neural_networks, appendix}
 
 %Provides the ability to customize colors to a certain degree
 \usepackage{color}
@@ -52,7 +52,8 @@
 %Create tikz-pictures
 \usepackage{tikz}
 %make positional arguments (such as 'above') available to tikz
-\usetikzlibrary{positioning}
+\usetikzlibrary{positioning,shapes,arrows,chains}
+%\usetikzlibrary{positioning, shapes}
 %To get figure counting within sections
 \usepackage{chngcntr}
 
@@ -92,6 +93,9 @@
 
 \renewcommand{\glossaryname}{Glossar}
 
+\newenvironment{frcseries}{\fontfamily{frc}\selectfont}{}
+\newcommand{\textfrc}[1]{{\frcseries#1}}
+
 \newcommand{\mbe}{\overset{!}{=}}
 \newcommand{\chrs}[3]{{\Gamma}_{#2 #3}^#1}
 \newcommand{\R}{\mathbb{R}}
@@ -110,6 +114,18 @@
 \newcommand{\cm}{{Chirp-Masse\ }}
 \newcommand{\co}{\text{c}}
 \newcommand{\s}{\text{s}}
+
+%Same size overset with controllable vertical offset.
+%Use $\oset[1ex]{arg1}{arg2}$
+%Sources:
+%https://www.latex4technics.com/?note=3cz1
+%Can't find the other one anymore
+\makeatletter
+\newcommand{\oset}[3][0ex]{%
+  \mathrel{\mathop{#3}\limits^{
+    \vbox to#1{\kern-2\ex@
+    \hbox{$\textstyle #2\mathstrut$}\vss}}}}
+\makeatother
 
 %To get the \lambdabar Character. Source: https://tex.stackexchange.com/questions/96479/how-can-i-type-lambda-bar
 \makeatletter
@@ -162,7 +178,10 @@
 \newglossaryentry{pm}{name=PM, description=Post-Minkowski'sche Näherung}
 \newglossaryentry{eob}{name=EOB, description=effective one body problem}
 \newglossaryentry{nn}{name=NN, description=Neural network}
+\newglossaryentry{nns}{name=NNs, description=Neural networks}
 \newglossaryentry{cnn}{name=CNN, description=Convolution neural network}
+\newglossaryentry{ffn}{name=FFN, description=feed forward (neural) network}
+\newglossaryentry{snr}{name=SNR, description=signal to noise ratio}
 
 \pagenumbering{Roman}
 %\maketitle
