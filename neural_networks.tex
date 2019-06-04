@@ -13,9 +13,9 @@ This sections aims to convey the basics of neural networks and the layers that a
 \noindent The basic building block of a \gls{nn} is - as the name suggests - a \emph{neuron}. This neuron is a function mapping inputs to a single output. In the early days this output was always either $1$ or $0$ \textcolor{red}{[Citation]}, whereas nowadays it is usually some real number.\\
 In general there are two different kinds of inputs. Those that are specific to the neuron itself and those that the neuron receives as an outside stimulus. We write the neuron as
 \begin{equation}\label{def:neuron}
-f: \R^n\times\R^n\times\R\to\R ;\ \ \ (\vec{x}, \vec{w}, b)\mapsto f(\vec{x}, \vec{w}, b)\coloneqq a(\vec{w}\cdot\vec{x}+b),
+n: \R^k\times\R\times\R^k\to\R ;\ \ \ (\vec{w}, b, \vec{x})\mapsto n(\vec{w}, b, \vec{x})\coloneqq a(\vec{w}\cdot\vec{x}+b),
 \end{equation}
-where $\vec{x}$ is the outside stimulus, $\vec{w}$ are called weights, $b$ is a bias value and $a$ is a function known as the \emph{activation function}\textcolor{red}{ (change this to not be emphasized if it is not used for the first time here)}. A usual depiction of a neuron and its structure is shown in \autoref{fig:neuron}. The activation function is a scalar function
+where $\vec{w}$ are called weights, $b$ is a bias value, $\vec{x}$ is the outside stimulus and $a$ is a function known as the \emph{activation function}\textcolor{red}{ (change this to not be emphasized if it is not used for the first time here)}. A usual depiction of a neuron and its structure is shown in \autoref{fig:neuron}. The activation function is a scalar function
 \begin{equation}\label{def:activation_function}
 a:\ \R\to\R
 \end{equation}
@@ -53,8 +53,56 @@ $1$ & $1$ & $1$\\
 
 \medskip
 \textcolor{blue}{Use the introduction of the and-neuron from above to introduce the concept of networks in a familiar way. Having logic gates enables us to build more complex structures, such as full adders and hence we can, in principle, calculate any function a computer can calculate. Only afterwards introduce layers as a way of structuring and formalizing networks.}\\
-\noindent Since all basic logic gates can be replicated by a neuron, it is a straight forward idea to connect them into more complicated structures, like a full-adder (see \autoref{app:Full_adder}). When doing this we connect multiple neurons, which therefore form a network - a neural network. The example of the full-adder demonstrates the principle of a \gls{nn} perfectly. It's premise is to connect multiple simple functions to form a network, that can solve difficult tasks.\\
-The example of a full-adder-network however shows another thing: Sufficiently complicated networks can - in principle - calculate any function an ordinary computer can calculate, as a computer is mostly a machine consisting of multiple adders and logic gates. 
+\noindent Since all basic logic gates can be replicated by a neuron, it is a straight forward idea to connect them into more complicated structures, like a full-adder (see \autoref{app:Full_adder}). These structures are than called neural networks, as they are a network of neurons. The example of the full-adder demonstrates the principle of a \gls{nns} perfectly. It's premise is to connect multiple simple functions, the neurons, to form a network, that can solve tasks the individual building blocks can't.\medskip\\
+Since \gls{nns} are the main subject of the upcoming part and since this part will be a bit more mathematical, some notation and nomenclature is introduced to structure the networks.\\
+Specifically each network is composed of multiple layers. Each layer consists of one or multiple neurons and each neuron has inputs only from the previous layer.  Formally we write
+\begin{equation}
+\mathcal{L}:\R^{k+l}\times\R^l\times\R^k\to\R^l;\ (W, \vec{b}, \vec{x})\mapsto\mathcal{L}(W,\vec{b},\vec{x})\coloneqq
+\begin{pmatrix}
+n_1\lr{{(W_1)}^T,b_1,\vec{x}}\\
+\vdots\\
+n_l\lr{{(W_l)}^T,b_l,\vec{x}}
+\end{pmatrix},
+\end{equation}
+where $n_i$ is neuron $i$ on that layer and $W_i$ is the $i$-th row of a $k\times l$-matrix. As a step of formal simplification we will assume that all neurons $n_i$ share the same activation function $a$. This does not limit the ability of networks that can be written down, since if two neurons have different activation functions, they can be viewed as two different layers connected to the same previous layer. Their output will than be merged afterwards (see \autoref{fig:diff_activation_functions_layer}).\\
+\begin{figure}
+\centering
+\input{tikzgraphics/tikz_layer_different_activations}
+\caption{Depiction of how a layer ($\mathcal{L}_\text{mid}$) consisting of neurons with different activation functions can be split into two separate layers ($\mathcal{L}_{n_1}$ and $\mathcal{L}_{n_2}$).}\label{fig:diff_activation_functions_layer}
+\end{figure}
+
+\noindent With this simplification one can write a layer simply as
+\begin{equation}
+\mathcal{L}(W,\vec{b},\vec{x})=a(W\cdot\vec{x}+\vec{b}),
+\end{equation}
+where it is understood, that the activation function $a$ acts component wise on the resulting $l$-dimensional vector.\\
+In this fashion a network consisting of a chain of layers $\mathcal{L}_\text{in}$, $\mathcal{L}_\text{inter}$, $\mathcal{L}_\text{out}$ can be written as
+\begin{equation}
+a_\text{out}\lr{W_\text{out}\cdot a_\text{inter}\lr{W_\text{inter}\cdot a_\text{in}\lr{W_\text{in}\cdot \vec{x}+\vec{b}_\text{in}}+\vec{b}_\text{inter}}+\vec{b}_\text{out}}.
+\end{equation}
+Hence a network can be understood as a set of nested functions.\\
+An important point with the definitions above is that the layers get their input only from their preceding layer. Especially no loops are allowed, i.e. getting input from some subsequent layer. A network of the first kind is called a \emph{feed forward neural network} (\gls{ffn}), as for one input each layer gets invoked only once. There are also other architectures called \emph{recurrent neural networks}, which also allow for loops in the networks and work by propagating the activations in discrete time steps. These kinds of networks are in principle closer to the inner workings of the human brain, but in practice show worst performance and are therefore not used or discussed further in this work. \textcolor{red}{[Citations], maybe also mention that RNNs have shown good performance in time series data (which we are working with) but other studies (paper Frank sent around) have shown that TCN also do the job}\\
+A \gls{ffn} in general consists of three different parts called the input-, output- and hidden layer/layers. The role of the input- and output-layers is self explanatory; they are the layers where data is fed into the network or where data is read out. The hidden-layers are called ''hidden'', as their shape and size, contrary to the other two layers, is not defined by the data. \autoref{fig:hidden_layer} shows an example of a simple network with a single hidden layer. In principle there could be any number of hidden layers with different sizes. In this example the input is n-dimensional and the output 2-dimensional. If the input was changed to be (n-1)-dimensional, the same hidden-layer could be used, as its size does not depend on the data or output. Therefore when designing a network architecture, one designs the shape and functionality of the hidden layers.\\
+A \gls{nn} is called \emph{deep}, if it has multiple hidden layers. \textcolor{red}{[Citation]}
+\begin{figure}
+\centering
+\input{tikzgraphics/tikz_hidden_layer}
+\caption{A depiction of a simple network with a single input-, hidden- and output-layer. The input-data is a n-dimensional vector ${(x_1, \dotsc, x_n)}^T$ and the output is a 2-dimensional vector. In this picture it looks like the hidden layer has the same number of neurons as the input layer. This does not necessarily have to be the case. Lines between two neurons indicate, that the output of the left neuron serves as weighted input for the right one.}\label{fig:hidden_layer}
+\end{figure}
+
+\subsection{Backpropagation}\label{sec:backpropagation}
+In \autoref{sec:basics_neuron_network} the basics of a \gls{nn} where discussed and the example of a network replicating a binary full-adder (see \autoref{app:Full_adder}) showed the potential of these networks, when the weights and biases are chosen correctly. The example actually proofs that a sufficiently complicated network can - in principle - calculate any function a computer can, as the computer is just a combination of logic gates, especially binary full-adders.\\
+The question therefore is how to choose the weights in a network for it to fit and calculate some function. For the binary full-adder the weights and biases could be chosen quite simply and the network was buildup out of small blocks. A more general approach would however be beneficial. The goal is to design some network and let it learn/optimize the weights and biases to fit some function optimally.\\
+To do this, some known and labeled data is necessary, such that the network can compare its output to some ground truth and adjust its weights and biases to minimize some error function. This way of optimizing the weights and biases is called \emph{training}. To be a bit more specific, the analyzed data in this work is some form of a strain-data time series. The output of this analysis is the \gls{snr} of the input strain segment. Therefore the network will receive some strain-data, of which the \gls{snr} is known, as input. The network will produce some value from this input data and compare it to what \gls{snr} was provided as label. From there it will try to optimize the weights and biases to best fit the function that maps $\text{strain-data}\to\text{\gls{snr}}$.\\
+This process of optimizing is called backpropagation, as the error propagates from the last to the first layer. The meaning of this will become clearer a little later. Another term, that is used in the context of \gls{nns} often, is the \emph{loss function}. The loss function
+\begin{equation}\label{def:genratl_loss}
+L:\R^l\times\R^l\to\R;\ (y_\text{net}, y_\text{label})\mapsto L(y_\text{net}, y_\text{label})
+\end{equation}
+is a function that calculates some form of error between the output of the network and the label value it was given.\\
+When doing a regressive fit, one of the standard error functions is the \emph{mean squared error}, which therefore is the loss function that is mainly used in this work and defined by
+\begin{equation}\label{def:loss_mean_squared_error}
+L:\R^l\times\R^l\to\R;\ (y_\text{net}, y_\text{label})\mapsto L(y_\text{net}, y_\text{label})\coloneqq\frac{1}{l}\sum_{i=1}^l{(y_{\text{net},i}-y_{\text{label},i})}^2.
+\end{equation}
 
 \subsection{Specific layers}
 \textcolor{blue}{Explain that there are not just dense layers.}
