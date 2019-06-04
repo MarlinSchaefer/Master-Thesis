@@ -1,0 +1,35 @@
+\begin{tikzpicture}[
+neuron/.style={circle, draw=black, very thick, minimum size=1.4cm},
+dot/.style={circle, draw=black, fill=black, minimum size=0.1cm, inner sep=0pt},
+VLineVertex/.style={circle, draw=black, minimum size=0cm, inner sep=0pt},
+layer/.style={rectangle, draw=black, very thick, minimum height=1.7cm, minimum width=1cm}
+]
+
+\node[layer] (in1) {$\mathcal{L}_\text{in}$};
+\node[layer] (n1n2) [right=1cm of in1] {$\oset[4ex]{n_1}{n_2}$};
+
+\node[layer] (out1) [right=1cm of n1n2] {$\mathcal{L}_\text{out}$};
+\node (lmid) [above=0.2cm of n1n2] {$\mathcal{L}_\text{mid}$};
+
+\node (arrow_start) [right=0.5cm of out1] {};
+\node (arrow_end) [right=0.75cm of arrow_start] {};
+
+\node[layer] (in2) [right=0.5cm of arrow_end] {$\mathcal{L}_\text{in}$};
+\node (midpoint) [right=1.5cm of in2] {};
+\node[layer] (ln1) [above=0.2cm of midpoint] {$\mathcal{L}_{n_1}$};
+\node[layer] (ln2) [below=0.2cm of midpoint] {$\mathcal{L}_{n_2}$};
+\node[layer] (out2) [right=1.5cm of midpoint] {$\mathcal{L}_\text{out}$};
+
+%Connections part1
+\draw (in1.east) -- (n1n2.west);
+\draw (n1n2.east) -- (out1.west);
+
+%Arrow
+\draw[->] (arrow_start) -- (arrow_end);
+
+%Connections part2
+\draw (in2.east) -- (ln1.west);
+\draw (in2.east) -- (ln2.west);
+\draw (ln1.east) -- (out2.west);
+\draw (ln2.east) -- (out2.west);
+\end{tikzpicture}
