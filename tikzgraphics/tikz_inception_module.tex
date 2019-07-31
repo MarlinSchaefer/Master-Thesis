@@ -1,0 +1,35 @@
+\begin{tikzpicture}[
+neuron/.style={circle, draw=black, very thick, minimum size=1.0cm},
+dot/.style={circle, draw=black, fill=black, minimum size=0.1cm, inner sep=0pt},
+VLineVertex/.style={circle, draw=black, minimum size=0cm, inner sep=0pt},
+layer/.style={rectangle, draw=black, very thick, minimum height=1cm, minimum width=3cm},
+concat/.style={rectangle, draw=black, very thick, minimum height=1cm, minimum width=6.5cm}
+]
+
+%Nodes
+\node[layer] (input) {input};
+\node (midpoint) [below=1cm of input] {};
+\node[layer] (l_2_dim_red) [left=0.25cm of midpoint] {Conv1D$\lr{16, 1}$};
+\node[layer] (l_2_filter) [below=0.5cm of l_2_dim_red] {Conv1D$\lr{64, 2}$};
+\node[layer] (l_1) [left=0.5cm of l_2_dim_red] {Conv1D$\lr{96,1}$};
+\node[layer] (r_2_dim_red) [right=0.25 of midpoint] {Conv1D$\lr{16, 1}$};
+\node[layer] (r_2_filter) [below=0.5cm of r_2_dim_red] {Conv1D$\lr{32, 3}$};
+\node[layer] (r_1_pool) [right=0.5cm of r_2_dim_red] {MaxPooling$\lr{4}$};
+\node[layer] (r_1_dim_red) [below=0.5cm of r_1_pool] {Conv1D$\lr{32, 1}$};
+\node[concat] (concat) [below=2.5cm of midpoint] {Concatenate Channels};
+
+%Connections
+\draw (input.south) -- (l_1.north);
+\draw (input.south) -- (l_2_dim_red.north);
+\draw (input.south) -- (r_2_dim_red.north);
+\draw (input.south) -- (r_1_pool.north);
+
+\draw (l_2_dim_red.south) -- (l_2_filter.north);
+\draw (r_2_dim_red.south) -- (r_2_filter.north);
+\draw (r_1_pool.south) -- (r_1_dim_red.north);
+
+\draw (l_1.south) -- (concat.west);
+\draw (l_2_filter.south) -- (concat.north);
+\draw (r_2_filter.south) -- (concat.north);
+\draw (r_1_dim_red.south) -- (concat.east);
+\end{tikzpicture}

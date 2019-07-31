@@ -24,7 +24,7 @@
 \usepackage[utf8]{inputenc}
 %The following package handels the bibliography. Biber is needed to run this. The option 'style=numeric' lets the citation have a number within their occurence within the text, the option 'doi=true' prints the doi to the bibliography, if there is one in the .bib file. The option 'backref' backreferences the page numbers in the bibliography to the pages where the citation occurs. 'backrefstyle=none' is a stylingoption for the backreferences.
 %\usepackage[doi=true,url=false,sorting=none,backref,backrefstyle=none]{biblatex}
-\usepackage[doi=true,url=false,sorting=none,backref,backrefstyle=none]{biblatex}
+\usepackage[doi=true,url=true,sorting=none,backref,backrefstyle=none]{biblatex}
 %Provides the ability to have colored links and change their color
 \usepackage[colorlinks,urlcolor=blue,citecolor=blue,linkcolor=black]{hyperref}
 %Provides the ability to change page layout and sizes
@@ -180,10 +180,12 @@
 \newglossaryentry{nn}{name=NN, description=Neural network}
 \newglossaryentry{nns}{name=NNs, description=Neural networks}
 \newglossaryentry{cnn}{name=CNN, description=Convolution neural network}
+\newglossaryentry{cnns}{name=CNNs, description=Convolution neural networks}
 \newglossaryentry{ffn}{name=FFN, description=feed forward (neural) network}
 \newglossaryentry{rnn}{name=RNN, description=recurrent neural network}
 \newglossaryentry{snr}{name=SNR, description=signal to noise ratio}
 \newglossaryentry{mse}{name=MSE, description=mean squared error}
+\newglossaryentry{ilsvrc}{name=ILSVRC, description=ImageNet Large Scale Visual Recognition Challenge}
 
 \pagenumbering{Roman}
 %\maketitle
