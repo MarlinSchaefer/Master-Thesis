@@ -41,7 +41,7 @@ $1$ & $0$\\
 \end{tabular}
 \end{tabular}
 \end{center}
-\caption{A summary and depiction of the main logic gates written as neurons. All of them share the same activation function \eqref{def:step_activation}.}\label{tab:neuron_logic_gates}
+\caption[Logic gates as neurons]{A summary and depiction of the main logic gates written as neurons. All of them share the same activation function \eqref{def:step_activation}.}\label{tab:neuron_logic_gates}
 \end{table}
 \medskip
 \noindent Using the basic logic gates a more complex structure - the ''XOR''-gate - can be built. A ''XOR''-gate is defined by its truth table (see \autoref{tab:xor}).
@@ -55,7 +55,7 @@ $0$ & $1$ & $1$\\
 $1$ & $0$ & $1$\\
 $1$ & $1$ & $0$
 \end{tabular}
-\caption{Truth table for the ''XOR''-gate.}\label{tab:xor}
+\caption[Truth table ''XOR'']{Truth table for the ''XOR''-gate.}\label{tab:xor}
 \end{table}
 It can be constructed from the three basic logic operations ''and'', ''or'' and ''not''
 \begin{equation}
@@ -67,12 +67,12 @@ With this ''XOR''-neuron a network, that behaves like a full-adder, can be defin
 \begin{figure}[H]
 \centering
 \input{tikzgraphics/tikz_xor_net}
-\caption{The definition of a network that is equivalent to an ''XOR''-gate.}\label{fig:xor_net}
+\caption[''XOR''-network]{The definition of a network that is equivalent to an ''XOR''-gate.}\label{fig:xor_net}
 \end{figure}
 \begin{figure}[H]
 \centering
 \input{tikzgraphics/tikz_full_adder}
-\caption{A network replicating the behavior of a binary full adder.}\label{fig:full_adder}
+\caption[Full adder network]{A network replicating the behavior of a binary full adder.}\label{fig:full_adder}
 \end{figure}
 
 \section{Indication that the network does not learn}\label{app:network_does_not_learn}
@@ -106,3 +106,91 @@ With $\partial_x f(x)=2x-a-b$ one gets
 \partial_x g(x) \mbe 0 \Leftrightarrow x = \frac{p}{2}\lr{a+b}+\lr{1-p}c
 \end{equation}
 as expected. The value of $g$ at this point will be the expectation value of the mean squared error if the network predicts a single value and optimizes this value. In this work $p$ is the probability of looking at data containing a \gls{gw}, i.e. the fraction of data-points containing a \gls{gw} over total number of data-points.
+
+\section{Deriving custom loss}
+For this work the binary decision of ''signal'' vs. ''no-signal'' is more important for the performance of the network, than how accurate the predicted \gls{snr}-value is. Therefore we would like the network to have a bias towards underestimating the \gls{snr}-values of pure noise examples and overestimate those of \gls{gw}-signals. To achieve this behavior, we tried to use a new loss function, that exponentially penalizes overestimating pure noise samples and underestimating \gls{gw}-signals. For backpropagation to work properly, the loss will need to be differentiable and its derivative needs to be continuous everywhere.\\
+As a starting point we will use the pure noise case first and adapt it to the full loss later on. We start at a distribution of values we want to achieve and later turn it into an error function. This distribution should exponentially decay for values larger than some fixed value and decay like $1/x$ for values smaller than this fixed value. The exponential part was inspired by the solution of the hydrogen atom, though the decay for this case goes like $x^2$. For this reason, we matched
+\begin{align}
+f_1(x) & = x^2 e^{-x}\\
+f_2(x) & = \frac{1}{a-b\cdot x}
+\end{align}
+for $x=1$, which gave
+\begin{equation}
+f(x)\coloneqq
+\begin{cases}
+	x^2 e^{-x}, & x \geq 1\\
+	\frac{1}{e}\frac{1}{2-x}, & x < 1
+\end{cases}.
+\end{equation}
+This distribution has its maximum value $\frac{4}{e^2}$ at $x=2$. For convenience, we will use
+\begin{equation}
+\text{dist}(x)\coloneqq f(x+2)
+\end{equation}
+from here on out, as the maximum is now centered at $x=0$. To get an error function from this distribution, that grows exponentially for $x>0$ and has a value of $0$ for $x=0$, define
+\begin{equation}
+\text{Err}(x)\coloneqq \frac{4}{e^2 \text{dist}(x)} - 1.
+\end{equation}
+To define a loss, that can behave differently for different label values, the error needs to transform based on some measure. Specifically it will need to have some transition between exponential growth for large values of $x$ and exponential growth for small values of $x$. To achieve this behavior, we rotate the error-function $\text{Err}$ around the y-axis and project it onto the x-y-plane afterwards. Therefore we get
+\begin{equation}\label{def:err_rotate}
+\text{Err}_\text{rotate}(x,\varphi)\coloneqq \text{Err}\lr{x/\cos\lr{\varphi}}.
+\end{equation}
+For $\varphi\in\left[0,\pi\right]$ this function is defined everywhere but $\varphi=\frac{\pi}{2}$.\\
+To get a loss as defined in \eqref{def:general_loss} from \eqref{def:err_rotate}, it needs to depend not only on the value the network returns but also on the label. Furthermore, the exponential behavior should be governed by the label value, as we want exponential growth for positive differences, when the label is small, and for negative differences, when the label is large. To achieve this, the rotation angle will be dictated by the label value.\\
+Therefore we want a function $g$, that is $0$ for all label values smaller than some minimum $a$ and $\pi$ for all label values larger than some maximum value $b$. In between $a$ and $b$, the function needs to be a smooth. The parts will be matched in a way to assure $g\in C^1(\R)$. With this one can find
+\begin{equation}
+g(x,a,b)\coloneqq
+\begin{cases}
+0, & x < a\\
+\pi, & x>b\\
+\pi p\lr{\frac{x-a}{b-a}}
+\end{cases},
+\end{equation}
+with
+\begin{equation}
+p(x)\coloneqq 3x^2-2x^3.
+\end{equation}
+In principle the loss for given values $a$ and $b$ could than be written as
+\begin{equation}\label{def:loss_original}
+L_\text{exp}\lr{y_\text{net}, y_\text{label}}=\text{Err}_\text{rotate}\lr{z, g(y_\text{label},a,b)},
+\end{equation}
+with $z=y_\text{net}-y_\text{label}$. There are however problems with this definition. First of all, the exponential part is smaller than the linear part for small values of $z$. This is especially true for values $\left| z\right| <2$. This is a problem, as the \gls{snr}-value assigned to pure noise and the smallest signal \gls{snr}-value are about $4$ apart. Therefore there would be an overlapping region for pure noise and small \gls{snr} signals, that is favored by the loss.\\
+To solve this issue one can simply introduce a squish factor $s$, which the input to the error is multiplied by
+\begin{equation}\label{def:loss_squished}
+L_\text{squish}\lr{y_\text{net}, y_\text{label}}\coloneqq \text{Err}_\text{rotate}\lr{s\cdot z, g(y_\text{label},a,b)}.
+\end{equation}
+This however introduces a new problem. With even a relatively small squish factor of $s=3$, the exponential grows very fast, which causes exploding gradients. To keep the gradients at bay, a cutoff is introduced to the function. To still have a non zero gradient, this cutoff is not flat, but is a linear function with a slope of $\pm s\frac{4}{e}$, which is the same slope as the linear part of \eqref{def:loss_squished}. To keep the entire loss of class $C^1$, the exponential part and the cutoff are connected by a spline polynomial. For this, we chose to start the spline polynomial at some value $k-1$ from the origin and have it connect to the linear part in a distance of $1$.\\
+With
+\begin{gather}
+u = \max\left[\text{Err}_\text{rotate}\lr{s\cdot z + k, g(y_\text{label},a,b)},\ \text{Err}_\text{rotate}\lr{s\cdot z + k - 1, g(y_\text{label},a,b)}\right]\nonumber\\
+l = \min\left[\text{Err}_\text{rotate}\lr{s\cdot z + k, g(y_\text{label},a,b)},\ \text{Err}_\text{rotate}\lr{s\cdot z + k - 1, g(y_\text{label},a,b)}\right]\nonumber\\
+\Delta_1 = 
+\begin{cases}
+	\frac{-4 s^2 k}{{2-s\cdot k}^3}e^{-s\cdot k}, & y_\text{label} > \frac{a+b}{2}\\
+	\frac{4 s^2 (k-1)}{{2+s\cdot (k-1)}^3}e^{s\cdot (k-1)}, & y_\text{label} < \frac{a+b}{2}
+\end{cases}\nonumber\\
+\Delta_2 =
+\begin{cases}
+	-s\frac{4}{e}, & y_\text{label} > \frac{a+b}{2}\\
+	s\frac{4}{e}, & y_\text{label} < \frac{a+b}{2}
+\end{cases}\\
+a_1 = \Delta_2 - \Delta_1 - 2\lr{u-l}\\
+a_2 = 3\lr{u-l} - 2\Delta_1 - \Delta_2
+\end{gather}
+and
+\begin{equation}
+p_2(z)\coloneqq a_1 \lr{z-k}^3 + a_2\lr{z-k}^2 + \Delta_1 \lr{z-k} + l
+\end{equation}
+one gets
+\begin{equation}
+L_\text{full}\lr{y_\text{net}, y_\text{label}}\coloneqq
+\begin{cases}
+	\text{Err}_\text{rotate}\lr{s\cdot z, g(y_\text{label},a,b)}, & z>1\land y_\text{label}>\frac{a+b}{2}\\
+	
+\end{cases}
+\end{equation}
+\textcolor{red}{Fix this equation}
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{loss_evolution.png}
+\caption[Loss iterations]{Three different stages of the custom loss function. (a): The loss as defined in \eqref{def:loss_original}. For $\left|x\right|<2$ the eyponential part is actually smaller than the linear part. This is not desirable, as for most of our testing the label for pure noise is about $4$ away from the smallest label for a signal. (b): To fix the issue of a too small exponential for some purposes, one can introduce a squish factor, that simply multiplies the input by some fixed value. In this case a squish factor of 3 was used. The values in general are a lot larger. (c): Having a large squish factor as in (b) introduces the problem of too large gradients. For this purpose, a cutoff can be introduced. This cutoff grows linearly with the same slope as the linear part of \eqref{def:loss_squished}. The transition between the exponential and linear part however needs to be of class $C^1$, so that the backpropagation algorithm can optimize. Therefore a spline polynomial connects the two parts.}\label{fig:loss_evolution}
+\end{figure}

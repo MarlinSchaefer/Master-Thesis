@@ -1,0 +1,49 @@
+\begin{tikzpicture}[
+neuron/.style={circle, draw=black, very thick, minimum size=1cm, transform shape},
+dot/.style={circle, draw=black, fill=black, minimum size=0.1cm, inner sep=0pt, transform shape},
+note/.style={circle, draw=black, minimum size=0pt, inner sep=0pt, transform shape},
+]
+
+%Layer 1 neurons
+\node[neuron] (l11) {};
+\node[neuron] (l12) [right=0.5cm of l11] {};
+\node[neuron] (l13) [right=0.5cm of l12] {};
+\node[neuron] (l14) [right=0.5cm of l13] {};
+\node[neuron] (l15) [right=0.5cm of l14]{};
+\node[neuron] (l16) [right=0.5cm of l15] {};
+
+%Layer 2 neurons
+\node[neuron] (l21) [below=1.5cm of l12] {};
+\node[neuron] (l22) [below=1.5cm of l13] {};
+\node[neuron] (l23) [below=1.5cm of l14] {};
+\node[neuron] (l24) [below=1.5cm of l15] {};
+
+%Labels
+\node (label_1) [right=1.5cm of l16] {Input};
+\node (label_2) [right=3cm of l24] {Convolution output};
+
+%Markers
+\node (m1) [right=0.05cm of l16] {};
+\node (m2) [right=0.05cm of l24] {};
+
+%Connections Layer 1 - Layer 2
+\draw[dashed] (l11.south) -- (l21.north);
+\draw[dashed] (l12.south) -- (l21.north);
+\draw[dashed] (l13.south) -- (l21.north);
+
+\draw[blue] (l12.south) -- (l22.north);
+\draw[blue] (l13.south) -- (l22.north);
+\draw[blue] (l14.south) -- (l22.north);
+
+\draw (l13.south) -- (l23.north);
+\draw (l14.south) -- (l23.north);
+\draw (l15.south) -- (l23.north);
+
+\draw[dashed, blue] (l14.south) -- (l24.north);
+\draw[dashed, blue] (l15.south) -- (l24.north);
+\draw[dashed, blue] (l16.south) -- (l24.north);
+
+%Marker arrows
+\draw[->] (label_1) -- (m1);
+\draw[->] (label_2) -- (m2);
+\end{tikzpicture}

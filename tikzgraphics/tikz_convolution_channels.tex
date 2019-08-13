@@ -1,0 +1,57 @@
+\begin{tikzpicture}[
+neuron/.style={circle, draw=black, very thick, minimum size=1cm, transform shape},
+dot/.style={circle, draw=black, fill=black, minimum size=0.1cm, inner sep=0pt, transform shape},
+note/.style={circle, draw=black, minimum size=0pt, inner sep=0pt, transform shape},
+]
+\begin{pgfonlayer}{bg}
+	\draw[black, very thick] (0,0) rectangle (1,-1) node[pos=0.5] {$d_{11}$};
+	\draw[black, very thick] (0,-1) rectangle (1,-2) node[pos=0.5] {$d_{21}$};
+	\draw[black, very thick] (0,-2) rectangle (1,-3) node[pos=0.5] {$d_{31}$};
+	\draw[black, very thick] (0,-3) rectangle (1,-4) node[pos=0.5] {$d_{41}$};
+	\draw[black, very thick] (0,-4) rectangle (1,-5) node[pos=0.5] {$d_{51}$};
+	\draw[black, very thick] (0,-5) rectangle (1,-6) node[pos=0.5] {$d_{61}$};
+	
+	\draw[black, very thick] (1,0) rectangle (2,-1) node[pos=0.5] {$d_{12}$};
+	\draw[black, very thick] (1,-1) rectangle (2,-2) node[pos=0.5] {$d_{22}$};
+	\draw[black, very thick] (1,-2) rectangle (2,-3) node[pos=0.5] {$d_{32}$};
+	\draw[black, very thick] (1,-3) rectangle (2,-4) node[pos=0.5] {$d_{42}$};
+	\draw[black, very thick] (1,-4) rectangle (2,-5) node[pos=0.5] {$d_{52}$};
+	\draw[black, very thick] (1,-5) rectangle (2,-6) node[pos=0.5] {$d_{62}$};
+	
+	\draw[blue, very thick] (0,0) rectangle (2, -3);
+	
+	\draw[blue] (2,  0) -- (4, -1);
+	\draw[blue] (2, -3) -- (4, -2);
+\end{pgfonlayer}
+
+\filldraw[fill=white, draw=black, very thick] (0.5, -0.5) rectangle (1.5, -1.5) node[pos=0.5] {$d_{11}$};
+\filldraw[fill=white, draw=black, very thick] (0.5, -1.5) rectangle (1.5, -2.5) node[pos=0.5] {$d_{21}$};
+\filldraw[fill=white, draw=black, very thick] (0.5, -2.5) rectangle (1.5, -3.5) node[pos=0.5] {$d_{31}$};
+\filldraw[fill=white, draw=black, very thick] (0.5, -3.5) rectangle (1.5, -4.5) node[pos=0.5] {$d_{41}$};
+\filldraw[fill=white, draw=black, very thick] (0.5, -4.5) rectangle (1.5, -5.5) node[pos=0.5] {$d_{51}$};
+\filldraw[fill=white, draw=black, very thick] (0.5, -5.5) rectangle (1.5, -6.5) node[pos=0.5] {$d_{61}$};
+
+\filldraw[fill=white, draw=black, very thick] (1.5, -0.5) rectangle (2.5, -1.5) node[pos=0.5] {$d_{12}$};
+\filldraw[fill=white, draw=black, very thick] (1.5, -1.5) rectangle (2.5, -2.5) node[pos=0.5] {$d_{22}$};
+\filldraw[fill=white, draw=black, very thick] (1.5, -2.5) rectangle (2.5, -3.5) node[pos=0.5] {$d_{32}$};
+\filldraw[fill=white, draw=black, very thick] (1.5, -3.5) rectangle (2.5, -4.5) node[pos=0.5] {$d_{42}$};
+\filldraw[fill=white, draw=black, very thick] (1.5, -4.5) rectangle (2.5, -5.5) node[pos=0.5] {$d_{52}$};
+\filldraw[fill=white, draw=black, very thick] (1.5, -5.5) rectangle (2.5, -6.5) node[pos=0.5] {$d_{62}$};
+
+\draw[black] (4, -2) rectangle (5, -3) node[pos=0.5] {$o_{21}$};
+\draw[black] (4, -3) rectangle (5, -4) node[pos=0.5] {$o_{31}$};
+\draw[black] (4, -4) rectangle (5, -5) node[pos=0.5] {$o_{41}$};
+\draw[black] (4, -1) rectangle (5, -2) node[pos=0.5] {$o_{11}$};
+\draw[blue, very thick] (4, -1) rectangle (5, -2);
+
+\draw[black] (5, -2) rectangle (6, -3) node[pos=0.5] {$o_{22}$};
+\draw[black] (5, -3) rectangle (6, -4) node[pos=0.5] {$o_{32}$};
+\draw[black] (5, -4) rectangle (6, -5) node[pos=0.5] {$o_{42}$};
+\draw[black] (5, -1) rectangle (6, -2) node[pos=0.5] {$o_{12}$};
+\draw[red, very thick] (5, -2) rectangle (6, -3);
+
+\draw[red, very thick] (0.5, -1.5) rectangle (2.5, -4.5);
+
+\draw[red] (2.5, -1.5) -- (5, -2);
+\draw[red] (2.5, -4.5) -- (5, -3);
+\end{tikzpicture}

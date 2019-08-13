@@ -31,7 +31,7 @@
 \usepackage{geometry}
 %This package handles the Glossary, the option 'toc' adds it to the table of contents, 'nonumberlist' makes it so that the glossary doesn't link to the page(s) the abbreviations were used.
 \usepackage[toc,nonumberlist]{glossaries}
-%Used for better enumerations
+%Used for better enneededumerations
 \usepackage{multicol}
 %
 \usepackage[inline]{enumitem}
@@ -153,6 +153,9 @@
 \newtheorem{bem}[thm]{Bemerkung}
 \newtheorem{defi}[thm]{Definition}
 
+\pgfdeclarelayer{bg}
+\pgfsetlayers{bg,main}
+
 \author{Marlin Benedikt Schäfer}
 
 \begin{document}
@@ -183,9 +186,12 @@
 \newglossaryentry{cnns}{name=CNNs, description=Convolution neural networks}
 \newglossaryentry{ffn}{name=FFN, description=feed forward (neural) network}
 \newglossaryentry{rnn}{name=RNN, description=recurrent neural network}
+\newglossaryentry{rnns}{name=RNNs, description=recurrent neural networks}
 \newglossaryentry{snr}{name=SNR, description=signal to noise ratio}
 \newglossaryentry{mse}{name=MSE, description=mean squared error}
 \newglossaryentry{ilsvrc}{name=ILSVRC, description=ImageNet Large Scale Visual Recognition Challenge}
+\newglossaryentry{tcn}{name=TCN, description=Temporal convolutional network}
+\newglossaryentry{sgd}{name=SGD, description=Stochastic gradient descent}
 
 \pagenumbering{Roman}
 %\maketitle
@@ -260,6 +266,12 @@ $\ $
 \newpage
 
 \setcounter{page}{8}
+\listoffigures
+\listoftables
+\thispagestyle{empty}
+\newpage
+
+\setcounter{page}{9}
 $\ $
 \textcolor{red}{This page is intentionally left blank. LÖSCHEN!!! Damit erste Seite nicht auf Rückseite gedruckt ist.}
 \thispagestyle{empty}
