@@ -1,6 +1,40 @@
 \section{Gravitational-Wave signals from binary neutron star mergers}
-\textcolor{red}{Explain the use for this section.}
+\textcolor{blue}{Explain the use for this section.}\\
+Gravitational waves from two inspiraling neutron stars are among the most interesting signals gravitational wave detectors can detect. They convey information about the highly relativistic regimes of gravity, about the structure of the component stars and about the formation channels of black holes or heavy neutron stars. \textcolor{red}{[Citations]} They are however also very hard to detect, as binary neutron star (\gls{bns}) systems are very light systems, when compared to inspiraling binary black holes (\gls{bbh}).\\
+Part 1 of this section will discuss how gravitational waves (\gls{gw}) are formed and what influences the structure of the resulting waveforms. Part 2 will go over the current method of detecting \gls{gw} and discuss the advantages and drawbacks.
 \subsection{The waveform}
-\textcolor{red}{Explain how the waveform looks like, what it depends on, maybe give the concept how it works in the context of linearized theory (quote bachelor thesis), cite important papers regarding the waveform theory.}
+\textcolor{blue}{Explain how the waveform looks like, what it depends on, maybe give the concept how it works in the context of linearized theory (quote bachelor thesis), cite important papers regarding the waveform theory.}\\
+Gravitational waves are a solution to the Einstein-equation
+\begin{equation}\label{def:einstein_equation}
+\mathcal{G}_\mn = \frac{8\pi G}{c^4}T_\mn,
+\end{equation}
+where $\mathcal{G}_\mn$ is the Einstein-tensor, $T_\mn$ is the energy-momentum-tensor, $G$ is the gravitational constant and $c$ is the speed of light in vacuum. They can be derived, in their linear form, by setting the energy-momentum-tensor to $0$ and assuming the metric to be a linear correction of the flat metric $\eta_\mn$
+\begin{equation}
+g_\mn = \eta_\mn + h_\mn.
+\end{equation}
+With these approximations the Einstein-equation \eqref{def:einstein_equation} simplifies to
+\begin{equation}\label{def:einstein_linear}
+\mathcal{G}_\mn=\frac{1}{2}\lr{\partial_{\alpha\mu}h^\alpha_\nu+\partial^\alpha_\nu h_{\mu\alpha} - \partial_\mn h- \Box h_\mn - \eta_\mn\Box h} = 0,
+\end{equation}
+where $h\coloneqq\eta^\mn h_\mn$ and $\Box\coloneqq\eta^\mn\partial_\mn$.\\
+This equation has, due to the symmetry of $h_\mn$, $10$ independent components, of which only $2$ are physical. To see this one can for instance choose the DeDonder-gauge condition
+\begin{equation}
+\partial^\alpha \bar{h}_{\alpha\mu} = 0,
+\end{equation}
+where $\bar{h}_\mn\coloneqq h_\mn - \frac{1}{2}\eta_\mn h$. One can further restrict the gauge to also satisfy $\bar{h}=-h=0$ and $\bar{h}_{0\mu} = 0 = \bar{h}_{3\mu}$. The gauge is named transverse-traceless-gauge (\gls{tt}) and results in the metric to be of the form
+\begin{equation}
+h_\mn^\text{\gls{tt}}=
+\begin{pmatrix}
+	0 & 0         & 0        & 0\\
+	0 & h_+       & h_\times & 0\\
+	0 & -h_\times & h_+      & 0\\
+	0 & 0         & 0        & 0\\
+\end{pmatrix}.
+\end{equation}
+Furthermore, \eqref{def:einstein_linear} simplifies to
+\begin{equation}
+\Box h_\mn^\text{\gls{tt}} = 0
+\end{equation}
+and thus the components $h_+$ and $h_\times$ satisfy a wave equation.
 \subsection{Matched filtering}
-\textcolor{red}{Explain what matched filtering is, why it works and how it is applied currently.}
+\textcolor{blue}{Explain what matched filtering is, why it works and how it is applied currently.}
