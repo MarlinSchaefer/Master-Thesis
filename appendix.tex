@@ -1,5 +1,5 @@
 \section{Full adder as network}\label{app:Full_adder}
-To create a full adder from basic neurons, the corresponding logic gates need to be defined. The equivalent neuron for an ''and''-gate was defined in \autoref{sec:basics_neuron_network}. There are two more basic neurons which need to be defined. The neuron corresponding to the ''or''-gate, which is given by the same activation function \eqref{def:step_activation}, weights $\vec{w}={(w_1, w_2)}^T=(1,1)$ and bias $b=-0.5$, and the equivalent neuron for the ''not''-gate, which is given by the activation function \eqref{def:step_activation}, weight $w=-1$ and bias $b=0.5$. These definitions are summarized in \autoref{tab:neuron_logic_gates}.
+To create a full adder from basic neurons, the corresponding logic gates need to be defined. The equivalent neuron for an ''and''-gate was defined in \autoref{sec:basics_neuron_network}. There are two more basic neurons which will be defined here. The neuron corresponding to the ''or''-gate, which is given by the same activation function \eqref{def:step_activation}, weights $\vec{w}={(w_1, w_2)}^T=(1,1)$ and bias $b=-0.5$, and the neuron equivalent to the ''not''-gate, which is given by the activation function \eqref{def:step_activation}, weight $w=-1$ and bias $b=0.5$. These definitions are summarized in \autoref{tab:neuron_logic_gates}.
 \begin{table}[H]
 \begin{center}
 \begin{tabular}{c|c|c}
@@ -76,18 +76,18 @@ With this ''XOR''-neuron a network, that behaves like a full-adder, can be defin
 \end{figure}
 
 \section{Indication that the network does not learn}\label{app:network_does_not_learn}
-Sometimes during training only a local minimum is found. The most notable of these is when the network just picks a fixed value in the interval and appoints it to any input. It is therefore useful to spot this behavior during training and consider restarting the training again. Therefore the value for a constant output will be calculated in this appendix.
+Sometimes during training only a local minimum is found. The most notable of these minima is when the network just picks a fixed value in the interval and appoints it to any input. It is therefore useful to spot this behavior during training and consider restarting. Therefore the value for a constant output will be calculated in this appendix.
 \medskip\\
-To start off the loss function will be assumed to be the mean squared error and that the \gls{snr}-values lie within the interval $\left[a,b\right]$. The mean squared error of a chosen point $x$ to every point in this interval is given by
+To start off the loss function will be assumed to be the mean squared error. Furthermore it is assumed, that the \gls{snr}-values lie within the interval $\left[a,b\right]$. The mean squared error of a chosen point $x$ to every point in this interval is given by
 \begin{equation}
 f(x)\coloneqq\frac{1}{b-a}\int_a^b\diff y\ \lr{x-y}^2=\frac{1}{3\lr{b-a}}\lr{\lr{b-x}^3-\lr{a-x}^3}.
 \end{equation}
 To minimize this one could in principle solve $\frac{\partial f}{\partial x}\mbe 0$ and it would yield the correct result. However it should at least intuitively be obvious that the point that minimizes the mean squared error to every point in the interval is the mean value of the interval $x=\frac{a+b}{2}$.\\
-Therefore if the network has to choose values out of a given interval $\left[a,b\right]$, minimize the mean squared error and arrives in a local minimum that leads to the network always returning a fixed value, this value should be
+Therefore if the network has to choose values out of a given interval $\left[a,b\right]$, minimize the mean squared error and the training finds a local minimum that leads to the network always returning a fixed value, this value should be
 \begin{equation}
 f\lr{\frac{a+b}{2}}=\frac{1}{3\lr{b-a}}\lr{\lr{\frac{b-a}{2}}^3-\lr{\frac{a-b}{2}}^3}=\frac{1}{12}\lr{b-a}^2.
 \end{equation}
-In this work another common case is the network having to choose a \gls{snr}-value from some continues interval $\left[a,b\right]$ or pick a discrete value $c$. The interval corresponds to the data containing some \gls{gw}-signal and the fixed point with value $c$ is the \gls{snr}-value assigned to pure noise during training. (This is by no means a strictly mathematical derivation but simply a quick way to calculate the expected value.) The mean squared error is hence given by
+In this work another common case is the network having to choose a \gls{snr}-value from some continues interval $\left[a,b\right]$ or pick a discrete value $c$. The interval corresponds to the data containing some \gls{gw}-signal and the fixed point with value $c$ is the \gls{snr}-value assigned to pure noise during training. (The following is by no means a strictly mathematical derivation but simply a quick way to calculate the expected value.) The mean squared error is hence given by
 \begin{align}
 g(x) & \coloneqq\lim_{n\to\infty}\lr{\frac{1}{n}\sum_{i=1}^{n}\lr{x-y_i}^2}\text{ with }
 \begin{cases}
@@ -100,12 +100,12 @@ g(x) & \coloneqq\lim_{n\to\infty}\lr{\frac{1}{n}\sum_{i=1}^{n}\lr{x-y_i}^2}\text
 & = p\underbrace{\lim_{n\to\infty}\lr{\frac{1}{n}\sum_{i=1}^{n}\lr{x-a_i}^2}}_{=f(x)}+(1-p)\lr{x-c}^2\nonumber\\
 & = p f(x) + (1-p)\lr{x-c}^2,
 \end{align}
-where the step in $(\ast)$ is not clear and would need a mathematical proof, but intuitively should be clear. \textcolor{red}{(If there is time, find a proof.)} For large $n$ all $a_i$ should contribute equally to the mean value and hence $p$ is just a proportionality factor.\\
+where the step in $(\ast)$ is not trivial and would need a mathematical proof, but intuitively should be clear. \textcolor{red}{(If there is time, find a proof.)} For large $n$ all $a_i$ should contribute equally to the mean value and hence $p$ is just a proportionality factor.\\
 With $\partial_x f(x)=2x-a-b$ one gets
 \begin{equation}
 \partial_x g(x) \mbe 0 \Leftrightarrow x = \frac{p}{2}\lr{a+b}+\lr{1-p}c
 \end{equation}
-as expected. The value of $g$ at this point will be the expectation value of the mean squared error if the network predicts a single value and optimizes this value. In this work $p$ is the probability of looking at data containing a \gls{gw}, i.e. the fraction of data-points containing a \gls{gw} over total number of data-points.
+as expected. The value of $g$ at this point will be the expectation value of the mean squared error if the network predicts a single value and optimizes this value. In this work $p$ is the probability of looking at data containing a \gls{gw}, i.e. the fraction of data-points containing a \gls{gw} over the total number of data-points.
 
 \section{Deriving custom loss}
 For this work the binary decision of ''signal'' vs. ''no-signal'' is more important for the performance of the network, than how accurate the predicted \gls{snr}-value is. Therefore we would like the network to have a bias towards underestimating the \gls{snr}-values of pure noise examples and overestimate those of \gls{gw}-signals. To achieve this behavior, we tried to use a new loss function, that exponentially penalizes overestimating pure noise samples and underestimating \gls{gw}-signals. For backpropagation to work properly, the loss will need to be differentiable and its derivative needs to be continuous everywhere.\\
