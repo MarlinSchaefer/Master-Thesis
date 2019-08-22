@@ -334,16 +334,22 @@ As \cite{deep_learning_book} put it: ''Regularization is any modification we mak
 \textcolor{blue}{Explain how batch normalization works and why it is useful. (cite according paper)}
 Batch normalization was introduced in \cite{batch_normalization_invention} and is used to normalize the inputs of each layer. This helps the network learn faster and generalize more easily.\\
 The normalization tries to fix the distribution of the inputs between different samples, as the layers would need to adapt their weights otherwise for different input distributions. Specifically the goal is to transform the data in a way, that the mean is $0$ and the variance is $1$. Normalizing data in such a way is in principle not problematic and a standard procedure only for the input layer. \textcolor{red}{[Citation]} The problem of normalizing the input of each individual layer is the backporpagation step, as it can lead to exploding biases. \cite{batch_normalization_invention}\\
-To solve this issue, gradients of the normalization with respect to multiple inputs need to be computed. Batch normalization uses the samples of each mini-batch to compute the mean, variance and gradients. To reduce computational cost, the normalization is computed for each individual activation and not over all activations. Finally a linear transformation
+To solve this issue, gradients of the normalization with respect to multiple inputs need to be computed. Batch normalization uses the samples of each mini-batch to compute the mean, variance and gradients. To reduce computational cost, the normalization is computed only over one dimension of the input. In this work, the mean and variance will be calculated for every channel and thus applied to each channel individually. Finally a linear transformation
 \begin{equation}
 y_i = \gamma \hat{x}_i + \beta
 \end{equation}
 is applied to the normalized data
 \begin{equation}
-\hat{x}_i = \frac{x_i - \mu_B}{{\sigma_B}^2 + \varepsilon}.
+\hat{x}_i = \frac{x_i - \mu_B}{\sqrt{{\sigma_B}^2 + \varepsilon}}.
 \end{equation}
-Here $x_i$ is the $i$-th sample of the mini-batch, $\mu_B$ is the mean and ${\sigma_B}^2$ is the variance of the activation calculated over the mini-batch. The factors $\beta$ and $\gamma$ are learned parameters and $\epsilon$ is a constant added for numerical stability.\\
-The linear transformation is applied so that the batch normalization layer can learn to be the identity transformation. Otherwise the normalization could loose the ability to represent some function it previously could have represented.
+Here $x_i$ is the $i$-th sample of the mini-batch, $\mu_B$ is the mean and ${\sigma_B}^2$ is the variance of the activations calculated over the mini-batch. The factors $\beta$ and $\gamma$ are learned parameters and $\epsilon$ is a constant added for numerical stability.\\
+The linear transformation is applied so that the batch normalization layer can learn to be the identity transformation. Otherwise the normalization could loose the ability to represent some function it previously could have represented.\medskip\\
+The implementation in Keras differs from this approach in the sense, that the mean $\mu_B$ and variance ${\sigma_B}^2$ are only calculated for each individual batch during training. When the network is used to evaluate some data, it will use a fixed mean and variance, that was approximated over all batches during training. They call this the moving average $\mu_\text{mov}$ and moving variance $\sigma_\text{mov}^2$ respectively and adjust them after every batch by
+\begin{align}
+{\mu'}_\text{mov} & = m\cdot\mu_\text{mov} + \lr{1-m}\mu_B\nonumber\\
+{{\sigma'}_\text{mov}}^2 & = m\cdot{\sigma_\text{mov}}^2 + \lr{1-m}{\sigma_B}^2,
+\end{align}
+where $m$ is the momentum used and usually set to a high value around $0.99$. Using this has the advantage, that only a finite number of samples have a non negligible effect on the mean- and variance value used during inference. Therefore drifts in the input distribution, which might occur during training, can be counteracted.
 
 \subsubsection{Dropout layer}
 \textcolor{blue}{Explain what a dropout layer is, what it does, why it is useful.}\\
