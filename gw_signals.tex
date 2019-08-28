@@ -8,7 +8,7 @@ Gravitational waves are a solution to the Einstein-equation
 \begin{equation}\label{def:einstein_equation}
 \mathcal{G}_\mn = \frac{8\pi G}{c^4}T_\mn,
 \end{equation}
-where $\mathcal{G}_\mn$ is the Einstein-tensor, $T_\mn$ is the energy-momentum-tensor, $G$ is the gravitational constant and $c$ is the speed of light in vacuum. They can be derived in their linear form, by setting assuming the metric to be a linear correction to the flat metric $\eta_\mn$
+where $\mathcal{G}_\mn$ is the Einstein-tensor, $T_\mn$ is the energy-momentum-tensor, $G$ is the gravitational constant and $c$ is the speed of light in vacuum. They can be derived in their linear form by assuming the metric to be a linear correction to the flat metric $\eta_\mn$
 \begin{equation}\label{def:linear_approximation}
 g_\mn = \eta_\mn + h_\mn.
 \end{equation}
@@ -25,7 +25,7 @@ where $\bar{h}_\mn\coloneqq h_\mn - \frac{1}{2}\eta_\mn h$. It can be realized b
 \begin{equation}\label{def:gw_equation}
 \Box\bar{h}_\mn=-\frac{16\pi G}{c^4}T_\mn.
 \end{equation}
-This gauge however leaves another freedom, as another transformation ${x'}^\mu=x^\mu+\xi^\mu$ could be applied, when $\Box\xi_\mu =0$. This can be used, such that the gauge to also satisfy $\bar{h}=-h=0$ and $\bar{h}_{0\mu} = 0 = \bar{h}_{3\mu}$. The gauge is named transverse-traceless-gauge (\gls{tt}) and results in the metric to be of the form
+This gauge however doesn't fix $h_\mn$ completely, as another transformation ${x'}^\mu=x^\mu+\xi^\mu$ could be applied, when $\Box\xi_\mu =0$. This can be used in a way that $\bar{h}=-h=0$ and $\bar{h}_{0\mu} = 0 = \bar{h}_{3\mu}$ are also satisfied. The gauge is named transverse-traceless-gauge (\gls{tt}) and results in the metric to be of the form
 \begin{equation}\label{def:tt_gauge}
 h_\mn^\text{\gls{tt}}=
 \begin{pmatrix}
@@ -46,11 +46,11 @@ is a wave equation. Its solutions travel at the speed of light. Therefore \gls{g
 \includegraphics[width=\textwidth]{effect_gw.pdf}
 \caption[Effect of GW on ring of test masses]{This image is taken from \cite{bachelor}. It shows the effect of a \gls{gw} passing orthogonaly through a ring of test masses.}\label{fig:gw_test_masses}
 \end{figure}
-\eqref{def:gw_wave_equation} shows, that \gls{gw} exist and can travel through space. It does however not specify how these waves are produced. To do so, the energy-momentum-tensor cannot be set to $0$. Instead the full equation \eqref{def:gw_equation} needs to be solved. The solution is known to be
+\eqref{def:gw_wave_equation} shows that \gls{gw} exist and can travel through space. It does however not specify how these waves are produced. To do so the energy-momentum-tensor cannot be set to $0$. Instead the full equation \eqref{def:gw_equation} needs to be solved. The solution is known to be
 \begin{equation}
 \bar{h}\lr{t, \vec{x}}=\frac{4 G}{c^4}\int\Diff{3}x'\ \frac{T_\mn\lr{t-\frac{\norm{\vec{x}-\vec{x}'}}{c},\vec{x}'}}{\norm{\vec{x}-\vec{x}'}}.
 \end{equation}
-For simplification it is assumed, that the observer is far from the source when compared to the size of the support of $T_\mn$, such that $\norm{\vec{x}-\vec{x}'}\approx r\coloneqq\norm{\vec{x}}$. Therefore we need to solve
+For simplification it is assumed that the observer is far from the source when compared to the size of the support of $T_\mn$, such that $\norm{\vec{x}-\vec{x}'}\approx r\coloneqq\norm{\vec{x}}$. Therefore we need to solve
 \begin{equation}
 \bar{h}\lr{t, \vec{x}}=\frac{4 G}{c^4}\frac{1}{r}\int\Diff{3}x'\ T_\mn\lr{t-\frac{r}{c},\vec{x}'}.
 \end{equation}
@@ -62,7 +62,7 @@ where $\ddot{I}_{ab}^\text{\gls{tt}}$ is the transverse-traceless-projection of 
 \begin{equation}\label{def:quad_st_1}
 \ddot{I}^{ab}=c^2\partial_0^2 \int\Diff{3}x'\ x'^a x'^b T^{00} = 2\int\Diff{3}x'\ T^{ab}.
 \end{equation}
-As the quadrupole moment is simply the traceless second mass moment and we project it to its traceless part anyways, \eqref{def:quad_st_1} can be rewritten as
+As the quadrupole moment $Q_{ab}$ is simply the traceless second mass moment and we project it to its traceless part anyways, \eqref{def:quad_st_1} can be rewritten as
 \begin{equation}\label{def:h_quadrupole}
 \boxed{h^{\gls{tt}}_{ab}\lr{t,\vec{x}} = \frac{2 G}{c^4}\frac{1}{r}\ddot{Q}^{\gls{tt}}_{ab}\lr{t-r/c},}
 \end{equation}
@@ -82,7 +82,7 @@ Therefore the waveforms are given by
 h_+ & = \frac{1}{r}\frac{G}{c^4}\lr{\ddot{I}_{11}-\ddot{I}_{22}}\\
 h_\times & = \frac{2}{r}\frac{G}{c^4}\ddot{I}_{12}.
 \end{align}
-The approximations, that led to \eqref{def:einstein_linear}, restrict the validity of the results above to the case, where there are only slight perturbations to the flat space-time. Therefore the motion of a binary system can be well approximated by classical mechanics. Therefore assume a system of two point-particles with masses $m_1$, $m_2$ that orbit each other in circular motion. In Newtonian mechanics, this problem reduces to an effective one body problem with the reduced mass $\mu=\frac{m_1m_2}{m_1+m_2}$. The motion in these relative coordinates is given by
+The approximations that led to \eqref{def:einstein_linear}, restrict the validity of the results above to cases, where there are only slight perturbations to flat space-time. \eqref{def:linear_approximation} actually assumes the background to be flat. Therefore the dynamics of the two bodies orbiting each other are dictated by Newtonian gravity. With this in mind, the binary system we are trying to model is a system of two point-particles with masses $m_1$, $m_2$. For simplicity\footnote{It turns out that this simplification is very accurate. This is due to two reasone. First of all a possibile ellipticity is radiated away before the \gls{gw} reaches currently detectable frequencies (4.1.3 in \cite{gwv1}). Secondly the rate of change of the orbital radius is small in the regime, where the approximation of linear gravity is meaningful. (4.1.1 in \cite{gwv1})} assume circular motion. In Newtonian mechanics, this problem reduces to an effective one body problem with the reduced mass $\mu=\frac{m_1m_2}{m_1+m_2}$. The motion in these relative coordinates is given by
 \begin{equation}\label{def:binary_motion}
 \vec{r}\lr{t} = R\cdot
 \begin{pmatrix}
@@ -91,7 +91,7 @@ The approximations, that led to \eqref{def:einstein_linear}, restrict the validi
 	0
 \end{pmatrix},
 \end{equation}
-where $R$ is the orbital separation of the two point masses and $\omega_s$ the orbital frequency. From this one gets
+where $R$ is the orbital separation of the two point masses and $\omega_s$ the orbital frequency. As a result one gets
 \begin{equation}\label{def:binary_system_second_mass_moment}
 \left[ I^{ab}\right] = \mu R^2\begin{pmatrix}
 		\sin^2\lr{\omega_s t} & -\frac{1}{2}\sin\lr{2\omega_s t} & 0\\
@@ -114,13 +114,13 @@ h_+ &= \frac{4}{r}\frac{G}{c^4}\mu R^2 \omega_s^2\cos\lr{2\omega_s t}\nonumber\\
 h_\times &= \frac{4}{r}\frac{G}{c^4}\mu R^2 \omega_s^2\sin\lr{2\omega_s t}.
 \end{align}
 Interestingly the frequency of the \gls{gw} is twice the frequency of the orbital period.\\
-The equations \eqref{def:gw_source_frame} are written in the source frame, i.e. they are the \gls{gw}-polarizations emitted in the z-direction, where the z-axis is the one orthogonal to the orbital plane and at the center of gravity. When measuring these waves however, we are not assured, that the system emits face-on to our detectors. Therefore we need to change coordinates, to get the emission in a general direction $\hat{n}$. To do so, one simply has to transform the second mass moment into the new frame. These calculations can be found on p.111 in \cite{gwv1} and finally yield
+The equations \eqref{def:gw_source_frame} are written in the source frame, i.e. they are the \gls{gw}-polarizations emitted in the z-direction, where the z-axis is the one orthogonal to the orbital plane and at the center of gravity. When measuring these waves however, we are not assured that the system emits face-on to our detectors. Therefore we need to change coordinates to get the emission in a general direction $\hat{n}$. To do so, one simply has to transform the second mass moment into the new frame. These calculations can be found on p.111 in \cite{gwv1} and finally yield
 \begin{align}\label{def:gw_travel_direction}
 h_+ &= \frac{4}{r}\frac{G}{c^4}\mu R^2 \omega_s^2\lr{\frac{1+\cos^2\lr{\iota}}{2}}\cos\lr{2\omega_s t+2\Phi}\nonumber\\
 h_\times &= \frac{4}{r}\frac{G}{c^4}\mu R^2 \omega_s^2\cos\lr{\iota}\sin\lr{2\omega_s t+2\Phi},
 \end{align}
 where $\iota$ is the inclination and $\Phi$ is the phase of the wave at $t=0$.\medskip\\
-To be measured, these waves need to hit a detector. The most common and currently only operational \gls{gw}-detectors are advanced Michelson-interferometers, with an angle of $\pi/2$ between the two arms. If the \gls{gw} hits such a detector, it will cause a deviation $\delta l$ in arm lengths given by the detector response functions
+To be measured these waves need to hit a detector. The most common and currently only operational \gls{gw}-detectors are advanced Michelson-interferometers with an angle of $\pi/2$ between the two arms. If the \gls{gw} hits such a detector, it will cause a deviation $\delta l$ in arm lengths given by the detector response functions
 %\delta l = F_+\lr{\theta, \varphi} h_+ + F_\times\lr{\theta, \varphi} h_\times,
 \begin{equation}\label{def:detector_response}
 \delta l = F_+\lr{\theta, \varphi}\lr{\cos\lr{2\psi}h_+ - \sin\lr{2\psi} h_\times} + F_\times\lr{\theta, \varphi}\lr{\sin\lr{2\psi}h_+ + \cos\lr{2\psi} h_\times},
@@ -130,9 +130,9 @@ with $h_+$ and $h_\times$ as given in \eqref{def:gw_travel_direction} and
 F_+\lr{\theta, \varphi} &\coloneqq \frac{1}{2}\lr{1+\cos^2\lr{\theta}}\cos\lr{2\varphi}\nonumber\\
 F_\times\lr{\theta, \varphi} &\coloneqq\cos\lr{\theta}\sin\lr{2\varphi}.
 \end{align}
-The angle $\theta$ is the angle between the propagation direction of the \gls{gw} to the (outwards facing) normal of the detector. $\varphi$ is the angle between one arm of the detector\footnote{If the arms were labeled with $x$ and $y$ in such a way, that they form a right handed coordinate system with the outwards facing normal vector, the arm the angle $\varphi$ is taken to is the one labeled $x$.} to the projection of the propagation direction of the \gls{gw} into the detector-plane. Therefore the angles $\theta$ and $\varphi$, or rather their projection onto a global coordinate system, are the declination and right ascension respectively. The angle $\psi$ is known as the polarization angle and is not detectable for a single detector. This is due to the reason, that rotating the wave around its propagation axis has the same effect.\medskip\\
-All the calculations above disregarded the energy carried away by the \gls{gw}. To include it, one needs to calculate the luminosity of a \gls{gw}-source, which in turn requires the computation of an effective energy-momentum tensor of the \gls{gw} itself.\\
-To get this energy-momentum-tensor, second order corrections in $h$ of $R_\mn$ need to be computed and averaged over time. As a result one gets \textcolor{red}{[Citation]}
+The angle $\theta$ is the angle between the propagation direction of the \gls{gw} to the (outwards facing) normal of the detector. $\varphi$ is the angle between one arm of the detector\footnote{If the arms were labeled with $x$ and $y$ in such a way, that they form a right handed coordinate system with the outwards facing normal vector, the arm the angle $\varphi$ is taken to is the one labeled $x$.} to the projection of the propagation direction of the \gls{gw} into the detector-plane. Therefore the angles $\theta$ and $\varphi$, or rather their projection onto a global coordinate system, are the declination and right ascension respectively. The angle $\psi$ is known as the polarization angle and is not detectable for a single detector. This is due to the reason that rotating the wave around its propagation axis has the same effect.\medskip\\
+All the calculations above disregarded the energy carried away by the \gls{gw}. To include it one needs to calculate the luminosity of a \gls{gw}-source, which in turn requires the computation of an effective energy-momentum tensor of the \gls{gw} itself.\\
+To get this energy-momentum-tensor, second order corrections in $h$ of $R_\mn$ need to be computed and averaged over time. The result is \textcolor{red}{[Citation]}
 \begin{equation}
 t_\mn = \frac{c^4}{32\pi G}\langle\partial_\mu h^{\sigma\alpha}\partial_\nu h_{\sigma\alpha}\rangle.
 \end{equation}
@@ -144,7 +144,7 @@ where $S^i=-c\cdot t^{0i}$ and $S^2\lr{r}$ denotes the spherical shell of radius
 \begin{equation}\label{def:luminosity_quadrupole}
 \boxed{L_\text{\gls{gw}}=\frac{G}{5c^5}\langle\dddot{Q}^{ab}\dddot{Q}_{ab}\rangle.}
 \end{equation}
-This equation can now be applied to the binary system specified by \eqref{def:binary_system_second_mass_moment}. To simplify notation and to give measurable parameters, denote, that the dynamics of the system under consideration are governed by Newtonian physics and thus Kepler's laws apply. Especially Kepler's third law
+This equation can now be applied to the binary system specified by \eqref{def:binary_system_second_mass_moment}. To simplify notation and to give measurable parameters, denote that the dynamics of the system under consideration are governed by Newtonian physics and thus Kepler's laws apply. Especially Kepler's third law
 \begin{equation}\label{def:kepler_third_law}
 \omega_s^2=\frac{G M}{R^3}
 \end{equation}
@@ -157,7 +157,7 @@ where
 M_c\coloneqq \mu^{3/5}M^{2/5}=\frac{\lr{m_1 m_2}^{3/5}}{\lr{m_1 + m_2}^{1/5}}.
 \end{equation}
 $M_c$ is called the chirp mass and is the only mass-combination a \gls{gw} depends on in linearized theory.\medskip\\
-According to \eqref{def:luminoisity_binary_system} a binary system looses energy when emitting \gls{gw}. The energy that is carried away, is taken from the orbital energy $E_\text{orbit}$ of the binary system. Therefore, disregarding any other effects\footnote{These effects could for instance be tidal deformation, mass acquisition or other sources of gravity in the proximity of the binary system.}, that might cause $E_\text{orbit}$ to vary,
+According to \eqref{def:luminoisity_binary_system} a binary system looses energy when emitting \gls{gw}. The energy, that is carried away, is taken from the orbital energy $E_\text{orbit}$ of the binary system. Therefore, disregarding any other effects\footnote{These effects could for instance be tidal deformation, mass acquisition or other sources of gravity in the proximity of the binary system.} that might cause $E_\text{orbit}$ to vary
 \begin{equation}
 -\frac{d E_\text{orbit}}{dt}=-\frac{1}{2}\frac{G m_1 m_2 \dot{R}}{R^2}\mbe L_\text{\gls{gw}}.
 \end{equation}
@@ -165,11 +165,11 @@ One can again utilize \eqref{def:kepler_third_law} to eliminate $R$ and $\dot{R}
 \begin{equation}\label{def:frequency_evolution_differential}
 \dot{f}_\text{\gls{gw}}=\frac{96}{5}\pi^{8/3}\lr{\frac{G M_c}{c^3}}^{5/3}f_\text{\gls{gw}}^{11/3}.
 \end{equation}
-This equation describes a runaway process, as for a positive value $f_\text{\gls{gw}}$ the change in frequency is positive, leading to a larger value of $f_\text{\gls{gw}}$ and so on. This in turn by \eqref{def:kepler_third_law} means, that the two masses will come closer and closer together until they touch. This point, where the waveform shuts of gives a specific point in time, which will be denoted by $t_\text{coal}$. With this, one can define the time till coalescence $\tau=t_\text{coal}-t$ and solve the differential equation \eqref{def:frequency_evolution_differential}. \textcolor{red}{[Cite p.170 \cite{gwv1}]}
+This equation describes a runaway process, as for a positive value $f_\text{\gls{gw}}$ the change in frequency is positive, leading to a larger value of $f_\text{\gls{gw}}$ and so on. That in turn by \eqref{def:kepler_third_law} means, that the two masses will come closer and closer together until they touch. The point, where the waveform shuts off, gives a specific point in time, which will be denoted by $t_\text{coal}$. With this, one can define the time until coalescence $\tau=t_\text{coal}-t$ and solve the differential equation \eqref{def:frequency_evolution_differential}. \textcolor{red}{[Cite p.170 \cite{gwv1}]}
 \begin{equation}\label{def:frequency evolution}
 f_\text{\gls{gw}}\lr{\tau} = \frac{1}{\pi}\lr{\frac{5}{256}\frac{1}{\tau}}^{3/8}\lr{\frac{G M_c}{c^3}}^{-5/8}
 \end{equation}
-Now that the frequency evolution of a \gls{gw} is known, the amplitudes $h_+$ and $h_\times$ can also be modeled. To do so revisit the initial assumption \eqref{def:binary_motion}. In this equation $R$ will now be time dependent and $\omega_s t$ will be replaced by $\Phi\lr{t}$, with
+Now that the frequency evolution of a \gls{gw} is known, the amplitudes $h_+$ and $h_\times$ can also be modeled. To do so revisit the initial assumption \eqref{def:binary_motion}. In this equation $R$ will now be time dependent and $\omega_s t$ will be replaced by $\Phi\lr{t}$, where
 \begin{equation}\label{def:phase_equation}
 \Phi\lr{t} = 2\pi \int_{t_0}^t\diff t'\ f_\text{\gls{gw}}\lr{t'}.
 \end{equation}
@@ -183,7 +183,7 @@ where $\Phi_0$ is the phase at $\tau=0$, i.e. at coalescence. Therefore this val
 h_+\lr{t} & = \frac{1}{r}\lr{\frac{G M_c}{c^2}}^{5/4}\lr{\frac{5}{c\tau}}^{1/4}\lr{\frac{1+\cos^2\lr{\iota}}{2}}\cos\lr{\Phi\lr{\tau}}\nonumber\\
 h_\times\lr{t} & = \frac{1}{r}\lr{\frac{G M_c}{c^2}}^{5/4}\lr{\frac{5}{c\tau}}^{1/4}\cos\lr{\iota}\cos\lr{\Phi\lr{\tau}}.
 \end{align}
-Combining \eqref{def:detector_response} and \eqref{def:linear_waveforms_time_evolution} shows, that in linearized theory the output of a detector depends on 8 parameters. These are the luminosity distance $r$, the cirp-mass $M_c$, the coalescence time $t_\text{coal}$, the coalescence phase $\Phi_0$, the inclination $\iota$, the declination $\theta$, the right ascension $\varphi$ and the polarization angle $\psi$. The first four parameters are source intrinsic parameters, where $M_c$ is a combination of the component masses $m_1$ and $m_2$. In that sense the parameter space can be extended to be 9-dimensional.\\
+Inserting \eqref{def:linear_waveforms_time_evolution} and \eqref{def:detector_response} shows that in linearized theory the output of a detector depends on 8 parameters. These are the luminosity distance $r$, the cirp-mass $M_c$, the coalescence time $t_\text{coal}$, the coalescence phase $\Phi_0$, the inclination $\iota$, the declination $\theta$, the right ascension $\varphi$ and the polarization angle $\psi$. The first four parameters are source intrinsic parameters, where $M_c$ is a combination of the component masses $m_1$ and $m_2$. In that sense the parameter space can be extended to be 9-dimensional.\\
 \autoref{fig:linear_waveform} shows an example of the time evolution of a waveform described by \eqref{def:linear_waveforms_time_evolution}. \textcolor{red}{To obtain the spin effects in linearized gravity, one could write down the lagrangian of two spinning particles orbiting each other, solving the lagrange equation for the trajectories of the particles and insert these trajectories into the definition of the quadrupole tensor. (At least that's how I think it could be done. If there is time, maybe do these calculations.)}\\
 Alongside energy, \gls{gw} also carry away angular momentum from the source. Using the quadrupole radiation \eqref{def:h_quadrupole}, the change in angular momentum evaluates to ((3.97) in \cite{gwv1})
 \begin{equation}
