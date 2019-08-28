@@ -1,9 +1,10 @@
-\section{Gravitational-Wave signals from binary neutron star mergers}
+\section{Gravitational-Wave Signals from Binary Neutron Star Mergers}
 \textcolor{blue}{Explain the use for this section.}\\
 Gravitational waves from two inspiraling neutron stars are among the most interesting signals gravitational wave detectors can detect. They convey information about the highly relativistic regimes of gravity, about the structure of the component stars and about the formation channels of black holes or heavy neutron stars. \textcolor{red}{[Citations]} They are however also very hard to detect, as binary neutron star (\gls{bns}) systems are very light systems, when compared to inspiraling binary black holes (\gls{bbh}).\\
 Part 1 of this section will discuss how gravitational waves (\gls{gw}) are formed and what influences the structure of the resulting waveforms. Part 2 will go over the current method of detecting \gls{gw} and discuss the advantages and drawbacks. \textcolor{red}{Need to specify, that I use Einstein sum convention in this section and that latin indices are spacial indices, whereas greek indices are over all four components. NEED TO CHANGE MOST CITATIONS FROM BACHELOR THESIS TO ORIGINAL SOURCES! Mention bachelor thesis only as a way to look up detailed calculations.}
-\subsection{The waveform}
+\subsection{The Waveform}
 \textcolor{blue}{Explain how the waveform looks like, what it depends on, maybe give the concept how it works in the context of linearized theory (quote bachelor thesis), cite important papers regarding the waveform theory.}\\
+\subsubsection{Linearized Gravity}
 Gravitational waves are a solution to the Einstein-equation
 \begin{equation}\label{def:einstein_equation}
 \mathcal{G}_\mn = \frac{8\pi G}{c^4}T_\mn,
@@ -190,16 +191,47 @@ Alongside energy, \gls{gw} also carry away angular momentum from the source. Usi
 \frac{dJ^i}{dt}=\frac{2G}{c^5}\varepsilon^{ikl}\langle \ddot{Q}_{ka}\dddot{Q}_{la}\rangle .
 \end{equation}
 The angular momentum, that is carried away, comes from the total angular momentum of the source. This in turn is comprised of the orbital angular momentum as well as the individual spins of the two component masses of a binary system. Therefore it is at least qualitatively understandable that the spins of the two bodies has an effect on the evolution of the waveform. Thus the 9 parameters of a waveform can be extended to 15, if both objects are allowed to rotate. The 6 additional parameters are the individual angular momenta of the two masses. Two further parameters influence the waveform, if the objects are not rigid and allowed to deform. This is true for binary neutron stars, as neutron stars are not singularities.\\
-Even though this work deals with \gls{bns}-signals, we neglect spin effects and tidal deformability and will thus not go into further detail here. \textcolor{red}{For more information on spin- and tidal effects see [Citations].}\medskip\\
+Even though this work deals with \gls{bns}-signals, we neglect spin effects and tidal deformability and will thus not go into further detail here. \textcolor{red}{For more information on spin- and tidal effects see [Citations].}\\
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{linear_waveform.png}
 \caption[Example time-evolution of a linear waveform]{This figure is heavily based on Figure 4.1 in \cite{gwv1}. Shown is an example of a waveform as it could be observed by a detector if the linear waveforms describe the source accuratly. Note the frequency and amplitude evolution. Both rise simultaniously. This behavior is called ''chirping''.}\label{fig:linear_waveform}
 \end{figure}
 
-\noindent
-As we will see in \autoref{sec:matched_filtering}, accurate models for the waveforms are necessary to detect them using traditional methods. This condition is not dropped for our approach of using machine learning algorithms, as they can only detect waveforms from distributions they have sampled before. \textcolor{red}{Citation?} Though the waveform derived in \eqref{def:linear_waveforms_time_evolution} gives a good qualitative overview of the rough amplitude evolution of inspiraling binary systems, it is hardly an accurate model. The main drawback of this model are the dynamics used to describe the motion of the system. It assumed \eqref{def:linear_approximation}, which in turn means, \gls{gw} and source-dynamics can be separated. Therefore the motion of binary system is dictated by Newtonian dynamics, while the \gls{gw} are a relativistic effect.\\
-To overcome this issue, a different approach to simplifying and approximating the Einstein equation \eqref{def:einstein_equation} is taken. Instead of using $g_\mn\approx h_\mn +\eta_\mn$, the metric $g_\mn$ is expanded in powers of the small parameter $\epsilon\sim v/c \sim \lr{R_s / d}^{1/2}$, where $v$ is the typical speed inside the source, $R_s$ is the Schwarzschild radius attributed to the systems total mass and $d$ is the size of the source. Therefore $\epsilon$ is small, if the source is not too compact and speeds are low compared to the speed of light.
+\subsubsection{Post-Newtonian expansion}
+This part closely follows chapter 5 in \cite{gwv1}, mainly stating results.\\
+As we will see in \autoref{sec:matched_filtering}, accurate models for the waveforms are necessary to detect \gls{gw} using traditional methods. This condition is not dropped for an approach utilizing machine learning algorithms, as they can only detect waveforms from distributions they have sampled before. \textcolor{red}{Citation?} Though the waveform derived in \eqref{def:linear_waveforms_time_evolution} gives a good qualitative overview of the rough amplitude evolution of inspiraling binary systems, it is hardly an accurate model. The main drawback of this model are the dynamics used to describe the motion of the system. It assumed \eqref{def:linear_approximation}, which in turn means, \gls{gw} and source-dynamics can be separated. Therefore, in linearized gravity, the motion of a binary system is dictated by Newtonian dynamics, while the \gls{gw} are a relativistic effect.\\
+This issue is overcome, by taking an approach called post-Newtonian expansion (\gls{pn}-expansion). To approximate the solution of the full Einstein equation \eqref{def:einstein_equation}, $g_\mn$ is expanded in powers of the small parameter $\epsilon\sim v/c \sim \lr{R_s / d}^{1/2}$, instead of using $g_\mn\approx h_\mn +\eta_\mn$. Here $v$ is the typical speed inside the source, $R_s$ is the Schwarzschild radius attributed to the systems total mass and $d$ is the diameter of a world-tube containing the support of the energy-momentum-tensor of the source. Therefore $\epsilon$ is small, if the source is not too compact and speeds are low compared to the speed of light.\\
+Specifically the metric expands to \textcolor{red}{(Mention why they start at different orders?)}
+\begin{align}\label{def:pn_expansion_metric}
+g_{00} && = & -1 && +{g^{(2)}}_{00} & +{g^{(4)}}_{00} && +{g^{(6)}}_{00} && +\dotsc\nonumber\\
+g_{0j} && = & && & +{g^{(3)}}_{0j} && +{g^{(5)}}_{0j} && +\dotsc\\
+g_{ij} && = & &&\delta_{ij} & +{g^{(2)}}_{ij} && +{g^{(4)}}_{ij} && +\dotsc,\nonumber
+\end{align}
+where ${g^{(n)}}$ denotes a term $\sim \epsilon^n$. The energy-momentum-tensor can be expanded in an equivalent way
+\begin{align}\label{def:pn_expansion_energy_momentum_tensor}
+T^{00} & = {T^{(0)}}^{00}+{T^{(2)}}^{00}+\cdots\nonumber\\
+T^{0i} & = {T^{(1)}}^{0i}+{T^{(3)}}^{0i}+\cdots\\
+T^{ij} & = {T^{(4)}}^{ij}+{T^{(4)}}^{ij}+\cdots.\nonumber
+\end{align}
+These expressions than need to be inserted into \eqref{def:einstein_equation} and terms of the same order in $\epsilon$ need to be equated. To get the equations of motion to the $n$-th \gls{pn}-order terms up to order $\epsilon^{2n}$ need to be kept and computed. Therefore it is possible to have the correction of some quantity to \gls{pn}-order $2.5$.\\
+To get the 1-\gls{pn} order corrections to the metric, one can once again impose a gauge condition. \textcolor{red}{Gauge condition can be required for any order.} The gauge condition most commonly used is still called deDonder gauge, which in the \gls{pn}-case reads
+\begin{equation}
+\partial_\mu\lr{\sqrt{-g}g^\mn}=0,
+\end{equation}
+where $g$ is the determinant of $g_\mn$. In this gauge the Einstein equation yields (to 1-\gls{pn} order)
+\begin{align}\label{def:metric_differential_equation_pn_1}
+\Delta {g^{(2)}}_{00} = & -\frac{8\pi G}{c^4}{T^{(0)}}^{00}\nonumber\\
+\Delta {g^{(2)}}_{ij} = & -\frac{8\pi G}{c^4}\delta_{ij}{T^{(0)}}^{00}\nonumber\\
+\Delta {g^{(3)}}_{0i} = & \frac{16\pi G}{c^4}{T^{(1)}}^{0i}\\
+\Delta {g^{(4)}}_{00} = & \partial_0^2{g^{(2)}}_{00} + {g^{(2)}}_{ij}\partial_i\partial_j{g^{(2)}}_{00}-\partial_i{g^{(i)}}_{00}\partial_j{g^{(2)}}_{00}\nonumber\\
+& -\frac{8\pi G}{c^4}\left\{{T^{(2)}}^{00}+{T^{(2)}}^{ii}-2{g^{(2)}}_{00}{T^{(0)}}{00}\right\},\nonumber
+\end{align}
+with $\Delta = \delta^{ij}\partial_i\partial_j$. Observe that higher order terms in \eqref{def:metric_differential_equation_pn_1} depend on the lower order terms of the expansion. Therefore the \gls{pn}-expansion is an iterative process.\\
+The equations \eqref{def:metric_differential_equation_pn_1} do in principle have a solution. The specific solution however depends on the boundary condition. A typical boundary condition is the ''no incoming radiation'' condition, where it is required that the metric vanishes at spatial infinity. The \gls{pn}-expansion however is only valid in the near region of the source, as it approximates the retarded solutions by a series of instantaneous potentials. To use a correct boundary condition one approximates the far-field solution and matches it with the near-field \gls{pn}-solution.\\
+The approximation for the far-field is called Post-Minkowskian-expansion (\gls{pm}-expansion).
+
+\subsubsection{TaylorF2}
 \textcolor{red}{Transition into roughly describing the PN-approximation and TaylorF2 here.}
 %Until now, the approximations made were quite strict. One of the major ones is the approximation of the two bodies of mass $m_1$ and $m_2$ as point particles. As such they have no intrinsic spin. Dropping this restriction shows, that also angular momentum is radiated away. Also each \textcolor{red}{Spin seems to be difficult. If it doesn't fit time wise, consider just pointing out, that there are in theory 6 more parameters coming from the individual spins, but as we only look at non-spinning systems anyways, we will not go into further detail and the effects here. Otherwise maybe look at Stephans Bachelor thesis to get a little grasp on spins and their effects? However I'm not comfortable writing, that spins only come into effect in PN-theory. Maybe I can find a mass momentum $I^{ab}$ for a binary system of two spinning masses and just say, that this can be plugged into the according equations?}\\
 \textcolor{red}{Include backreaction in first order as 4.1.1 \cite{gwv1} does, until equation (4.32). Mention that elliptic effects can be mostly disregarded, cite \cite{gwv1}. Go over into PN territory and mention what changes.}
