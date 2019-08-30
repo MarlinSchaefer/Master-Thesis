@@ -1,7 +1,7 @@
 \section{Gravitational-Wave Signals from Binary Neutron Star Mergers}
 \textcolor{blue}{Explain the use for this section.}\\
 Gravitational waves from two inspiraling neutron stars are among the most interesting signals gravitational wave detectors can detect. They convey information about the highly relativistic regimes of gravity, about the structure of the component stars and about the formation channels of black holes or heavy neutron stars. \textcolor{red}{[Citations]} They are however also very hard to detect, as binary neutron star (\gls{bns}) systems are very light systems, when compared to inspiraling binary black holes (\gls{bbh}).\\
-Part 1 of this section will discuss how gravitational waves (\gls{gw}) are formed and what influences the structure of the resulting waveforms. Part 2 will go over the current method of detecting \gls{gw} and discuss the advantages and drawbacks. \textcolor{red}{Need to specify, that I use Einstein sum convention in this section and that latin indices are spacial indices, whereas greek indices are over all four components. NEED TO CHANGE MOST CITATIONS FROM BACHELOR THESIS TO ORIGINAL SOURCES! Mention bachelor thesis only as a way to look up detailed calculations.}
+Part 1 of this section will discuss how gravitational waves (\gls{gw}) are formed and what influences the structure of the resulting waveforms. Part 2 will go over the current method of detecting \gls{gw} and discuss the advantages and drawbacks. \textcolor{red}{Need to specify, that I use Einstein sum convention in this section and that latin indices are spacial indices, whereas greek indices are over all four components. NEED TO CHANGE MOST CITATIONS FROM BACHELOR THESIS TO ORIGINAL SOURCES! Mention bachelor thesis only as a way to look up detailed calculations. Need to specify which convention is used for $\eta^\mn$.}
 \subsection{The Waveform}
 \textcolor{blue}{Explain how the waveform looks like, what it depends on, maybe give the concept how it works in the context of linearized theory (quote bachelor thesis), cite important papers regarding the waveform theory.}\\
 \subsubsection{Linearized Gravity}
@@ -198,7 +198,7 @@ Even though this work deals with \gls{bns}-signals, we neglect spin effects and 
 \caption[Example time-evolution of a linear waveform]{This figure is heavily based on Figure 4.1 in \cite{gwv1}. Shown is an example of a waveform as it could be observed by a detector if the linear waveforms describe the source accuratly. Note the frequency and amplitude evolution. Both rise simultaniously. This behavior is called ''chirping''.}\label{fig:linear_waveform}
 \end{figure}
 
-\subsubsection{Post-Newtonian expansion}
+\subsubsection{Post-Newtonian Expansion}
 This part closely follows chapter 5 in \cite{gwv1}, mainly stating results.\\
 As we will see in \autoref{sec:matched_filtering}, accurate models for the waveforms are necessary to detect \gls{gw} using traditional methods. This condition is not dropped for an approach utilizing machine learning algorithms, as they can only detect waveforms from distributions they have sampled before. \textcolor{red}{Citation?} Though the waveform derived in \eqref{def:linear_waveforms_time_evolution} gives a good qualitative overview of the rough amplitude evolution of inspiraling binary systems, it is hardly an accurate model. The main drawback of this model are the dynamics used to describe the motion of the system. It assumed \eqref{def:linear_approximation}, which in turn means, \gls{gw} and source-dynamics can be separated. Therefore, in linearized gravity, the motion of a binary system is dictated by Newtonian dynamics, while the \gls{gw} are a relativistic effect.\\
 This issue is overcome, by taking an approach called post-Newtonian expansion (\gls{pn}-expansion). To approximate the solution of the full Einstein equation \eqref{def:einstein_equation}, $g_\mn$ is expanded in powers of the small parameter $\epsilon\sim v/c \sim \lr{R_s / d}^{1/2}$, instead of using $g_\mn\approx h_\mn +\eta_\mn$. Here $v$ is the typical speed inside the source, $R_s$ is the Schwarzschild radius attributed to the systems total mass and $d$ is the diameter of a world-tube containing the support of the energy-momentum-tensor of the source. Therefore $\epsilon$ is small, if the source is not too compact and speeds are low compared to the speed of light.\\
@@ -229,12 +229,62 @@ where $g$ is the determinant of $g_\mn$. In this gauge the Einstein equation yie
 \end{align}
 with $\Delta = \delta^{ij}\partial_i\partial_j$. Observe that higher order terms in \eqref{def:metric_differential_equation_pn_1} depend on the lower order terms of the expansion. Therefore the \gls{pn}-expansion is an iterative process.\\
 The equations \eqref{def:metric_differential_equation_pn_1} do in principle have a solution. The specific solution however depends on the boundary condition. A typical boundary condition is the ''no incoming radiation'' condition, where it is required that the metric vanishes at spatial infinity. The \gls{pn}-expansion however is only valid in the near region of the source, as it approximates the retarded solutions by a series of instantaneous potentials. To use a correct boundary condition one approximates the far-field solution and matches it with the near-field \gls{pn}-solution.\\
-The approximation for the far-field is called Post-Minkowskian-expansion (\gls{pm}-expansion).
+The approximation for the far-field is called Post-Minkowskian-expansion (\gls{pm}-expansion). For simplified notation the Einstein equation will be recast into their relaxed form
+\begin{equation}\label{def:einstein_equation_relaxed}
+\Box k^\mn = \frac{16\pi G}{c^4}\tau^\mn.
+\end{equation}
+To get this result, the deDonder gauge
+\begin{equation}
+\partial_\nu k^{\mn}=0
+\end{equation}
+was again required. The metric $k$ is given by
+\begin{equation}
+k^\mn\coloneqq \sqrt{-g}g^\mn -\eta^\mn.
+\end{equation}
+Furthermore
+\begin{equation}\label{def:pn_tau}
+\tau^\mn = \lr{-g}T^\mn + \frac{c^4}{16\pi G}\Lambda^\mn,
+\end{equation}
+with $\Lambda^\mn$ being a tensor that depends highly nonlinearly on $k$ and $g$. The expression is given in (5.74) of \cite{gwv1}. To simplify the relaxed Einstein equation \eqref{def:einstein_equation_relaxed} in the far field, we denote that the energy-momentum-tensor of matter $T^\mn$ vanishes outside the source. Therefore the task is solving
+\begin{equation}
+\Box k^\mn = \Lambda^\mn.
+\end{equation}
+To do so, we expand $k$ in powers of $R_s/r$, which is equivalent to expanding in powers of $G$. We also expand $\Lambda^\mn$ in powers of $k$. Therefore
+\begin{gather}
+k^\mn=\sum_{n=1}^\infty G^n k^\mn_n\\
+\Lambda^\mn = N^\mn\left[k,k\right] + M^\mn\left[k,k,k\right]+\dotsc.
+\end{gather}
+Equating terms of the same order in $G$ and iteratively using the results for $k$ yields
+\begin{gather}
+\Box k^\mn_1=0\\
+\Box k^\mn_2 = N^\mn\left[k_1, k_1\right]\\
+\Box k^\mn_3 = M^\mn\left[k_1, k_1, k_1\right]+N^\mn\left[k_1,k_2\right]+N^\mn\left[k_2,k_1\right]\\
+\vdots\nonumber
+\end{gather}
+or in short
+\begin{equation}\label{def:pm_wave_equation}
+\Box k^\mn_n=\Lambda^\mn_n\left[k_1, \dotsc, k_{n-1}\right].
+\end{equation}
+The most general solution to $k_1$ can be written in terms of retarded multipolar waves. The solution under consideration of the deDonder gauge can be found in equation (5.95) and following of \cite{gwv1}. To find the solution to any order $n$ equation \eqref{def:pm_wave_equation} needs to be solved, inserting all previous solution $k_1,\dotsc,k_{n-1}$. Therefore a general solution to \eqref{def:pm_wave_equation} would be convenient.\\
+Traditionally such a solution is known and given by the retarded Green's function. The problem however is that the solution to \eqref{def:pm_wave_equation} is only valid outside the source but solving it by the retarded Green's function requires knowledge over the entire region. To get around this issue, we observe the fact that we only want the solution of $k$ to some order in $G$. This has the benefit that $\Lambda^\mn_n$ may therefore be expressed as a multipole expansion with only a finite number of terms. Needing only a finite number of terms in the multipole expansion has the effect of being able to find some constant $B$, such that $r^B\Lambda^\mn_n$ is defined for all $r$ and thus the solution is given by the retarded Green's function. Expanding this solution in a Laurent-series and taking only the zeroth order term yields a particular solution $u^\mn_n$ with
+\begin{equation}
+\Box u^\mn_n=\Lambda^\mn_n.
+\end{equation}
+From this particular solution the general solution can be constructed.\medskip\\
+As a final step, the \gls{pn}-expansion can be recast in the form of $k$, where we expand
+\begin{gather}
+k_\mn =\sum_{n=2}^\infty \frac{1}{c^n}\frac{d^n}{du^n}k_\mn\lr{u}\\
+\tau^\mn=\sum_{n=2}^\infty \frac{1}{c^n}\frac{d^n}{du^n}\tau^\mn\lr{u},
+\end{gather}
+with $u=t-r/c$ and $\tau$ given in \eqref{def:pn_tau}. Doing so and inserting it into the relaxed Einstein equations results in the recursive relation
+\begin{equation}
+\Delta\left[\frac{d^n}{du^n}k^\mn\right]=16\pi G\frac{d^{n-4}}{du^{n-4}}\tau^\mn+\partial_t^2\left[\frac{d^{n-2}}{du^{n-2}}k^\mn\right].
+\end{equation}
 
 \subsubsection{TaylorF2}
 \textcolor{red}{Transition into roughly describing the PN-approximation and TaylorF2 here.}
 %Until now, the approximations made were quite strict. One of the major ones is the approximation of the two bodies of mass $m_1$ and $m_2$ as point particles. As such they have no intrinsic spin. Dropping this restriction shows, that also angular momentum is radiated away. Also each \textcolor{red}{Spin seems to be difficult. If it doesn't fit time wise, consider just pointing out, that there are in theory 6 more parameters coming from the individual spins, but as we only look at non-spinning systems anyways, we will not go into further detail and the effects here. Otherwise maybe look at Stephans Bachelor thesis to get a little grasp on spins and their effects? However I'm not comfortable writing, that spins only come into effect in PN-theory. Maybe I can find a mass momentum $I^{ab}$ for a binary system of two spinning masses and just say, that this can be plugged into the according equations?}\\
 \textcolor{red}{Include backreaction in first order as 4.1.1 \cite{gwv1} does, until equation (4.32). Mention that elliptic effects can be mostly disregarded, cite \cite{gwv1}. Go over into PN territory and mention what changes.}
 
-\subsection{Matched filtering}\label{sec:matched_filtering}
+\subsection{Matched Filtering}\label{sec:matched_filtering}
 \textcolor{blue}{Explain what matched filtering is, why it works and how it is applied currently. Also need to mention PSD and what it is.}
