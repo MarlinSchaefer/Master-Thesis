@@ -1,4 +1,4 @@
-\section{Full adder as network}\label{app:Full_adder}
+\section{Full Adder as Network}\label{app:Full_adder}
 To create a full adder from basic neurons, the corresponding logic gates need to be defined. The equivalent neuron for an ''and''-gate was defined in \autoref{sec:basics_neuron_network}. There are two more basic neurons which will be defined here. The neuron corresponding to the ''or''-gate, which is given by the same activation function \eqref{def:step_activation}, weights $\vec{w}={(w_1, w_2)}^T=(1,1)$ and bias $b=-0.5$, and the neuron equivalent to the ''not''-gate, which is given by the activation function \eqref{def:step_activation}, weight $w=-1$ and bias $b=0.5$. These definitions are summarized in \autoref{tab:neuron_logic_gates}.
 \begin{table}[H]
 \begin{center}
@@ -75,7 +75,7 @@ With this ''XOR''-neuron a network, that behaves like a full-adder, can be defin
 \caption[Full adder network]{A network replicating the behavior of a binary full adder.}\label{fig:full_adder}
 \end{figure}
 
-\section{Indication that the network does not learn}\label{app:network_does_not_learn}
+\section{Indication of a Local Minimum}\label{app:network_does_not_learn}
 Sometimes during training only a local minimum is found. The most notable of these minima is when the network just picks a fixed value in the interval and appoints it to any input. It is therefore useful to spot this behavior during training and consider restarting. Therefore the value for a constant output will be calculated in this appendix.
 \medskip\\
 To start off the loss function will be assumed to be the mean squared error. Furthermore it is assumed, that the \gls{snr}-values lie within the interval $\left[a,b\right]$. The mean squared error of a chosen point $x$ to every point in this interval is given by
@@ -107,7 +107,7 @@ With $\partial_x f(x)=2x-a-b$ one gets
 \end{equation}
 as expected. The value of $g$ at this point will be the expectation value of the mean squared error if the network predicts a single value and optimizes this value. In this work $p$ is the probability of looking at data containing a \gls{gw}, i.e. the fraction of data-points containing a \gls{gw} over the total number of data-points.
 
-\section{Deriving custom loss}
+\section{Deriving Custom Loss}\label{app:custom_loss}
 For this work the binary decision of ''signal'' vs. ''no-signal'' is more important for the performance of the network, than how accurate the predicted \gls{snr}-value is. Therefore we would like the network to have a bias towards underestimating the \gls{snr}-values of pure noise examples and overestimate those of \gls{gw}-signals. To achieve this behavior, we tried to use a new loss function, that exponentially penalizes overestimating pure noise samples and underestimating \gls{gw}-signals. For backpropagation to work properly, the loss will need to be differentiable and its derivative needs to be continuous everywhere.\\
 As a starting point we will use the pure noise case first and adapt it to the full loss later on. We start at a distribution of values we want to achieve and later turn it into an error function. This distribution should exponentially decay for values larger than some fixed value and decay like $1/x$ for values smaller than this fixed value. The exponential part was inspired by the solution of the hydrogen atom, though the decay for this case goes like $x^2$. For this reason, we matched
 \begin{align}
