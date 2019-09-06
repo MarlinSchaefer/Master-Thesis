@@ -49,9 +49,9 @@ is a wave equation. Its solutions travel at the speed of light. Therefore, gravi
 \end{figure}
 \eqref{def:gw_wave_equation} shows that \gls{gw} exist and can travel through space. It does, however, not specify how these waves are produced. To do so the energy-momentum-tensor cannot be set to $0$. Instead the full equation \eqref{def:gw_equation} needs to be solved. The solution is known to be
 \begin{equation}
-\bar{h}\lr{t, \vec{x}}=\frac{4 G}{c^4}\int\Diff{3}x'\ \frac{T_\mn\lr{t-\frac{\norm{\vec{x}-\vec{x}'}}{c},\vec{x}'}}{\norm{\vec{x}-\vec{x}'}}.
+\bar{h}\lr{t, \vec{x}}=\frac{4 G}{c^4}\int\Diff{3}x'\ \frac{T_\mn\lr{t-\frac{\norm{\vec{x}-\vec{x}'}}{c},\vec{x}'}}{\left|\vec{x}-\vec{x}'\right|}.
 \end{equation}
-For simplification, it is assumed that the observer is far away from the source when compared to the size of the support of $T_\mn$, such that $\norm{\vec{x}-\vec{x}'}\approx r\coloneqq\norm{\vec{x}}$. Therefore we need to solve
+For simplification, it is assumed that the observer is far away from the source when compared to the size of the support of $T_\mn$, such that $\left|\vec{x}-\vec{x}'\right|\approx r\coloneqq\left|\vec{x}\right|$. Therefore we need to solve
 \begin{equation}
 \bar{h}\lr{t, \vec{x}}=\frac{4 G}{c^4}\frac{1}{r}\int\Diff{3}x'\ T_\mn\lr{t-\frac{r}{c},\vec{x}'}.
 \end{equation}
@@ -65,7 +65,7 @@ where $\ddot{I}_{ab}^\text{\gls{tt}}$ is the transverse-traceless-projection of 
 \end{equation}
 As the quadrupole moment $Q_{ab}$ is simply the traceless second mass moment and we project it to its traceless part anyways, \eqref{def:quad_st_1} can be rewritten as
 \begin{equation}\label{def:h_quadrupole}
-\boxed{h^{\gls{tt}}_{ab}\lr{t,\vec{x}} = \frac{2 G}{c^4}\frac{1}{r}\ddot{Q}^{\gls{tt}}_{ab}\lr{t-r/c},}
+\boxed{h^{\gls{tt}}_{ab}\lr{t,\vec{x}} = \frac{2 G}{c^4}\frac{1}{r}\ddot{Q}^{\gls{tt}}_{ab}\lr{t-r/c}}
 \end{equation}
 with $Q_{ab}\coloneqq I_{ab} - \frac{1}{3}\delta_{ab}I^c_c$. This is the famous quadrupole formula. (chapter 5.2 in \cite{bachelor})\medskip\\
 
@@ -131,7 +131,7 @@ with $h_+$ and $h_\times$ as given in \eqref{def:gw_travel_direction} and
 F_+\lr{\theta, \varphi} &\coloneqq \frac{1}{2}\lr{1+\cos^2\lr{\theta}}\cos\lr{2\varphi}\nonumber\\
 F_\times\lr{\theta, \varphi} &\coloneqq\cos\lr{\theta}\sin\lr{2\varphi}.
 \end{align}
-The angle $\theta$ is the angle between the propagation direction of the \gls{gw} to the (outwards facing) normal of the detector. $\varphi$ is the angle between one arm of the detector\footnote{If the arms were labeled with $x$ and $y$ in such a way that they form a right handed coordinate system with the outwards facing normal vector, the arm the angle $\varphi$ is taken to is the one labeled $x$.} to the projection of the propagation direction of the \gls{gw} into the detector-plane. Therefore, the angles $\theta$ and $\varphi$, or rather their projection onto a global coordinate system, are the declination and right ascension respectively. The angle $\psi$ is known as the polarization angle and is not detectable for a single detector. This is due to the reason that rotating the wave around its propagation axis has the same effect.\medskip\\
+The angle $\theta$ is taken between the propagation direction of the \gls{gw} to the (outwards facing) normal of the detector. $\varphi$ is the angle between one arm of the detector\footnote{If the arms were labeled with $x$ and $y$ in such a way that they form a right handed coordinate system with the outwards facing normal vector, the arm the angle $\varphi$ is taken to is the one labeled $x$.} to the projection of the propagation direction of the \gls{gw} into the detector-plane. Therefore, the angles $\theta$ and $\varphi$, or rather their projection onto a global coordinate system, are the declination and right ascension respectively. The angle $\psi$ is known as the polarization angle and is not detectable for a single detector. This is due to the reason that rotating the wave around its propagation axis has the same effect.\medskip\\
 All the calculations above disregarded the energy carried away by the \gls{gw}. To include it one needs to calculate the luminosity of a \gls{gw}-source, which in turn requires the computation of an effective energy-momentum tensor of the \gls{gw} itself.\\
 To get this energy-momentum tensor, second order corrections in $h$ of $R_\mn$ need to be computed and averaged over time. The result is \textcolor{red}{[Citation]}
 \begin{equation}
@@ -200,7 +200,7 @@ Even though this work deals with \gls{bns}-signals, we neglect spin effects and 
 
 \subsubsection{Post-Newtonian Expansion}\label{sec:pn_expansion}
 This part closely follows chapter 5 in \cite{gwv1}, mainly stating results and concepts.\\
-As we will see in \autoref{sec:matched_filtering}, accurate models for the waveforms are necessary to detect \gls{gw} using traditional methods. This condition is not dropped for an approach utilizing machine learning algorithms, as they can only detect waveforms from distributions they have sampled before. \textcolor{red}{Citation?} Though the waveform derived in \eqref{def:linear_waveforms_time_evolution} gives a good qualitative overview of the rough amplitude evolution of inspiraling binary systems, it is hardly an accurate model. The main drawback of this model are the dynamics used to describe the motion of the system. It assumed \eqref{def:linear_approximation} which in turn means that \gls{gws} and source-dynamics can be separated. Therefore, in linearized gravity the motion of a binary system is dictated by Newtonian dynamics, while the \gls{gws} are a relativistic effect.\\
+As we will see in \autoref{sec:matched_filtering}, accurate models for the waveforms are necessary to detect \gls{gw} using traditional methods. This does not change for an approach utilizing machine learning algorithms, as they can only detect waveforms from distributions they have sampled before. \textcolor{red}{Citation?} Though the waveform derived in \eqref{def:linear_waveforms_time_evolution} gives a good qualitative overview of the rough amplitude evolution of inspiraling binary systems, it is hardly an accurate model. The main drawback of this model are the dynamics used to describe the motion of the system. It assumed \eqref{def:linear_approximation} which in turn means that \gls{gws} and source-dynamics can be separated. Therefore, in linearized gravity the motion of a binary system is dictated by Newtonian dynamics, while the \gls{gws} are a relativistic effect.\\
 This issue is overcome, by taking an approach called post-Newtonian expansion (\gls{pn}-expansion). To approximate the solution of the full Einstein equation \eqref{def:einstein_equation}, $g_\mn$ is expanded in powers of the small parameter $\epsilon\sim v/c \sim \lr{R_s / d}^{1/2}$, instead of using $g_\mn\approx h_\mn +\eta_\mn$. Here $v$ is the typical speed inside the source, $R_s$ is the Schwarzschild radius attributed to the system's total mass and $d$ is the diameter of a world-tube containing the support of the energy-momentum-tensor of the source. Therefore, $\epsilon$ is small if the source is not too compact and speeds are low compared to the speed of light.\\
 Specifically the metric expands to \textcolor{red}{(Mention why they start at different orders?)}
 \begin{align}\label{def:pn_expansion_metric}
@@ -228,7 +228,7 @@ where $g$ is the determinant of $g_\mn$. In this gauge the Einstein equation yie
 & -\frac{8\pi G}{c^4}\left\{{T^{(2)}}^{00}+{T^{(2)}}^{ii}-2{g^{(2)}}_{00}{T^{(0)}}{00}\right\},\nonumber
 \end{align}
 with $\Delta = \delta^{ij}\partial_i\partial_j$. Observe that higher order terms in \eqref{def:metric_differential_equation_pn_1} depend on the lower order terms of the expansion. Therefore the \gls{pn}-expansion is an iterative process.\\
-The equations \eqref{def:metric_differential_equation_pn_1} do in principle have a solution. The specific solution however depends on the boundary condition. A typical boundary condition is the ''no incoming radiation'' condition, where it is required that the metric vanishes at spatial infinity. The \gls{pn}-expansion however is only valid in the near region of the source, as it approximates the retarded solutions by a series of instantaneous potentials. To use a correct boundary condition one approximates the far-field solution and matches it with the near-field \gls{pn}-solution.\\
+The equations \eqref{def:metric_differential_equation_pn_1} do in principle have many solutions. A particular solution, however, is specified by the boundary condition. A typical boundary condition is the ''no incoming radiation'' condition, where it is required that the metric approaches the flat space time metric $\eta$ as one goes to spatial infinity. The \gls{pn}-expansion however is only valid in the near region of the source, as it approximates the retarded solutions by a series of instantaneous potentials. To use a correct boundary condition one approximates the far-field solution and matches it with the near-field \gls{pn}-solution.\\
 The approximation for the far-field is called Post-Minkowskian-expansion (\gls{pm}-expansion). For simplified notation the Einstein equation will be recast into their relaxed form
 \begin{equation}\label{def:einstein_equation_relaxed}
 \Box k^\mn = \frac{16\pi G}{c^4}\tau^\mn.
@@ -252,9 +252,9 @@ with $\Lambda^\mn$ being a tensor that depends highly nonlinearly on $k$ and $g$
 To do so, we expand $k$ in powers of $R_s/r$, which is equivalent to expanding in powers of $G$. We also expand $\Lambda^\mn$ in powers of $k$. Therefore
 \begin{gather}
 k^\mn=\sum_{n=1}^\infty G^n k^\mn_n\\
-\Lambda^\mn = N^\mn\left[k,k\right] + M^\mn\left[k,k,k\right]+\dotsc.
+\Lambda^\mn = N^\mn\left[k,k\right] + M^\mn\left[k,k,k\right]+\dotsc,
 \end{gather}
-Equating terms of the same order in $G$ and iteratively using the results for $k$ yields
+where $N^\mn\left[ k, k\right]$ denotes a tensor of quadratic order in $G$. Equating terms of the same order in $G$ and iteratively using the results for $k$ yields
 \begin{gather}
 \Box k^\mn_1=0\\
 \Box k^\mn_2 = N^\mn\left[k_1, k_1\right]\\
