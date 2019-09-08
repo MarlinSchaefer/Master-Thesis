@@ -75,6 +75,7 @@ With this ''XOR''-neuron a network, that behaves like a full-adder, can be defin
 \caption[Full adder network]{A network replicating the behavior of a binary full adder.}\label{fig:full_adder}
 \end{figure}
 
+\begin{comment}
 \section{Indication of a Local Minimum}\label{app:network_does_not_learn}
 Sometimes during training only a local minimum is found. The most notable of these minima is when the network just picks a fixed value in the interval and appoints it to any input. It is therefore useful to spot this behavior during training and consider restarting. Therefore the value for a constant output will be calculated in this appendix.
 \medskip\\
@@ -106,6 +107,7 @@ With $\partial_x f(x)=2x-a-b$ one gets
 \partial_x g(x) \mbe 0 \Leftrightarrow x = \frac{p}{2}\lr{a+b}+\lr{1-p}c
 \end{equation}
 as expected. The value of $g$ at this point will be the expectation value of the mean squared error if the network predicts a single value and optimizes this value. In this work $p$ is the probability of looking at data containing a \gls{gw}, i.e. the fraction of data-points containing a \gls{gw} over the total number of data-points.
+\end{comment}
 
 \section{Deriving Custom Loss}\label{app:custom_loss}
 For this work the binary decision of ''signal'' vs. ''no-signal'' is more important for the performance of the network, than how accurate the predicted \gls{snr}-value is. Therefore we would like the network to have a bias towards underestimating the \gls{snr}-values of pure noise examples and overestimate those of \gls{gw}-signals. To achieve this behavior, we tried to use a new loss function, that exponentially penalizes overestimating pure noise samples and underestimating \gls{gw}-signals. For backpropagation to work properly, the loss will need to be differentiable and its derivative needs to be continuous everywhere.\\
