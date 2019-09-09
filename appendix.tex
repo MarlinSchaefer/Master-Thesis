@@ -208,3 +208,30 @@ For this work, we choose values $a=4, b=8$ and $k=2.2$.
 \includegraphics[width=\textwidth]{loss_evolution.png}
 \caption[Loss iterations]{Three different stages of the custom loss function. (a): The loss as defined in \eqref{def:loss_original}. For $\left|x\right|<2$ the eyponential part is actually smaller than the linear part. This is not desirable, as for most of our testing the label for pure noise is about $4$ away from the smallest label for a signal. (b): To fix the issue of a too small exponential for some purposes, one can introduce a squish factor, that simply multiplies the input by some fixed value. In this case a squish factor of 3 was used. The values in general are a lot larger. (c): Having a large squish factor as in (b) introduces the problem of too large gradients. For this purpose, a cutoff can be introduced. This cutoff grows linearly with the same slope as the linear part of \eqref{def:loss_squished}. The transition between the exponential and linear part however needs to be of class $C^1$, so that the backpropagation algorithm can optimize. Therefore a spline polynomial connects the two parts.}\label{fig:loss_evolution}
 \end{figure}
+
+\section{Illustrations Final Architecture}\label{app:illustrations_final_architecture}
+\begin{figure}
+\centering
+\includegraphics[angle=90, origin=c, height=0.8\textheight]{Final_architecture.png}
+\caption[Overview final architecture]{\textcolor{red}{Description, need to show auxiliary outputs}}\label{fig:high_level_final_network}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth]{TCN-block.png}
+\caption[TCN-Block]{Shown is a single \gls{tcn}-block at depth $i$. A complete \gls{tcn} stacks multiple of these on top of each other.}\label{fig:tcn_block}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth]{Preprocessing.png}
+\caption[Preprocessing of inception network]{Shown are the specific layers of the preprocessing step in the final network. A ConvBlock with a specified kernel size and number of  filters is understood to have a convolution layer with these properties.}\label{fig:preprocessing}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{Inception_stack.png}
+\caption[Inception-Res Block]{Shown is an inception block of the final architecture. Each one contains two inception modules, which are depicted to the right. Each layer of the inception module is equipped with a ReLU activation function and all convolution layers pad their input in such a way that the output has the same size as the input.}\label{fig:inception_block}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[height=0.5\textheight]{postprocessing.png}
+\caption[Postprocessing of inception network]{Shown are the specific layers of the postprocessing step. They are mainly used to reduce the output of the collect-inception network that preceed it to the wanted quantities and their shapes.}\label{fig:postprocessing}
+\end{figure}
