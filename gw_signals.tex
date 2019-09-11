@@ -2,14 +2,15 @@
 %\textcolor{blue}{Explain the use for this section.}\\
 Gravitational waves from two inspiraling neutron stars are among the most interesting signals gravitational wave detectors can detect. They convey information about the highly relativistic regimes of gravity, about the structure of the component stars and about the formation channels of black holes or heavy neutron stars. \textcolor{red}{[Citations]} They are however also very hard to detect, as binary neutron star (\gls{bns}) systems are very light, when compared to inspiraling binary black holes (\gls{bbh}).\\
 Part 1 of this section will discuss how gravitational waves (\gls{gw}) are formed and what influences the structure of the resulting waveforms. Part 2 will go over the current method of detecting \gls{gw} and discuss the advantages and drawbacks. \textcolor{red}{Need to specify, that I use Einstein sum convention in this section and that latin indices are spacial indices, whereas greek indices are over all four components. NEED TO CHANGE MOST CITATIONS FROM BACHELOR THESIS TO ORIGINAL SOURCES! Mention bachelor thesis only as a way to look up detailed calculations. Need to specify which convention is used for $\eta^\mn$. Look for ''energy-momentum-tensor'' and replace by ''energy-momentum tensor''. Search for ''chirp-mass'' and replace by ''chirp mass''. Through entire work replace ''decent'' with ''descent'' if some value goes down. (The other just means it was okay)}
-\subsection{The Waveform}
+\subsection{The Waveform}\label{sec:the_waveform}
 \textcolor{blue}{Explain how the waveform looks like, what it depends on, maybe give the concept how it works in the context of linearized theory (quote bachelor thesis), cite important papers regarding the waveform theory.}\\
+\textcolor{red}{Maybe mention here that we only look at inspiral due to frequency range, but merger and ringdown also exist.}
 \subsubsection{Linearized Gravity}\label{sec:linearized_gravity}
-Gravitational waves are a solution to the Einstein-equation
+Gravitational waves can be derived from the Einstein-equation
 \begin{equation}\label{def:einstein_equation}
 \mathcal{G}_\mn = \frac{8\pi G}{c^4}T_\mn,
 \end{equation}
-where $\mathcal{G}_\mn$ is the Einstein-tensor, $T_\mn$ is the energy-momentum-tensor, $G$ is the gravitational constant and $c$ is the speed of light in vacuum. They can be derived in their linear form by assuming the metric to be a linear correction to the flat metric $\eta_\mn$
+where $\mathcal{G}_\mn$ is the Einstein-tensor, $T_\mn$ is the energy-momentum-tensor, $G$ is the gravitational constant and $c$ is the speed of light in vacuum. \textcolor{red}{Make sentence fit the previous}They can be derived in their linear form by assuming the metric to be a linear correction to the flat metric $\eta_\mn$
 \begin{equation}\label{def:linear_approximation}
 g_\mn = \eta_\mn + h_\mn.
 \end{equation}
@@ -83,6 +84,7 @@ Therefore, the waveforms are given by
 h_+ & = \frac{1}{r}\frac{G}{c^4}\lr{\ddot{I}_{11}-\ddot{I}_{22}}\\
 h_\times & = \frac{2}{r}\frac{G}{c^4}\ddot{I}_{12}.
 \end{align}
+\textcolor{red}{Check if inspiral is said somewhere before. Maybe mention once more, that frequency change is is not in effect, we look at a system with given dynamics. Clarify.}\\
 The approximations that led to \eqref{def:einstein_linear} restrict the validity of the results above to cases where there are only slight perturbations to flat space-time. \eqref{def:linear_approximation} actually assumes the background to be flat. Therefore, the dynamics of the two bodies orbiting each other are dictated by Newtonian gravity. With this in mind, the binary system we are trying to model is a system of two point-particles with masses $m_1$, $m_2$. For simplicity\footnote{It turns out that this simplification is very accurate. This is due to two reasone. First of all a possibile ellipticity is radiated away before the \gls{gw} reaches currently detectable frequencies (4.1.3 in \cite{gwv1}). Secondly the rate of change of the orbital radius is small in the regime, where the approximation of linear gravity is meaningful. (4.1.1 in \cite{gwv1})} assume circular motion. In Newtonian mechanics, this problem reduces to an effective one body problem with the reduced mass $\mu=\frac{m_1m_2}{m_1+m_2}$. The motion in these relative coordinates is given by
 \begin{equation}\label{def:binary_motion}
 \vec{r}\lr{t} = R\cdot
@@ -200,7 +202,7 @@ Even though this work deals with \gls{bns}-signals, we neglect spin effects and 
 
 \subsubsection{Post-Newtonian Expansion}\label{sec:pn_expansion}
 This part closely follows chapter 5 in \cite{gwv1}, mainly stating results and concepts.\\
-As we will see in \autoref{sec:matched_filtering}, accurate models for the waveforms are necessary to detect \gls{gw} using traditional methods. This does not change for an approach utilizing machine learning algorithms, as they can only detect waveforms from distributions they have sampled before. \textcolor{red}{Citation?} Though the waveform derived in \eqref{def:linear_waveforms_time_evolution} gives a good qualitative overview of the rough amplitude evolution of inspiraling binary systems, it is hardly an accurate model. The main drawback of this model are the dynamics used to describe the motion of the system. It assumed \eqref{def:linear_approximation} which in turn means that \gls{gws} and source-dynamics can be separated. Therefore, in linearized gravity the motion of a binary system is dictated by Newtonian dynamics, while the \gls{gws} are a relativistic effect.\\
+As we will see in \autoref{sec:matched_filtering}, accurate models for the waveforms are necessary to detect \gls{gw} using traditional methods. This does not change for an approach utilizing machine learning algorithms, as they can only detect waveforms from distributions they have sampled before. \textcolor{red}{Citation?} Though the waveform derived in \eqref{def:linear_waveforms_time_evolution} gives a good qualitative overview of the rough amplitude evolution of inspiraling binary systems, it is hardly an accurate model. The main drawback of this model are the dynamics used to describe the motion of the system. It assums equation \eqref{def:linear_approximation} which in turn means that \gls{gws} and source-dynamics can be separated. Therefore, in linearized gravity the motion of a binary system is dictated by Newtonian dynamics, while the \gls{gws} are a relativistic effect.\\
 This issue is overcome by taking an approach called post-Newtonian expansion (\gls{pn}-expansion). To approximate the solution of the full Einstein equation \eqref{def:einstein_equation}, $g_\mn$ is expanded in powers of the small parameter $\epsilon\sim v/c \sim \lr{R_s / d}^{1/2}$, instead of using $g_\mn\approx h_\mn +\eta_\mn$. Here $v$ is the typical speed inside the source, $R_s$ is the Schwarzschild radius attributed to the system's total mass and $d$ is the diameter of a world-tube containing the support of the energy-momentum-tensor of the source. Therefore, $\epsilon$ is small if the source is not too compact and speeds are low compared to the speed of light.\\
 Specifically the metric expands to \textcolor{red}{(Mention why they start at different orders?)}
 \begin{align}\label{def:pn_expansion_metric}
@@ -321,4 +323,46 @@ Even though the \gls{pn}-formalism allows us to model the waveforms rather accur
 \textcolor{red}{Include backreaction in first order as 4.1.1 \cite{gwv1} does, until equation (4.32). Mention that elliptic effects can be mostly disregarded, cite \cite{gwv1}. Go over into PN territory and mention what changes.}
 
 \subsection{Searching for Gravitational Waves}\label{sec:matched_filtering}
-\textcolor{blue}{Explain what matched filtering is, why it works and how it is applied currently. Also need to mention PSD and what it is.}
+\textcolor{blue}{Explain what matched filtering is, why it works and how it is applied currently. Also need to mention PSD and what it is.}\\
+The LIGO Scientific Collaboration and the VIRGO collaboration use a wide range of different online pipelines that aim to rapidly generate triggers if a \gls{gw} event is present within the data \cite{ligo_pipelines}. Most of them are modeled searches and based on the concept of matched filtering, i.e. they need a pre-generated model to find a signal that is similar to this model. As we are using PyCBC to generate our waveforms, backgrounds and results we will be going in detail only about the PyCBC Live pipeline \cite{pycbc_live}. In the first part of this section we will briefly recapitulate the basics of matched filtering before summarizing the PyCBC Live pipeline in the second part.
+\subsubsection{Matched Filtering}
+\Cref{sec:the_waveform} discussed how \gls{gw} are generated. The detectors register them as a differential arm length of their two interferometer arms. However, the amplitude of this change in distance is on the order \SI[parse-numbers=false]{\mathcal{O}\lr{10^{-18}}}{\meter} and as such is highly contaminated with noise originating from thermal motion of atoms, quantum shot noise and others \cite{frank_phd}. In fact the amplitude output of the detector is dominated by noise (7.3 in \cite{gwv1}). For this section we will assume that the data $s$ contains a signal $h$ submerged in noise $n$. Therefore,
+\begin{equation}
+s(t) = n(t) + h(t)
+\end{equation}
+in the time domain. To still be able to detect \gls{gw}s a filtering technique names matched filtering is applied to the data. It is a modeled filter, thus requiring knowledge of the signal it is trying to find. The basic concept goes as follows. Assume we use the exact waveform that is inside the data as a filter on white gaussian noise with zero mean \textcolor{red}{(Do I need these requirements to the noise?)}. Then, to decide whether or not the template is present in the data, we can multiply the template with the data and integrate this product over some time $T$, averaging the output by dividing by $T$.
+\begin{equation}\label{def:matched_filter_concept}
+\frac{1}{T}\int_0^T\diff t\ s(t)\cdot h(t) = \frac{1}{T}\int_0^T\diff t\ h^2(t) + \frac{1}{T}\int_0^T\diff t\ n(t)\cdot h(t)
+\end{equation}
+For $T\to\infty$ the first term will approach some finite value $h_0^2$, where $h_0$ is the characteristic amplitude of the \gls{gw}. The second term, though, will approach $0$ as $n(t)$ and $h(t)$ are uncorrelated (7.3 in \cite{gwv1}).\smallskip\\
+To understand the optimal filter we can construct from \eqref{def:matched_filter_concept} we firstly need to define the power spectral density (\gls{psd}). The \gls{psd} characterizes the power contained within the noise at a given frequency bin. As $n(t)$ is real valued the fourier transform $\tilde{n}(f)$ fulfills $\tilde{n}(-f)=\tilde{n}^\ast(f)$, where $\ast$ denotes the complex conjugate. The power in each frequency bin is given by
+\begin{equation}\label{def:psd}
+\langle \tilde{n}^\ast(f)\tilde{n}(f')\rangle = \delta\lr{f-f'}\frac{1}{2}S_n(f),
+\end{equation}
+where $S_n(f)$ denotes the one sided \gls{psd}. It is called one sided as the factor $1/2$ in \eqref{def:psd} results in
+\begin{equation}
+\langle n^2(t)\rangle = \int_0^\infty\diff f\ S_n(f).
+\end{equation}
+Without the factor the integral would have boundaries $\pm\infty$ and need integration over the entire frequency range.\\
+The \gls{psd} can be estimated from data by integration over some period of time $T$ and is given by
+\begin{equation}
+S_n(f)=\frac{2\langle {\left|\tilde{n}(f)\right|}^2\rangle}{T}
+\end{equation}
+and has the unit $\text{Hz}^{-1}$. If we refer to a \gls{psd} in this work, it will always be the one sided variant. The amplitude spectral density (\gls{asd}) is the square root of the \gls{psd} and used to color noise. Especially it is used to whiten data, i.e. divide the data by the \gls{asd} associated to the \gls{psd} of the underlying noise. Whitening is used to suppress frequencies that are very noisy.\smallskip\\
+The matched filter can be derived using the \gls{psd} and is proven to be optimal for gaussian noise. Optimal meaning that the value a template matching the waveform inside the data perfectly is maximized. We use this matched filter to create a statistic called signal-to-noise ratio (\gls{snr}) $\rho$, which is given by \cite{pycbc_live}
+\begin{equation}\label{def:snr_matched_filter}
+\rho^2\coloneqq\frac{\norm{\langle s|h\rangle}^2}{\langle h|h\rangle},
+\end{equation}
+with
+\begin{equation}
+\langle a|b\rangle = 4\int_0^\infty\diff f\ \frac{\tilde{a}(f)\tilde{b}^\ast(f)}{S_n(f)}.
+\end{equation}
+
+\subsubsection{Detection Pipeline (PyCBC Live)}
+\textcolor{blue}{Describe how PyCBC Live works and especially go into how they calculate false alarm rates.}\\
+PyCBC Live is the online detection pipeline based on the PyCBC library optimized for low latency trigger generation. It utilizes a template bank of pre-calculated waveforms in a matched filter search. To do so, the data is filtered roughly according to \eqref{def:snr_matched_filter} with every waveform in the template bank. In fact a time series of \gls{snr} values is calculated using
+\begin{equation}
+\rho^2(t) = \frac{4}{\langle h|h\rangle}\int_0^\infty\diff f\ \frac{\tilde{s}(f)\tilde{h}^\ast(f)}{S_n(f)}e^{2\pi i f t},
+\end{equation}
+where $h$ is the template. To generate triggers from this time series a threshold of $\sim 5.5$ is applied to the output and several consistency tests are applied.\\
+\textcolor{red}{Can keep up with live data stream but adds on average 16 seconds of latency, i.e. triggers are generated 16s after the data came in. Pipeline treats every detector on its own and combines the results. Make cuts based on data quality which is estimated by estimating the PSD.}

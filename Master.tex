@@ -206,6 +206,7 @@
 \newglossaryentry{psd}{name=PSD, description=Power spectral density}
 \newglossaryentry{tcin}{name=TCIN, description=TCN-collect-inception network}
 \newglossaryentry{em}{name=EM, description=Electromagnetic}
+\newglossaryentry{asd}{name=ASD, description=amplitude spectral density}
 
 \pagenumbering{Roman}
 %\maketitle
@@ -279,13 +280,13 @@ $\ $
 \thispagestyle{empty}
 \newpage
 
-\setcounter{page}{8}
+\setcounter{page}{9}
 \listoffigures
 \listoftables
 \thispagestyle{empty}
 \newpage
 
-\setcounter{page}{9}
+\setcounter{page}{10}
 $\ $
 \textcolor{red}{This page is intentionally left blank. LÖSCHEN!!! Damit erste Seite nicht auf Rückseite gedruckt ist.}
 \thispagestyle{empty}
@@ -293,6 +294,8 @@ $\ $
 
 \pagenumbering{arabic}
 \setcounter{section}{0}
+%Command below used to prevent page numbers being shown for multiple page table of contents
+\addtocontents{toc}{\protect\thispagestyle{empty}}
 
 \include{introduction}
 
