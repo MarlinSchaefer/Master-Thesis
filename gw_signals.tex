@@ -4,17 +4,20 @@ Gravitational waves from two inspiraling neutron stars are among the most intere
 Part 1 of this section will discuss how gravitational waves (\gls{gw}) are formed and what influences the structure of the resulting waveforms. Part 2 will go over the current method of detecting \gls{gw} and discuss the advantages and drawbacks. \textcolor{red}{Need to specify, that I use Einstein sum convention in this section and that latin indices are spacial indices, whereas greek indices are over all four components. NEED TO CHANGE MOST CITATIONS FROM BACHELOR THESIS TO ORIGINAL SOURCES! Mention bachelor thesis only as a way to look up detailed calculations. Need to specify which convention is used for $\eta^\mn$. Look for ''energy-momentum-tensor'' and replace by ''energy-momentum tensor''. Search for ''chirp-mass'' and replace by ''chirp mass''. Through entire work replace ''decent'' with ''descent'' if some value goes down. (The other just means it was okay)}
 \subsection{The Waveform}\label{sec:the_waveform}
 \textcolor{blue}{Explain how the waveform looks like, what it depends on, maybe give the concept how it works in the context of linearized theory (quote bachelor thesis), cite important papers regarding the waveform theory.}\\
-\textcolor{red}{Maybe mention here that we only look at inspiral due to frequency range, but merger and ringdown also exist.}
+\textcolor{red}{Maybe mention here that we only look at inspiral due to frequency range, but merger and ringdown also exist.}\\
+A gravitational wave generally consists of three stages, an inspiral, a merger and a ringdown phase. In the first phase, the two bodies spiral slowly towards each other following quasi-circular orbits. Once they are close enough though, they will not be able to stay on these circular paths and plunge towards each other. This plunge results in the two bodies merging. Therefore, this phase is commonly referred to as ''merger''. After they collided the remnant will radiate off some more energy. This is the so-called ringdown phase.\\
+We will see that frequencies of \gls{gw}s coming from a \gls{bns} system are very high due to their low total mass. As such even the inspiral phase will contain frequencies higher than the ones the network can detect. For this reason we only model the inspiral phase in the following subsections.
 \subsubsection{Linearized Gravity}\label{sec:linearized_gravity}
-Gravitational waves can be derived from the Einstein-equation
+Most calculations of this section are done in detail in \cite{bachelor}.\\
+Gravitational waves are a prediction of the Einstein-equation
 \begin{equation}\label{def:einstein_equation}
 \mathcal{G}_\mn = \frac{8\pi G}{c^4}T_\mn,
 \end{equation}
-where $\mathcal{G}_\mn$ is the Einstein-tensor, $T_\mn$ is the energy-momentum-tensor, $G$ is the gravitational constant and $c$ is the speed of light in vacuum. \textcolor{red}{Make sentence fit the previous}They can be derived in their linear form by assuming the metric to be a linear correction to the flat metric $\eta_\mn$
+if a weak field is assumed. Here $\mathcal{G}_\mn$ is the Einstein-tensor, $T_\mn$ is the energy-momentum tensor, $G$ is the gravitational constant and $c$ is the speed of light in vacuum. The weak field limit is given by
 \begin{equation}\label{def:linear_approximation}
-g_\mn = \eta_\mn + h_\mn.
+g_\mn = \eta_\mn + h_\mn,
 \end{equation}
-With this approximation the Einstein-equation \eqref{def:einstein_equation} simplifies to
+where $g_\mn$ is the metric of curved space time, $\eta_\mn=\text{diag}\lr{-,+,+,+}$ is the metric of flat space time and $h_\mn$ is a small perturbation, with $\left|h_\mn\right|\ll 1$ and $\left|\partial_{\sigma_1}\dotsc\partial_{\sigma_n}h_\mn\right|\in\mathcal{O}\lr{\left|h_\mn\right|}\eqqcolon\mathcal{O}\lr{h}$. With this approximation the Einstein-equation \eqref{def:einstein_equation} simplifies to
 \begin{equation}\label{def:einstein_linear}
 \mathcal{G}_\mn=\frac{1}{2}\lr{\partial_{\alpha\mu}h^\alpha_\nu+\partial^\alpha_\nu h_{\mu\alpha} - \partial_\mn h- \Box h_\mn - \eta_\mn\Box h} = \frac{8\pi G}{c^4}T_\mn,
 \end{equation}
@@ -123,7 +126,7 @@ h_+ &= \frac{4}{r}\frac{G}{c^4}\mu R^2 \omega_s^2\lr{\frac{1+\cos^2\lr{\iota}}{2
 h_\times &= \frac{4}{r}\frac{G}{c^4}\mu R^2 \omega_s^2\cos\lr{\iota}\sin\lr{2\omega_s t+2\Phi},
 \end{align}
 where $\iota$ is the inclination and $\Phi$ is the phase of the wave at $t=0$.\medskip\\
-To be measured these waves need to hit a detector. The most common and currently only operational \gls{gw}-detectors are advanced Michelson interferometers with an angle of $\pi/2$ between the two arms. If the \gls{gw} hits such a detector, it will cause a deviation $\delta l$ in arm lengths given by the detector response functions
+To be measured these waves need to hit a detector. The LIGO and Virgo detectors are advanced Michelson interferometers with an angle of $\pi/2$ between the two arms. If the \gls{gw} hits such a detector, it will cause a deviation $\delta l$ in arm lengths given by the detector response functions
 %\delta l = F_+\lr{\theta, \varphi} h_+ + F_\times\lr{\theta, \varphi} h_\times,
 \begin{equation}\label{def:detector_response}
 \delta l = F_+\lr{\theta, \varphi}\lr{\cos\lr{2\psi}h_+ - \sin\lr{2\psi} h_\times} + F_\times\lr{\theta, \varphi}\lr{\sin\lr{2\psi}h_+ + \cos\lr{2\psi} h_\times},
@@ -133,7 +136,8 @@ with $h_+$ and $h_\times$ as given in \eqref{def:gw_travel_direction} and
 F_+\lr{\theta, \varphi} &\coloneqq \frac{1}{2}\lr{1+\cos^2\lr{\theta}}\cos\lr{2\varphi}\nonumber\\
 F_\times\lr{\theta, \varphi} &\coloneqq\cos\lr{\theta}\sin\lr{2\varphi}.
 \end{align}
-The angle $\theta$ is taken between the propagation direction of the \gls{gw} to the (outwards facing) normal of the detector. $\varphi$ is the angle between one arm of the detector\footnote{If the arms were labeled with $x$ and $y$ in such a way that they form a right handed coordinate system with the outwards facing normal vector, the arm the angle $\varphi$ is taken to is the one labeled $x$.} to the projection of the propagation direction of the \gls{gw} into the detector-plane. Therefore, the angles $\theta$ and $\varphi$, or rather their projection onto a global coordinate system, are the declination and right ascension respectively. The angle $\psi$ is known as the polarization angle and is not detectable for a single detector. This is due to the reason that rotating the wave around its propagation axis has the same effect.\medskip\\
+These response functions ignore the relative motion between the earth and the emitting system, as signals from binary systems spend only a couple seconds within the sensitive frequency band. \cite{gw170817}\\
+The angle $\theta$ is taken between the propagation direction of the \gls{gw} to the (outwards facing, relative to earth) normal of the detector. $\varphi$ is the angle between one arm of the detector\footnote{If the arms were labeled with $x$ and $y$ in such a way that they form a right handed coordinate system with the outwards facing normal vector, the arm the angle $\varphi$ is taken to is the one labeled $x$.} to the projection of the propagation direction of the \gls{gw} into the detector-plane. Therefore, the angles $\theta$ and $\varphi$, or rather their projection onto a global coordinate system, are the declination and right ascension respectively. The angle $\psi$ is known as the polarization angle and is not detectable for a single detector. This is due to the reason that rotating the wave around its propagation axis has the same effect.\medskip\\
 All the calculations above disregarded the energy carried away by the \gls{gw}. To include it one needs to calculate the luminosity of a \gls{gw}-source, which in turn requires the computation of an effective energy-momentum tensor of the \gls{gw} itself.\\
 To get this energy-momentum tensor, second order corrections in $h$ of $R_\mn$ need to be computed and averaged over time. The result is \textcolor{red}{[Citation]}
 \begin{equation}
@@ -197,12 +201,12 @@ Even though this work deals with \gls{bns}-signals, we neglect spin effects and 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{linear_waveform.png}
-\caption[Example time-evolution of a linear waveform]{This figure is heavily based on Figure 4.1 in \cite{gwv1}. Shown is an example of a waveform as it could be observed by a detector if the linear waveforms describe the source accuratly. Note the frequency and amplitude evolution, they both rise simultaniously. This behavior is called ''chirping''.}\label{fig:linear_waveform}
+\caption[Example time-evolution of a linear waveform]{This figure is derived from Figure 4.1 in \cite{gwv1}. Shown is an example of a waveform as it could be observed by a detector if the linear waveforms describe the source accurately. Note the frequency and amplitude evolution, they both rise simultaneously. This behavior is called ''chirping''.}\label{fig:linear_waveform}
 \end{figure}
 
 \subsubsection{Post-Newtonian Expansion}\label{sec:pn_expansion}
 This part closely follows chapter 5 in \cite{gwv1}, mainly stating results and concepts.\\
-As we will see in \autoref{sec:matched_filtering}, accurate models for the waveforms are necessary to detect \gls{gw} using traditional methods. This does not change for an approach utilizing machine learning algorithms, as they can only detect waveforms from distributions they have sampled before. \textcolor{red}{Citation?} Though the waveform derived in \eqref{def:linear_waveforms_time_evolution} gives a good qualitative overview of the rough amplitude evolution of inspiraling binary systems, it is hardly an accurate model. The main drawback of this model are the dynamics used to describe the motion of the system. It assums equation \eqref{def:linear_approximation} which in turn means that \gls{gws} and source-dynamics can be separated. Therefore, in linearized gravity the motion of a binary system is dictated by Newtonian dynamics, while the \gls{gws} are a relativistic effect.\\
+As we will see in \autoref{sec:matched_filtering}, accurate models for the waveforms are necessary to detect \gls{gw} using traditional methods. This does not change for an approach utilizing machine learning algorithms, as they can only detect waveforms from distributions they have sampled before. \textcolor{red}{Citation?} Though the waveform derived in \eqref{def:linear_waveforms_time_evolution} gives a good qualitative overview of the rough amplitude evolution of inspiraling binary systems, it is hardly an accurate model. The main drawback of this model are the dynamics used to describe the motion of the system. It assumes equation \eqref{def:linear_approximation} which in turn means that \gls{gws} and source-dynamics can be separated. Therefore, in linearized gravity the motion of a binary system is dictated by Newtonian dynamics, while the \gls{gws} are a relativistic effect.\\
 This issue is overcome by taking an approach called post-Newtonian expansion (\gls{pn}-expansion). To approximate the solution of the full Einstein equation \eqref{def:einstein_equation}, $g_\mn$ is expanded in powers of the small parameter $\epsilon\sim v/c \sim \lr{R_s / d}^{1/2}$, instead of using $g_\mn\approx h_\mn +\eta_\mn$. Here $v$ is the typical speed inside the source, $R_s$ is the Schwarzschild radius attributed to the system's total mass and $d$ is the diameter of a world-tube containing the support of the energy-momentum-tensor of the source. Therefore, $\epsilon$ is small if the source is not too compact and speeds are low compared to the speed of light.\\
 Specifically the metric expands to \textcolor{red}{(Mention why they start at different orders?)}
 \begin{align}\label{def:pn_expansion_metric}
@@ -293,13 +297,9 @@ where $M$ is the total mass and $\omega_s$ the orbital frequency. Note that $x\s
 \begin{equation}
 \nu\coloneqq \frac{m_1 m_2}{\lr{m_1 + m_2}^2},
 \end{equation}
-the post-Newtonian parameter
+and the post-Newtonian parameter
 \begin{equation}
-\gamma\coloneqq \frac{G M}{r c^2}
-\end{equation}
-and the dimensionless time parameter \textcolor{red}{Maybe remove $\theta$ as it is not used.}
-\begin{equation}
-\Theta\coloneqq \frac{\nu c^3}{5 G M}\lr{t_\text{coal}-t}.
+\gamma\coloneqq \frac{G M}{r c^2}.
 \end{equation}
 Using the metrics acquired from the \gls{pn}-expansion one can solve the equations of motion for the two inspiraling bodies and obtain corrections to $\omega_s$, $\gamma$, the energy $E$ and the radiated power $L_\text{\gls{gw}}$. Combining these results one can than find the phase evolution and emitted waveforms. The computations are extremely long. For this reason we only state the results for the energy and luminosity at $3.5$\gls{pn} order here. ($\mu$ in this case is the reduced mass) (equation (5.256) in \cite{gwv1})
 \begin{align}
@@ -360,9 +360,9 @@ with
 
 \subsubsection{Detection Pipeline (PyCBC Live)}
 \textcolor{blue}{Describe how PyCBC Live works and especially go into how they calculate false alarm rates.}\\
-PyCBC Live is the online detection pipeline based on the PyCBC library optimized for low latency trigger generation. It utilizes a template bank of pre-calculated waveforms in a matched filter search. To do so, the data is filtered roughly according to \eqref{def:snr_matched_filter} with every waveform in the template bank. In fact a time series of \gls{snr} values is calculated using
+PyCBC Live is the online detection pipeline based on the PyCBC library optimized for low latency trigger generation. It utilizes a template bank of \textcolor{red}{<insert number of templates + citation>} pre-calculated waveforms in a matched filter search. To do so, the data is filtered roughly according to \eqref{def:snr_matched_filter} with every waveform in the template bank. In fact a time series of \gls{snr} values is calculated using
 \begin{equation}
 \rho^2(t) = \frac{4}{\langle h|h\rangle}\int_0^\infty\diff f\ \frac{\tilde{s}(f)\tilde{h}^\ast(f)}{S_n(f)}e^{2\pi i f t},
 \end{equation}
-where $h$ is the template. To generate triggers from this time series a threshold of $\sim 5.5$ is applied to the output and several consistency tests are applied.\\
+where $h$ is the template. To generate triggers from this time series a threshold of $\sim 5.5$ is applied to the output and several consistency tests are applied. These tests are applied to counteract the influence of non-Gaussian noise sections, \\
 \textcolor{red}{Can keep up with live data stream but adds on average 16 seconds of latency, i.e. triggers are generated 16s after the data came in. Pipeline treats every detector on its own and combines the results. Make cuts based on data quality which is estimated by estimating the PSD.}

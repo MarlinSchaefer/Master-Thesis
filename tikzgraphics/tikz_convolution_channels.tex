@@ -18,10 +18,17 @@ note/.style={circle, draw=black, minimum size=0pt, inner sep=0pt, transform shap
 	\draw[black, very thick] (1,-4) rectangle (2,-5) node[pos=0.5] {$d_{52}$};
 	\draw[black, very thick] (1,-5) rectangle (2,-6) node[pos=0.5] {$d_{62}$};
 	
-	\draw[blue, very thick] (0,0) rectangle (2, -3);
+	\draw[black, very thick] (2,0) rectangle (3,-1) node[pos=0.5] {$d_{13}$};
+	\draw[black, very thick] (2,-1) rectangle (3,-2) node[pos=0.5] {$d_{23}$};
+	\draw[black, very thick] (2,-2) rectangle (3,-3) node[pos=0.5] {$d_{33}$};
+	\draw[black, very thick] (2,-3) rectangle (3,-4) node[pos=0.5] {$d_{43}$};
+	\draw[black, very thick] (2,-4) rectangle (3,-5) node[pos=0.5] {$d_{53}$};
+	\draw[black, very thick] (2,-5) rectangle (3,-6) node[pos=0.5] {$d_{63}$};	
 	
-	\draw[blue] (2,  0) -- (4, -1);
-	\draw[blue] (2, -3) -- (4, -2);
+	\draw[blue, very thick] (0,0) rectangle (3, -3);
+	
+	\draw[blue] (3,  0) -- (5, -1);
+	\draw[blue] (3, -3) -- (5, -2);
 \end{pgfonlayer}
 
 \filldraw[fill=white, draw=black, very thick] (0.5, -0.5) rectangle (1.5, -1.5) node[pos=0.5] {$d_{11}$};
@@ -38,20 +45,27 @@ note/.style={circle, draw=black, minimum size=0pt, inner sep=0pt, transform shap
 \filldraw[fill=white, draw=black, very thick] (1.5, -4.5) rectangle (2.5, -5.5) node[pos=0.5] {$d_{52}$};
 \filldraw[fill=white, draw=black, very thick] (1.5, -5.5) rectangle (2.5, -6.5) node[pos=0.5] {$d_{62}$};
 
-\draw[black] (4, -2) rectangle (5, -3) node[pos=0.5] {$o_{21}$};
-\draw[black] (4, -3) rectangle (5, -4) node[pos=0.5] {$o_{31}$};
-\draw[black] (4, -4) rectangle (5, -5) node[pos=0.5] {$o_{41}$};
-\draw[black] (4, -1) rectangle (5, -2) node[pos=0.5] {$o_{11}$};
-\draw[blue, very thick] (4, -1) rectangle (5, -2);
+\filldraw[fill=white, draw=black, very thick] (2.5, -0.5) rectangle (3.5, -1.5) node[pos=0.5] {$d_{13}$};
+\filldraw[fill=white, draw=black, very thick] (2.5, -1.5) rectangle (3.5, -2.5) node[pos=0.5] {$d_{23}$};
+\filldraw[fill=white, draw=black, very thick] (2.5, -2.5) rectangle (3.5, -3.5) node[pos=0.5] {$d_{33}$};
+\filldraw[fill=white, draw=black, very thick] (2.5, -3.5) rectangle (3.5, -4.5) node[pos=0.5] {$d_{43}$};
+\filldraw[fill=white, draw=black, very thick] (2.5, -4.5) rectangle (3.5, -5.5) node[pos=0.5] {$d_{53}$};
+\filldraw[fill=white, draw=black, very thick] (2.5, -5.5) rectangle (3.5, -6.5) node[pos=0.5] {$d_{63}$};
 
-\draw[black] (5, -2) rectangle (6, -3) node[pos=0.5] {$o_{22}$};
-\draw[black] (5, -3) rectangle (6, -4) node[pos=0.5] {$o_{32}$};
-\draw[black] (5, -4) rectangle (6, -5) node[pos=0.5] {$o_{42}$};
-\draw[black] (5, -1) rectangle (6, -2) node[pos=0.5] {$o_{12}$};
-\draw[red, very thick] (5, -2) rectangle (6, -3);
+\draw[black] (5, -2) rectangle (6, -3) node[pos=0.5] {$o_{21}$};
+\draw[black] (5, -3) rectangle (6, -4) node[pos=0.5] {$o_{31}$};
+\draw[black] (5, -4) rectangle (6, -5) node[pos=0.5] {$o_{41}$};
+\draw[black] (5, -1) rectangle (6, -2) node[pos=0.5] {$o_{11}$};
+\draw[blue, very thick] (5, -1) rectangle (6, -2);
 
-\draw[red, very thick] (0.5, -1.5) rectangle (2.5, -4.5);
+\draw[black] (6, -2) rectangle (7, -3) node[pos=0.5] {$o_{22}$};
+\draw[black] (6, -3) rectangle (7, -4) node[pos=0.5] {$o_{32}$};
+\draw[black] (6, -4) rectangle (7, -5) node[pos=0.5] {$o_{42}$};
+\draw[black] (6, -1) rectangle (7, -2) node[pos=0.5] {$o_{12}$};
+\draw[red, very thick] (6, -2) rectangle (7, -3);
 
-\draw[red] (2.5, -1.5) -- (5, -2);
-\draw[red] (2.5, -4.5) -- (5, -3);
+\draw[red, very thick] (0.5, -1.5) rectangle (3.5, -4.5);
+
+\draw[red] (3.5, -1.5) -- (6, -2);
+\draw[red] (3.5, -4.5) -- (6, -3);
 \end{tikzpicture}
