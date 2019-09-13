@@ -317,10 +317,32 @@ L_\text{\gls{gw}} = & \frac{32 c^5}{5 G}\nu^2 x^5 \left\{ 1 + \lr{-\frac{1247}{3
 \end{align}
 
 \subsubsection{TaylorF2}
+This section closely follows section 2.4.2 and 2.4.4 of \cite{frank_phd}.\\
+The previous section outlines how the energy and luminosity can be obtained to some finite \gls{pn} order. To actually get a waveform from these results, we need to solve
+\begin{equation}\label{def:energy_luminosity_pn}
+\frac{\diff E}{\diff t}=-L_\text{\gls{gw}}\ \rightarrow\ \frac{\diff v}{\diff t}=-\frac{L_\text{\gls{gw}}}{\diff E / \diff v}
+\end{equation}
+and from there obtain the phase using
+\begin{align}\label{def:phase_pn}
+&\Phi = \int \diff t\ \omega,& M\omega=v^3.
+\end{align}
+There are many ways to approximate solutions to these equations, but we will focus only on the TaylorF2 approximation, as it is the one we use in this work. It starts by inverting equation \eqref{def:energy_luminosity_pn} to get $t(v)$. It therefore tries to solve
+\begin{equation}\label{def:pn_equation_t}
+\frac{\diff t}{\diff v}=-\frac{\diff E / \diff v}{L_\text{\gls{gw}}}.
+\end{equation}
+To do so, the right hand side of this equation is re-expanded in terms of $v/c\sim \epsilon$ to $3.5$ \gls{pn} order. This inverted equation can then be analytically integrated and the result can be found in (2.73) of \cite{frank_phd}.\\
+Similarly $\Phi$ can be computed from the equations \eqref{def:phase_pn}, using
+\begin{equation}\label{def:pn_equation_phi}
+\frac{\diff \Phi}{\diff v} = \frac{v^3}{M}\frac{\diff t}{\diff v}=-\frac{\diff E / \diff v}{L_\text{\gls{gw}}}.
+\end{equation}
+The integral can once more be performed analytically and the result can be found in (2.75) of \cite{frank_phd}.\\
+The time domain phase can then be constructed from equations \eqref{def:pn_equation_t} and \eqref{def:pn_equation_phi} and is called TaylorT2. In \autoref{sec:matched_filtering} we will find, however, that the analysis will be done in the frequency domain. One can construct the frequency representation of the orbital phase and in extension the entire waveform from the results of TaylorT2. These waveforms are hence called TaylorF2.
+\begin{comment}
 Even though the \gls{pn}-formalism allows us to model the waveforms rather accurately for a long part of the signal it still assumes circular motion and velocities to be small. As the two stars spiral together they will, however, reach a point, where circular motion is not possible anymore. This orbit is called the ''innermost stable circular orbit'' (\gls{isco}). From here the stars will plunge towards each other, velocities are high and fields are not weak anymore. Therefore, the validity of the formalism breaks down at this point. Finally, after the two bodies have merged, the remaining body will radiate off some more energy. Therefore, the signal consists of three parts: inspiral, merger and ringdown. The inspiral phase is well modeled by the \gls{pn}-formalism outlined in \autoref{sec:pn_expansion}. The ringdown can be described by \textcolor{red}{What can it be described by and where can one find an analysis of this?} The merger however is very difficult to model and usually involves numerical solutions of the Einstein equations. These, however, are very costly from a computational perspective, which is a great problem when one searches for \gls{gws}.
 \textcolor{red}{Transition into roughly describing the PN-approximation and TaylorF2 here.}
 %Until now, the approximations made were quite strict. One of the major ones is the approximation of the two bodies of mass $m_1$ and $m_2$ as point particles. As such they have no intrinsic spin. Dropping this restriction shows, that also angular momentum is radiated away. Also each \textcolor{red}{Spin seems to be difficult. If it doesn't fit time wise, consider just pointing out, that there are in theory 6 more parameters coming from the individual spins, but as we only look at non-spinning systems anyways, we will not go into further detail and the effects here. Otherwise maybe look at Stephans Bachelor thesis to get a little grasp on spins and their effects? However I'm not comfortable writing, that spins only come into effect in PN-theory. Maybe I can find a mass momentum $I^{ab}$ for a binary system of two spinning masses and just say, that this can be plugged into the according equations?}\\
 \textcolor{red}{Include backreaction in first order as 4.1.1 \cite{gwv1} does, until equation (4.32). Mention that elliptic effects can be mostly disregarded, cite \cite{gwv1}. Go over into PN territory and mention what changes.}
+\end{comment}
 
 \subsection{Searching for Gravitational Waves}\label{sec:matched_filtering}
 \textcolor{blue}{Explain what matched filtering is, why it works and how it is applied currently. Also need to mention PSD and what it is.}\\
@@ -345,7 +367,7 @@ where $S_n(f)$ denotes the one sided \gls{psd}. It is called one sided as the fa
 \end{equation}
 Without the factor the integral would have boundaries $\pm\infty$ and need integration over the entire frequency range.\\
 The \gls{psd} can be estimated from data by integration over some period of time $T$ and is given by
-\begin{equation}
+\begin{equation}\label{def:estimate_psd}
 S_n(f)=\frac{2\langle {\left|\tilde{n}(f)\right|}^2\rangle}{T}
 \end{equation}
 and has the unit $\text{Hz}^{-1}$. If we refer to a \gls{psd} in this work, it will always be the one sided variant. The amplitude spectral density (\gls{asd}) is the square root of the \gls{psd} and used to color noise. Especially it is used to whiten data, i.e. divide the data by the \gls{asd} associated to the \gls{psd} of the underlying noise. Whitening is used to suppress frequencies that are very noisy.\smallskip\\
@@ -357,12 +379,26 @@ with
 \begin{equation}
 \langle a|b\rangle = 4\int_0^\infty\diff f\ \frac{\tilde{a}(f)\tilde{b}^\ast(f)}{S_n(f)}.
 \end{equation}
+\textcolor{red}{Maybe say a few words about what the SNR means.}
 
 \subsubsection{Detection Pipeline (PyCBC Live)}
-\textcolor{blue}{Describe how PyCBC Live works and especially go into how they calculate false alarm rates.}\\
-PyCBC Live is the online detection pipeline based on the PyCBC library optimized for low latency trigger generation. It utilizes a template bank of \textcolor{red}{<insert number of templates + citation>} pre-calculated waveforms in a matched filter search. To do so, the data is filtered roughly according to \eqref{def:snr_matched_filter} with every waveform in the template bank. In fact a time series of \gls{snr} values is calculated using
+%\textcolor{blue}{Describe how PyCBC Live works and especially go into how they calculate false alarm rates.}\\
+This section summarizes the results of \cite{pycbc_live}.\\
+PyCBC Live is the online detection pipeline based on the PyCBC library optimized for low latency trigger generation. It utilizes a template bank of $\mathcal{O}\lr{10^5}$ pre-calculated waveforms in a matched filter search. For multiple detectors this analysis is done in all of the detectors and only afterwards combined into a combined statistic. Therefore, the goal is to calculate a \gls{snr} time series for every detector and template. To do so the expression
 \begin{equation}
-\rho^2(t) = \frac{4}{\langle h|h\rangle}\int_0^\infty\diff f\ \frac{\tilde{s}(f)\tilde{h}^\ast(f)}{S_n(f)}e^{2\pi i f t},
+\rho^2(t) = \frac{4}{\langle h|h\rangle}\int_0^\infty\diff f\ \frac{\tilde{s}(f)\tilde{h}^\ast(f)}{S_n(f)}e^{2\pi i f t}
 \end{equation}
+has to be computed for every template $h$ and all detector data $s$. In order to keep up with the constant data-stream the input is downsampled to \SI{2048}{\hertz} and high-passed. The latter allows for computations to be executed in single precision. Furthermore, the workload can be easily parallelized over multiple compute notes to speed up the process. This process is repeated every \SI{8}{\s} on a chunk of data that contains upwards of \SI{32}{\s} of time series strain data. The \gls{psd} $S_n(f)$ is estimated from the data by dividing the minute prior to the analysis segment into overlapping intervals, each of duration \SI{4}{\s}, and computing equation \eqref{def:estimate_psd} from it. The frequency bins are finally averaged over all intervals.\\
+After computing the \gls{snr} time series, the peak \gls{snr} of each one is thresholded by a value of $\sim 5.5$, i.e. no peak \gls{snr} below this value are kept, and all but the loudest $\mathcal{O}\lr{10^3}$ are discarded. Sometimes these triggers are then discarded altogether. This happens if the \gls{psd} estimate shows drifts in detector noise, sensitivity estimates report poor data quality or the \gls{snr} values are unusually high. If non of these conditions apply, some more consistency tests are applied and the \gls{snr} is reweighed based on a $\chi^2$ signal consistency test. Until now this procedure was done for all detectors individually. The resulting single detector triggers are then combined to report a detector network \gls{snr}. To do so, the templates that generated a trigger need to have generated a trigger in all other detectors. The time difference at which the peak was found in each detector is furthermore not allowed to be greater than the time of flight difference, which is \SI{\sim 10}{\milli\s}. The maximum separation is therefore set to \SI{15}{\milli\s}.\\
+For the two detectors Hanford and Livingston all remaining trigger pairs are combined to a network \gls{snr} given by
+\begin{equation}
+\rho_c^2=\rho_\text{H}^2 + \rho_\text{L}^2 + 2\log\lr{p(\theta)},
+\end{equation}
+where $p(\theta)$ is the astrophysical probability of a trigger observed with parameters $\theta$.\medskip\\
+To estimate the significance of the trigger, the false alarm rate of the procedure producing the reported trigger is calculated. In order to get enough data that does not contain a physical signal but captures the current detector performance, the data of one detector is shifted in time. The length of time to shift is determined by the time of flight between the two observatories. If a trigger was found in such time shifted data, we would know that it could not be a real trigger as it violates causality. To do this efficiently only the triggers for each detector are shifted in time. This procedure allows to get false alarm rate estimates of down to 1 per 100 years. The threshold of notifying other astronomers of a trigger is chosen to be 1 per 2 month.\medskip\\
+The described procedure produces reliable triggers and through the known optimal template a rough estimate of the skyposition. It is able to keep up with the detector output but introduces on average \SI{16}{\s} of latency, i.e. a trigger is reported \SI{16}{\s} after the event occurred on average.
+\begin{comment}
+This estimate of the \gls{psd} is also used to detect drifts in the detector noise. Based on this, estimates of poor detector sensitivity and unusually high \gls{snr} values, some data is vetoed and not used for further analysis.
 where $h$ is the template. To generate triggers from this time series a threshold of $\sim 5.5$ is applied to the output and several consistency tests are applied. These tests are applied to counteract the influence of non-Gaussian noise sections, \\
 \textcolor{red}{Can keep up with live data stream but adds on average 16 seconds of latency, i.e. triggers are generated 16s after the data came in. Pipeline treats every detector on its own and combines the results. Make cuts based on data quality which is estimated by estimating the PSD.}
+\end{comment}
