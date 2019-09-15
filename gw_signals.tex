@@ -336,7 +336,20 @@ Similarly $\Phi$ can be computed from the equations \eqref{def:phase_pn}, using
 \frac{\diff \Phi}{\diff v} = \frac{v^3}{M}\frac{\diff t}{\diff v}=-\frac{\diff E / \diff v}{L_\text{\gls{gw}}}.
 \end{equation}
 The integral can once more be performed analytically and the result can be found in (2.75) of \cite{frank_phd}.\\
-The time domain phase can then be constructed from equations \eqref{def:pn_equation_t} and \eqref{def:pn_equation_phi} and is called TaylorT2. In \autoref{sec:matched_filtering} we will find, however, that the analysis will be done in the frequency domain. One can construct the frequency representation of the orbital phase and in extension the entire waveform from the results of TaylorT2. These waveforms are hence called TaylorF2.
+The time domain phase can then be constructed from equations \eqref{def:pn_equation_t} and \eqref{def:pn_equation_phi} and is called TaylorT2. In \autoref{sec:matched_filtering} we will find, however, that the analysis will be done in the frequency domain. One can construct the frequency representation of the orbital phase and in extension the entire waveform from the results of TaylorT2. These waveforms are hence called TaylorF2.\\
+To do so we have to calculate
+\begin{equation}\label{def:original_fourier_transform}
+\tilde{h}(f)=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty\diff t\ h(t)e^{2\pi i f t}=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty\diff t\ A(t)\cdot e^{-2i\Phi(t)}\cdot e^{2\pi i f t}.
+\end{equation}
+To analytically solve this equation, we expand $\Phi(t)$ around the time $t_f$ where the derivative of the phase is equal to the Fourier frequency, i.e.
+\begin{equation}
+2\dot{\Phi}(t_f)\mbe 2\pi f.
+\end{equation}
+Assuming a slowly varying amplitude $\dot{A}/A\ll 2\dot{\Phi}$ and expanding $\Phi$ to second order the integral in equation \eqref{def:original_fourier_transform} can be solved to yield
+\begin{equation}
+\tilde{h}(f)=A(t_f)\sqrt{\frac{\pi}{\ddot{\Phi}(t_f)}}e^{i\left[2 \pi f t_f - 2 \Phi(t_f) - \pi / 4\right]}.
+\end{equation}
+In this derivation the spherical harmonic decomposition was disregarded and we only quoted results for the 2-2-mode. An explicit expression for the amplitude can be found in (2.84) of \cite{frank_phd}.
 \begin{comment}
 Even though the \gls{pn}-formalism allows us to model the waveforms rather accurately for a long part of the signal it still assumes circular motion and velocities to be small. As the two stars spiral together they will, however, reach a point, where circular motion is not possible anymore. This orbit is called the ''innermost stable circular orbit'' (\gls{isco}). From here the stars will plunge towards each other, velocities are high and fields are not weak anymore. Therefore, the validity of the formalism breaks down at this point. Finally, after the two bodies have merged, the remaining body will radiate off some more energy. Therefore, the signal consists of three parts: inspiral, merger and ringdown. The inspiral phase is well modeled by the \gls{pn}-formalism outlined in \autoref{sec:pn_expansion}. The ringdown can be described by \textcolor{red}{What can it be described by and where can one find an analysis of this?} The merger however is very difficult to model and usually involves numerical solutions of the Einstein equations. These, however, are very costly from a computational perspective, which is a great problem when one searches for \gls{gws}.
 \textcolor{red}{Transition into roughly describing the PN-approximation and TaylorF2 here.}
