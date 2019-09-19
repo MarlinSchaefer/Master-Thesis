@@ -93,8 +93,8 @@ With the performance these architectures suggested, we moved to more difficult d
 It again improved results a by a little. The sensitivity now didn't drop below 97\% for any of the bins, with the loudest noise sample having an \gls{snr} $\sim 8$. This is the last and best performing iteration of the network we found before the bug in the generating process was discovered and fixed. It therefore is still one of the core structures of the final architecture.\medskip\\
 \begin{figure}
 \centering
-\includegraphics[width=\textwidth]{collect_inception_res_net_rev_1.png}
-\caption[Cascading architecture of a collect-inception-res network]{The rough architecture of a cascading collect-inception-res network is shown. The preprocessing layers contain 2 convolutional layers as well as some dropout and batch normalization. The block labeled ''Some Dense'' actually consists of two separate stacks of dense layers, that reduce the output of the last inception layer down to the appropriate size. \textcolor{red}{Work on this graphic and make it a bit larger.}}\label{fig:cascade_inception_res_net}
+\includegraphics[angle=-90, origin=c, height=0.77\textheight]{collect_inception_res_net_rev_1_version_2.png}
+\caption[Cascading architecture of a collect-inception-res network]{The architecture of a cascading collect-inception-res network. The preprocessing layers are shown in \autoref{fig:preprocessing}. The postprocessing layer is shown in \autoref{fig:postprocessing}.}\label{fig:cascade_inception_res_net}
 \end{figure}
 
 \noindent Using the corrected data generator with the previously well performing inception-res networks on data, where all previously mentioned parameters were being varied, showed how big the impact of the error was. The sensitivity dropped from 95\% in every \gls{snr} bin to below 20\% in the loudest bin. The collect-inception-res network held up a bit better, dropping to 40\% sensitivity in the loudest bin. From this point we tried to recover some of the lost performance by developing new features and implementing them into the collect-inception-res network.\medskip\\

@@ -1,0 +1,43 @@
+\begin{tikzpicture}[
+neuron/.style={circle, draw=black, very thick, minimum size=1cm, transform shape},
+dot/.style={circle, draw=black, fill=black, minimum size=0.1cm, inner sep=0pt, transform shape},
+note/.style={circle, draw=black, minimum size=0pt, inner sep=0pt, transform shape},
+]
+%Layer 1
+\node[neuron] (l1_1) {};
+\node[neuron, fill={rgb:orange,1;yellow,2;pink,5}] (l1_2) [right=0.3cm of l1_1] {};
+\node[neuron, fill={rgb:orange,1;yellow,2;pink,5}] (l1_3) [right=0.3cm of l1_2] {};
+\node[neuron, fill={rgb:orange,1;yellow,2;pink,5}] (l1_4) [right=0.3cm of l1_3] {};
+\node[neuron, fill={rgb:orange,1;yellow,2;pink,5}] (l1_5) [right=0.3cm of l1_4] {};
+\node[neuron, fill={rgb:orange,1;yellow,2;pink,5}] (l1_6) [right=0.3cm of l1_5] {};
+\node[neuron] (l1_7) [right=0.3cm of l1_6] {};
+
+%Layer 2
+\node[neuron] (l2_1) [below=0.5cm of l1_2] {};
+\node[neuron, fill={rgb:orange,1;yellow,2;pink,5}] (l2_2) [right=0.3cm of l2_1] {};
+\node[neuron, fill={rgb:orange,1;yellow,2;pink,5}] (l2_3) [right=0.3cm of l2_2] {};
+\node[neuron, fill={rgb:orange,1;yellow,2;pink,5}] (l2_4) [right=0.3cm of l2_3] {};
+\node[neuron] (l2_5) [right=0.3cm of l2_4] {};
+
+%Layer 3
+\node[neuron] (l3_1) [below=0.5cm of l2_2] {};
+\node[neuron, fill={rgb:orange,1;yellow,2;pink,5}] (l3_2) [right=0.3cm of l3_1] {};
+\node[neuron] (l3_3) [right=0.3cm of l3_2] {};
+
+%Connections
+\draw (l1_2.south) -- (l2_2.north);
+\draw (l1_3.south) -- (l2_2.north);
+\draw (l1_4.south) -- (l2_2.north);
+
+\draw (l1_3.south) -- (l2_3.north);
+\draw (l1_4.south) -- (l2_3.north);
+\draw (l1_5.south) -- (l2_3.north);
+
+\draw (l1_4.south) -- (l2_4.north);
+\draw (l1_5.south) -- (l2_4.north);
+\draw (l1_6.south) -- (l2_4.north);
+
+\draw (l2_2.south) -- (l3_2.north);
+\draw (l2_3.south) -- (l3_2.north);
+\draw (l2_4.south) -- (l3_2.north);
+\end{tikzpicture}

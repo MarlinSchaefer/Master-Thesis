@@ -1,0 +1,30 @@
+\begin{tikzpicture}[
+neuron/.style={circle, draw=black, very thick, minimum size=1cm, transform shape},
+dot/.style={circle, draw=black, fill=black, minimum size=0.1cm, inner sep=0pt, transform shape},
+note/.style={circle, draw=black, minimum size=0pt, inner sep=0pt, transform shape},
+]
+%Input
+\node[neuron] (in1) {0};
+\node[neuron] (in2) [right=0.3cm of in1] {1};
+\node[neuron] (in3) [right=0.3cm of in2] {2};
+\node[neuron] (in4) [right=0.3cm of in3] {15};
+\node[neuron] (in5) [right=0.3cm of in4] {7};
+\node[neuron] (in6) [right=0.3cm of in5] {3};
+
+\node (mid1) at ($(in1)!0.5!(in2)$) {};
+\node (mid2) at ($(in3)!0.5!(in4)$) {};
+\node (mid3) at ($(in5)!0.5!(in6)$) {};
+
+%Layer 2
+\node[neuron] (out1) [below=0.9cm of mid1] {\textcolor{black}{1}};
+\node[neuron] (out2) [below=0.9cm of mid2] {\textcolor{black}{15}};
+\node[neuron] (out3) [below=0.9cm of mid3] {\textcolor{black}{7}};
+
+%Connections layer 1 -- layer 2
+\draw (in1.south) -- (out1.north);
+\draw (in2.south) -- (out1.north);
+\draw (in3.south) -- (out2.north);
+\draw (in4.south) -- (out2.north);
+\draw (in5.south) -- (out3.north);
+\draw (in6.south) -- (out3.north);
+\end{tikzpicture}

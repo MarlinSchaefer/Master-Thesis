@@ -1,0 +1,88 @@
+\begin{tikzpicture}[
+neuron/.style={circle, draw=black, very thick, minimum size=1.2cm, transform shape},
+dot/.style={circle, draw=black, fill=black, minimum size=0.1cm, inner sep=0pt, transform shape},
+note/.style={circle, draw=black, minimum size=0pt, inner sep=0pt, transform shape},
+]
+
+%Left side
+%Input Layer neurons
+\node[neuron] (inp_1) {$d_1$};
+\node[neuron] (inp_2) [below=0.3cm of inp_1] {$d_2$};
+\node[dot] (inp_v_1) [below=0.3cm of inp_2] {};
+\node[dot] (inp_v_2) [below=0.15cm of inp_v_1] {};
+\node[dot] (inp_v_3) [below=0.15cm of inp_v_2] {};
+\node[neuron] (inp_3) [below=0.3cm of inp_v_3] {$d_{n-1}$};
+\node[neuron] (inp_4) [below=0.3cm of inp_3] {$d_n$};
+%\node (inp_label) [above=0.3cm of inp_1] {Layer $i$};
+
+%Hidden Layer neurons
+\node[dot] (hid_v_2) [right=3cm of inp_v_2] {};
+\node[dot] (hid_v_1) [above=0.15cm of hid_v_2] {};
+\node[dot] (hid_v_3) [below=0.15cm of hid_v_2] {};
+\node[neuron] (hid_2) [above=0.3cm of hid_v_1] {$o_1$};
+\node[neuron] (hid_1) [above=0.3cm of hid_2] {$o_2$};
+%\node (hid_label) [above=0.3cm of hid_1] {Layer $i+1$};
+\node[neuron] (hid_3) [below=0.3cm of hid_v_3] {$o_{n-1}$};
+\node[neuron] (hid_4) [below=0.3cm of hid_3] {$o_n$};
+
+%Connections Input Layer - Hidden Layer
+\draw (inp_1.east) -- (hid_1.west);
+\draw (inp_1.east) -- (hid_2.west);
+\draw (inp_1.east) -- (hid_3.west);
+\draw (inp_1.east) -- (hid_4.west);
+
+\draw (inp_2.east) -- (hid_1.west);
+\draw (inp_2.east) -- (hid_2.west);
+\draw (inp_2.east) -- (hid_3.west);
+\draw (inp_2.east) -- (hid_4.west);
+
+\draw (inp_3.east) -- (hid_1.west);
+\draw (inp_3.east) -- (hid_2.west);
+\draw (inp_3.east) -- (hid_3.west);
+\draw (inp_3.east) -- (hid_4.west);
+
+\draw (inp_4.east) -- (hid_1.west);
+\draw (inp_4.east) -- (hid_2.west);
+\draw (inp_4.east) -- (hid_3.west);
+\draw (inp_4.east) -- (hid_4.west);
+
+%Middle line
+%\node (top_mid) [right=1cm of hid_1] {};
+%\node (bot_mid) [right=1cm of hid_4] {};
+\node (top_mid) [above right=1cm and 1cm of hid_1] {};
+\node (bot_mid) [below right=1cm and 1cm of hid_4] {};
+
+\draw (top_mid) -- (bot_mid);
+
+%Right side
+%input layer
+\node[neuron] (conv_in_1) [below right=0.3cm and 1cm of top_mid] {$d_1$};
+\node[neuron] (conv_in_2) [below=0.3cm of conv_in_1] {$d_2$};
+\node[neuron] (conv_in_3) [below=0.3cm of conv_in_2] {$d_3$};
+\node[neuron] (conv_in_4) [below=0.3cm of conv_in_3] {$d_4$};
+\node[neuron] (conv_in_5) [below=0.3cm of conv_in_4] {$d_5$};
+\node[dot] (conv_in_v1) [below=0.3cm of conv_in_5] {};
+\node[dot] (conv_in_v2) [below=0.15cm of conv_in_v1] {};
+\node[dot] (conv_in_v3) [below=0.15cm of conv_in_v2] {};
+
+%Output layer
+\node[neuron, red] (conv_out_1) [right=2cm of conv_in_2] {$o_1$};
+\node[neuron] (conv_out_2) [below=0.3cm of conv_out_1] {$o_2$};
+\node[neuron, blue] (conv_out_3) [below=0.3cm of conv_out_2] {$o_3$};
+\node[dot] (conv_out_v1) [below=0.3cm of conv_out_3] {};
+\node[dot] (conv_out_v2) [below=0.15cm of conv_out_v1] {};
+\node[dot] (conv_out_v3) [below=0.15cm of conv_out_v2] {};
+
+%Draw connections
+\draw[red] (conv_in_1.east) -- (conv_out_1.west);
+\draw[red] (conv_in_2.east) -- (conv_out_1.west);
+\draw[red] (conv_in_3.east) -- (conv_out_1.west);
+
+\draw[blue] (conv_in_3.east) -- (conv_out_3.west);
+\draw[blue] (conv_in_4.east) -- (conv_out_3.west);
+\draw[blue] (conv_in_5.east) -- (conv_out_3.west);
+
+\draw[dashed, black] (conv_in_2.east) -- (conv_out_2.west);
+\draw[dashed, black] (conv_in_3.east) -- (conv_out_2.west);
+\draw[dashed, black] (conv_in_4.east) -- (conv_out_2.west);
+\end{tikzpicture}

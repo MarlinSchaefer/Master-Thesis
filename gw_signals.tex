@@ -1,14 +1,15 @@
 \section{Gravitational-Wave Signals from Binary Neutron Star Mergers}\label{sec:gravitational_waves}
 %\textcolor{blue}{Explain the use for this section.}\\
-Gravitational waves from two inspiraling neutron stars are among the most interesting signals gravitational wave detectors can detect. They convey information about the highly relativistic regimes of gravity, about the structure of the component stars and about the formation channels of black holes or heavy neutron stars. \textcolor{red}{[Citations]} They are however also very hard to detect, as binary neutron star (\gls{bns}) systems are very light, when compared to inspiraling binary black holes (\gls{bbh}).\\
-Part 1 of this section will discuss how gravitational waves (\gls{gw}) are formed and what influences the structure of the resulting waveforms. Part 2 will go over the current method of detecting \gls{gw} and discuss the advantages and drawbacks. \textcolor{red}{Need to specify, that I use Einstein sum convention in this section and that latin indices are spacial indices, whereas greek indices are over all four components. NEED TO CHANGE MOST CITATIONS FROM BACHELOR THESIS TO ORIGINAL SOURCES! Mention bachelor thesis only as a way to look up detailed calculations. Need to specify which convention is used for $\eta^\mn$. Look for ''energy-momentum-tensor'' and replace by ''energy-momentum tensor''. Search for ''chirp-mass'' and replace by ''chirp mass''. Through entire work replace ''decent'' with ''descent'' if some value goes down. (The other just means it was okay)}
+Gravitational waves from two inspiraling neutron stars are among the most interesting signals gravitational wave detectors can detect. They convey information about the highly relativistic regimes of gravity, about the structure of the component stars and about the formation channels of black holes or heavy neutron stars \cite{test_gr_gw150914, constrain_radius_ns, formation_channels}. They are however also very hard to detect, as binary neutron star (\gls{bns}) systems are very light, when compared to inspiraling binary black holes (\gls{bbh}).\\
+Part 1 of this section will discuss how gravitational waves (\gls{gw}) are formed and what influences the structure of the resulting waveforms. Part 2 will go over the current method of detecting \gls{gw} and discuss the advantages and drawbacks.\smallskip\\
+Notationally, we use the Einstein sum convention, denote 4-dimensional space time indices by greek and spatial indices by latin letters. By convention we choose $\eta^\mn=\text{diag}(-,+,+,+)$ for the flat space time metric.\\
+\textcolor{red}{NEED TO CHANGE MOST CITATIONS FROM BACHELOR THESIS TO ORIGINAL SOURCES!}
 \subsection{The Waveform}\label{sec:the_waveform}
-\textcolor{blue}{Explain how the waveform looks like, what it depends on, maybe give the concept how it works in the context of linearized theory (quote bachelor thesis), cite important papers regarding the waveform theory.}\\
-\textcolor{red}{Maybe mention here that we only look at inspiral due to frequency range, but merger and ringdown also exist.}\\
+%\textcolor{blue}{Explain how the waveform looks like, what it depends on, maybe give the concept how it works in the context of linearized theory (quote bachelor thesis), cite important papers regarding the waveform theory.}\\
 A gravitational wave generally consists of three stages, an inspiral, a merger and a ringdown phase. In the first phase, the two bodies spiral slowly towards each other following quasi-circular orbits. Once they are close enough though, they will not be able to stay on these circular paths and plunge towards each other. This plunge results in the two bodies merging. Therefore, this phase is commonly referred to as ''merger''. After they collided the remnant will radiate off some more energy. This is the so-called ringdown phase.\\
-We will see that frequencies of \gls{gw}s coming from a \gls{bns} system are very high due to their low total mass. As such even the inspiral phase will contain frequencies higher than the ones the network can detect. For this reason we only model the inspiral phase in the following subsections.
+We will see that frequencies of \gls{gw}s coming from a \gls{bns} system are very high due to their low total mass. As such even the inspiral phase will contain frequencies higher than the ones the detectors can detect. For this reason we only model the inspiral phase in the following subsections.
 \subsubsection{Linearized Gravity}\label{sec:linearized_gravity}
-Most calculations of this section are done in detail in \cite{bachelor}.\\
+Most calculations of this section are layed out in detail in \cite{bachelor}.\\
 Gravitational waves are a prediction of the Einstein-equation
 \begin{equation}\label{def:einstein_equation}
 \mathcal{G}_\mn = \frac{8\pi G}{c^4}T_\mn,
@@ -40,18 +41,18 @@ h_\mn^\text{\gls{tt}}=
 	0 & 0         & 0        & 0\\
 \end{pmatrix}.
 \end{equation}
-\eqref{def:tt_gauge} now has only the two independent components $h_+$ and $h_\times$ left, which are called the ''plus-'' and ''cross-polarization'' of a \gls{gw}.\medskip\\
+\eqref{def:tt_gauge} now has only the two independent components $h_+$ and $h_\times$ left, which are called the ''plus-'' and ''cross-polarization'' of a \gls{gw}. \cite{gwv1}\medskip\\
 Evaluating \eqref{def:gw_equation} in vacuum reveals the wave-like character of $h_\mn$, as
 \begin{equation}\label{def:gw_wave_equation}
 \Box\bar{h}_\mn =0
 \end{equation}
-is a wave equation. Its solutions travel at the speed of light. Therefore, gravitational waves travel through space-time at the speed of light. The effect that a solution of this equation has on a ring of resting test masses is shown in \autoref{fig:gw_test_masses}. (chapter 3 \cite{bachelor})\medskip\\
+is a wave equation. Its solutions travel at the speed of light. Therefore, gravitational waves travel through space-time at the speed of light. The effect that a solution of this equation has on a ring of resting test masses is shown in \autoref{fig:gw_test_masses}.\medskip\\
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{effect_gw.pdf}
 \caption[Effect of GW on ring of test masses]{This image is taken from \cite{bachelor}. It shows the effect of a \gls{gw} passing orthogonally through a ring of test masses.}\label{fig:gw_test_masses}
 \end{figure}
-\eqref{def:gw_wave_equation} shows that \gls{gw} exist and can travel through space. It does, however, not specify how these waves are produced. To do so the energy-momentum-tensor cannot be set to $0$. Instead the full equation \eqref{def:gw_equation} needs to be solved. The solution is known to be
+\eqref{def:gw_wave_equation} shows that \gls{gw} exist and can travel through space. It does, however, not specify how these waves are produced. To do so the energy-momentum tensor cannot be set to $0$. Instead the full equation \eqref{def:gw_equation} needs to be solved. The solution is known to be
 \begin{equation}
 \bar{h}\lr{t, \vec{x}}=\frac{4 G}{c^4}\int\Diff{3}x'\ \frac{T_\mn\lr{t-\frac{\norm{\vec{x}-\vec{x}'}}{c},\vec{x}'}}{\left|\vec{x}-\vec{x}'\right|}.
 \end{equation}
@@ -71,7 +72,7 @@ As the quadrupole moment $Q_{ab}$ is simply the traceless second mass moment and
 \begin{equation}\label{def:h_quadrupole}
 \boxed{h^{\gls{tt}}_{ab}\lr{t,\vec{x}} = \frac{2 G}{c^4}\frac{1}{r}\ddot{Q}^{\gls{tt}}_{ab}\lr{t-r/c}}
 \end{equation}
-with $Q_{ab}\coloneqq I_{ab} - \frac{1}{3}\delta_{ab}I^c_c$. This is the famous quadrupole formula. (chapter 5.2 in \cite{bachelor})\medskip\\
+with $Q_{ab}\coloneqq I_{ab} - \frac{1}{3}\delta_{ab}I^c_c$. This is the famous quadrupole formula. \cite{giuscript}\medskip\\
 
 \noindent To calculate the \gls{gw} a binary system emits, $I_{ab}$ or $Q_{ab}$ needs to be specified. Furthermore, the transverse-traceless-projection needs to be calculated. The projection turns out to be ((3.64) in \cite{gwv1})
 \begin{equation}
@@ -139,7 +140,7 @@ F_\times\lr{\theta, \varphi} &\coloneqq\cos\lr{\theta}\sin\lr{2\varphi}.
 These response functions ignore the relative motion between the earth and the emitting system, as signals from binary systems spend only a couple seconds within the sensitive frequency band. \cite{gw170817}\\
 The angle $\theta$ is taken between the propagation direction of the \gls{gw} to the (outwards facing, relative to earth) normal of the detector. $\varphi$ is the angle between one arm of the detector\footnote{If the arms were labeled with $x$ and $y$ in such a way that they form a right handed coordinate system with the outwards facing normal vector, the arm the angle $\varphi$ is taken to is the one labeled $x$.} to the projection of the propagation direction of the \gls{gw} into the detector-plane. Therefore, the angles $\theta$ and $\varphi$, or rather their projection onto a global coordinate system, are the declination and right ascension respectively. The angle $\psi$ is known as the polarization angle and is not detectable for a single detector. This is due to the reason that rotating the wave around its propagation axis has the same effect.\medskip\\
 All the calculations above disregarded the energy carried away by the \gls{gw}. To include it one needs to calculate the luminosity of a \gls{gw}-source, which in turn requires the computation of an effective energy-momentum tensor of the \gls{gw} itself.\\
-To get this energy-momentum tensor, second order corrections in $h$ of $R_\mn$ need to be computed and averaged over time. The result is \textcolor{red}{[Citation]}
+To get this energy-momentum tensor, second order corrections in $h$ of $R_\mn$ need to be computed and averaged over time. The result is (equation (2.37) in \cite{gwv1})
 \begin{equation}
 t_\mn = \frac{c^4}{32\pi G}\langle\partial_\mu h^{\sigma\alpha}\partial_\nu h_{\sigma\alpha}\rangle.
 \end{equation}
@@ -172,7 +173,7 @@ One can again utilize \eqref{def:kepler_third_law} to eliminate $R$ and $\dot{R}
 \begin{equation}\label{def:frequency_evolution_differential}
 \dot{f}_\text{\gls{gw}}=\frac{96}{5}\pi^{8/3}\lr{\frac{G M_c}{c^3}}^{5/3}f_\text{\gls{gw}}^{11/3}.
 \end{equation}
-This equation describes a runaway process, as for a positive value $f_\text{\gls{gw}}$ the change in frequency is positive, leading to a larger value of $f_\text{\gls{gw}}$ and so on. This in turn by \eqref{def:kepler_third_law} means that the two masses will come closer and closer together until they touch. The point in time at which the waveform shuts off, will be denoted by $t_\text{coal}$. With this, one can define the time until coalescence $\tau=t_\text{coal}-t$ and solve the differential equation \eqref{def:frequency_evolution_differential}. \textcolor{red}{[Cite p.170 \cite{gwv1}]}
+This equation describes a runaway process, as for a positive value $f_\text{\gls{gw}}$ the change in frequency is positive, leading to a larger value of $f_\text{\gls{gw}}$ and so on. This in turn by \eqref{def:kepler_third_law} means that the two masses will come closer and closer together until they touch. The point in time at which the waveform shuts off, will be denoted by $t_\text{coal}$. With this, one can define the time until coalescence $\tau=t_\text{coal}-t$ and solve the differential equation \eqref{def:frequency_evolution_differential}. (p.170 \cite{gwv1})
 \begin{equation}\label{def:frequency evolution}
 f_\text{\gls{gw}}\lr{\tau} = \frac{1}{\pi}\lr{\frac{5}{256}\frac{1}{\tau}}^{3/8}\lr{\frac{G M_c}{c^3}}^{-5/8}
 \end{equation}
@@ -190,9 +191,8 @@ where $\Phi_0$ is the phase at $\tau=0$, i.e. at coalescence. Therefore, this va
 h_+\lr{t} & = \frac{1}{r}\lr{\frac{G M_c}{c^2}}^{5/4}\lr{\frac{5}{c\tau}}^{1/4}\lr{\frac{1+\cos^2\lr{\iota}}{2}}\cos\lr{\Phi\lr{\tau}}\nonumber\\
 h_\times\lr{t} & = \frac{1}{r}\lr{\frac{G M_c}{c^2}}^{5/4}\lr{\frac{5}{c\tau}}^{1/4}\cos\lr{\iota}\cos\lr{\Phi\lr{\tau}}.
 \end{align}
-Inserting \eqref{def:linear_waveforms_time_evolution} and \eqref{def:detector_response} shows that in linearized theory the output of a detector depends on 8 parameters. These are the luminosity distance $r$, the chirp mass $M_c$, the coalescence time $t_\text{coal}$, the coalescence phase $\Phi_0$, the inclination $\iota$, the declination $\theta$, the right ascension $\varphi$ and the polarization angle $\psi$. The first four parameters are source intrinsic parameters, where $M_c$ is a combination of the component masses $m_1$ and $m_2$. In that sense the parameter space can be extended to be 9-dimensional.\\
-\autoref{fig:linear_waveform} shows an example of the time evolution of a waveform described by \eqref{def:linear_waveforms_time_evolution}. \textcolor{red}{To obtain the spin effects in linearized gravity, one could write down the lagrangian of two spinning particles orbiting each other, solving the lagrange equation for the trajectories of the particles and insert these trajectories into the definition of the quadrupole tensor. (At least that's how I think it could be done. If there is time, maybe do these calculations.)}\\
-Alongside energy, \gls{gw} also carry away angular momentum from the source. Using the quadrupole radiation \eqref{def:h_quadrupole}, the change in angular momentum evaluates to ((3.97) in \cite{gwv1})
+Inserting \eqref{def:linear_waveforms_time_evolution} and \eqref{def:detector_response} shows that in linearized theory the output of a detector depends on 8 parameters. These are the luminosity distance $r$, the chirp mass $M_c$, the coalescence time $t_\text{coal}$, the coalescence phase $\Phi_0$, the inclination $\iota$, the declination $\theta$, the right ascension $\varphi$ and the polarization angle $\psi$. (section 4.1.1 in \cite{gwv1}) The first four parameters are source intrinsic parameters, where $M_c$ is a combination of the component masses $m_1$ and $m_2$. In that sense the parameter space can be extended to be 9-dimensional. \autoref{fig:linear_waveform} shows an example of the time evolution of a waveform described by \eqref{def:linear_waveforms_time_evolution}.\\ %\textcolor{red}{To obtain the spin effects in linearized gravity, one could write down the lagrangian of two spinning particles orbiting each other, solving the lagrange equation for the trajectories of the particles and insert these trajectories into the definition of the quadrupole tensor. (At least that's how I think it could be done. If there is time, maybe do these calculations.)}\\
+Alongside energy, \gls{gw}s also carry away angular momentum from the source. Using the quadrupole radiation \eqref{def:h_quadrupole}, the change in angular momentum evaluates to ((3.97) in \cite{gwv1})
 \begin{equation}
 \frac{dJ^i}{dt}=\frac{2G}{c^5}\varepsilon^{ikl}\langle \ddot{Q}_{ka}\dddot{Q}_{la}\rangle .
 \end{equation}
@@ -207,14 +207,14 @@ Even though this work deals with \gls{bns}-signals, we neglect spin effects and 
 \subsubsection{Post-Newtonian Expansion}\label{sec:pn_expansion}
 This part closely follows chapter 5 in \cite{gwv1}, mainly stating results and concepts.\\
 As we will see in \autoref{sec:matched_filtering}, accurate models for the waveforms are necessary to detect \gls{gw} using traditional methods. This does not change for an approach utilizing machine learning algorithms, as they can only detect waveforms from distributions they have sampled before. \textcolor{red}{Citation?} Though the waveform derived in \eqref{def:linear_waveforms_time_evolution} gives a good qualitative overview of the rough amplitude evolution of inspiraling binary systems, it is hardly an accurate model. The main drawback of this model are the dynamics used to describe the motion of the system. It assumes equation \eqref{def:linear_approximation} which in turn means that \gls{gws} and source-dynamics can be separated. Therefore, in linearized gravity the motion of a binary system is dictated by Newtonian dynamics, while the \gls{gws} are a relativistic effect.\\
-This issue is overcome by taking an approach called post-Newtonian expansion (\gls{pn}-expansion). To approximate the solution of the full Einstein equation \eqref{def:einstein_equation}, $g_\mn$ is expanded in powers of the small parameter $\epsilon\sim v/c \sim \lr{R_s / d}^{1/2}$, instead of using $g_\mn\approx h_\mn +\eta_\mn$. Here $v$ is the typical speed inside the source, $R_s$ is the Schwarzschild radius attributed to the system's total mass and $d$ is the diameter of a world-tube containing the support of the energy-momentum-tensor of the source. Therefore, $\epsilon$ is small if the source is not too compact and speeds are low compared to the speed of light.\\
-Specifically the metric expands to \textcolor{red}{(Mention why they start at different orders?)}
+This issue is overcome by taking an approach called post-Newtonian expansion (\gls{pn}-expansion). To approximate the solution of the full Einstein equation \eqref{def:einstein_equation}, $g_\mn$ is expanded in powers of the small parameter $\epsilon\sim v/c \sim \lr{R_s / d}^{1/2}$, instead of using $g_\mn\approx h_\mn +\eta_\mn$. Here $v$ is the typical speed inside the source, $R_s$ is the Schwarzschild radius attributed to the system's total mass and $d$ is the diameter of a world-tube containing the support of the energy-momentum tensor of the source. Therefore, $\epsilon$ is small if the source is not too compact and speeds are low compared to the speed of light.\\
+Specifically the metric expands to% \textcolor{red}{(Mention why they start at different orders?)}
 \begin{align}\label{def:pn_expansion_metric}
 g_{00} && = & -1 && +{g^{(2)}}_{00} & +{g^{(4)}}_{00} && +{g^{(6)}}_{00} && +\dotsc\nonumber\\
 g_{0j} && = & && & +{g^{(3)}}_{0j} && +{g^{(5)}}_{0j} && +\dotsc\\
 g_{ij} && = & &&\delta_{ij} & +{g^{(2)}}_{ij} && +{g^{(4)}}_{ij} && +\dotsc,\nonumber
 \end{align}
-where ${g^{(n)}}$ denotes a term $\sim \epsilon^n$. The energy-momentum-tensor can be expanded in an equivalent way
+where ${g^{(n)}}$ denotes a term $\sim \epsilon^n$. The energy-momentum tensor can be expanded in an equivalent way
 \begin{align}\label{def:pn_expansion_energy_momentum_tensor}
 T^{00} & = {T^{(0)}}^{00}+{T^{(2)}}^{00}+\cdots\nonumber\\
 T^{0i} & = {T^{(1)}}^{0i}+{T^{(3)}}^{0i}+\cdots\\
@@ -251,7 +251,7 @@ Furthermore
 \begin{equation}\label{def:pn_tau}
 \tau^\mn = \lr{-g}T^\mn + \frac{c^4}{16\pi G}\Lambda^\mn,
 \end{equation}
-with $\Lambda^\mn$ being a tensor that depends highly nonlinearly on $k$ and $g$. The expression is given in (5.74) of \cite{gwv1}. To simplify the relaxed Einstein equation \eqref{def:einstein_equation_relaxed} in the far field, we denote that the energy-momentum-tensor of matter $T^\mn$ vanishes outside the source. Therefore the task is solving
+with $\Lambda^\mn$ being a tensor that depends highly nonlinearly on $k$ and $g$. The expression is given in (5.74) of \cite{gwv1}. To simplify the relaxed Einstein equation \eqref{def:einstein_equation_relaxed} in the far field, we denote that the energy-momentum tensor of matter $T^\mn$ vanishes outside the source. Therefore the task is solving
 \begin{equation}
 \Box k^\mn = \Lambda^\mn.
 \end{equation}
