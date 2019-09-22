@@ -252,4 +252,15 @@ The highest p-score assigned to any noise sample of the validation set was 0.408
 \caption[False alarm rate for p-score log-scale]{The false alarm rate given as a function of the recovered $-\log(\text{p-score})$. The statistics are evaluated on the testing set of duration \SI{4927488}{\s}. It is a re-scaled version of \autoref{fig:false_alarm_p} to better resolve the evolution at high p-scores. The black, dotted line shows an estimated upper limit of the false alarm rate that was used to generate the results of \cite{bns_network}.}\label{fig:false_alarm_p_log}
 \end{figure}
 
-\noindent The false alarm rate alone is not useful to us. Instead we want to know how many signals we can reliably recover. For this reason we calculate the volume our search is sensitive for. We give it in terms of the radius a sphere would need to encompass the given volume.\\
+\noindent The false alarm rate alone is not useful to us. Instead we want to know how many signals we can reliably recover. For this reason we calculate the volume our search is sensitive to and give the result in terms of the radius of a corresponding sphere. The result is plotted in \autoref{fig:sens_radius}.\\
+\textcolor{red}{Points I want to make: At a false alarm rate on the level of \cite{bns_network} we have a sensitive range of 175 mega parsec. Sources at that distance will receive a SNR (if put through pycbc.filter.sigma) of 20. This corresponds to a pSNR of about 0.5, at which \cite{bns_network} claims to reach 100\% sensitivity. If we factor in the factor of 2.26 which will be lost due to sky position, the SNR will be around 8.9 at that distance. This corresponds to pSNR 0.23. At that value they claim a sensitivity of roughly 5\%, which we easily beat. Can I draw any real conclusion from this? Maybe varying sky position is more important than source parameters? About the comparison to matched filtering. A rough estimate of the sensitive range at SNR 8 would be 194.8 mega parsec, by calculating the sigma of a face on waveform at distance 1 and rescaling it by that factor. The result needs to be divided by 2.26 to average over all sky positions.) Overall we are not as sensitive as matched filtering even at very high false alarm rates. With further improvements to the architecture we might get there however.}
+\begin{figure}
+\centering
+\includegraphics[width=0.73\textwidth]{SensitivitySNR.png}
+\caption[Sensitivie volume]{The plot shows the sensitivity of the network for both detection statistics. They are very close for high false alarm rates, but split up below a false alarm rate of about 100 samples per month. The p-score is the better statistic at low false alarm rates. The y-axis gives the radius of a sphere. The search is sensitive to sources within this sphere.}\label{fig:sens_radius}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=0.73\textwidth]{SensitivityPercentage.png}
+\caption[Sensitivity as ratio]{The plot shows the ratio of detected signals over the total number of injected signals. The behavior of both curves closely matches that of \autoref{fig:sens_radius}.}
+\end{figure}

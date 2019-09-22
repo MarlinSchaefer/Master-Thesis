@@ -1,3 +1,12 @@
 \section{Conclusions}
 \textcolor{blue}{Well duh, give a conclusion and maybe outlook.}\\
 \textcolor{red}{Mention that the PyCBC Live pipeline has probably (talk to Alex about this) a higher latency than our search (they have latency on average \SI{16}{\s} \cite{pycbc_live}) but already give rough parameter estimation and sky localization which we can't do. They furthermore are a lot more sensitive.}
+\begin{itemize}
+	\item First time anybody tested sensitivity of a \gls{nn} for \gls{bns} signals at such a low false alarm rate
+	\item Computationally very efficient therefore lower latency (need to quantify this)
+	\item At the moment network probably too complicated and therefore hyper parameters probably not optimal
+	\item Introduced new architecture of using a TCN as denoiser. Also the cascading architecture is new and promising
+	\item Network not yet ready to use
+	\item Couldn't work with real detector data yet, as it also wouldn't be sensible with our sensitivity
+	\item Still interesting as it has shown potential with easier data
+\end{itemize}
