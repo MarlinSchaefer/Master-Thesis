@@ -210,27 +210,27 @@ For this work, we choose values $a=4, b=8$ and $k=2.2$.
 \end{figure}
 
 \section{Illustrations Final Architecture}\label{app:illustrations_final_architecture}
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[angle=-90, origin=c, height=0.8\textheight]{Final_architecture.png}
 \caption[Overview final architecture]{\textcolor{red}{Description, need to show auxiliary outputs}}\label{fig:high_level_final_network}
 \end{figure}
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.5\textwidth]{TCN-block.png}
 \caption[TCN-Block]{Shown is a single \gls{tcn}-block at depth $i$. A complete \gls{tcn} stacks multiple of these on top of each other.}\label{fig:tcn_block}
 \end{figure}
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.5\textwidth]{Preprocessing.png}
 \caption[Preprocessing of inception network]{Shown are the specific layers of the preprocessing step in the final network. A ConvBlock with a specified kernel size and number of  filters is understood to have a convolution layer with these properties.}\label{fig:preprocessing}
 \end{figure}
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{Inception_stack.png}
 \caption[Inception-Res Block]{Shown is an inception block of the final architecture. Each one contains two inception modules, which are depicted to the right. Each layer of the inception module is equipped with a ReLU activation function and all convolution layers pad their input in such a way that the output has the same size as the input.}\label{fig:inception_block}
 \end{figure}
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[height=0.5\textheight]{postprocessing.png}
 \caption[Postprocessing of inception network]{Shown are the specific layers of the postprocessing step. They are mainly used to reduce the output of the collect-inception network that preceed it to the wanted quantities and their shapes.}\label{fig:postprocessing}

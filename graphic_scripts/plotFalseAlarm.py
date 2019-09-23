@@ -5,6 +5,8 @@ import os
 from latex_images_path import images_path
 
 def main():
+    FontSize = 48
+    
     results_path = '/home/marlin/Documents/Documents/Studium/Masterarbeit/Forschungsphase/Code/Git/master_project/bns_net/saves/long_data_2/results'
     snrFalseAlarmPath = os.path.join(results_path, 'SNR_200_steps_false_alarm.hf5')
     pFalseAlarmPath = os.path.join(results_path, 'p_score_200_steps_new_log_false_alarm.hf5')
@@ -15,7 +17,7 @@ def main():
     #Plot SNR false alarm rate
     dpi = 96
     plt.figure(figsize=(1920.0/dpi, 1440.0/dpi), dpi=dpi)
-    plt.rcParams.update({'font.size': 32, 'text.usetex': 'true'})
+    plt.rcParams.update({'font.size': FontSize, 'text.usetex': 'true'})
     
     with h5py.File(snrFalseAlarmPath, 'r') as f:
         x = f['x'][:]
@@ -34,7 +36,7 @@ def main():
     #Plot p-score false alarm rate
     dpi = 96
     plt.figure(figsize=(1920.0/dpi, 1440.0/dpi), dpi=dpi)
-    plt.rcParams.update({'font.size': 32, 'text.usetex': 'true'})
+    plt.rcParams.update({'font.size': FontSize, 'text.usetex': 'true'})
     
     with h5py.File(pFalseAlarmPath, 'r') as f:
         x = f['x'][1:]
@@ -53,7 +55,7 @@ def main():
     #Plot p-score false alarm rate 2
     dpi = 96
     plt.figure(figsize=(1920.0/dpi, 1440.0/dpi), dpi=dpi)
-    plt.rcParams.update({'font.size': 32, 'text.usetex': 'true'})
+    plt.rcParams.update({'font.size': FontSize, 'text.usetex': 'true'})
     
     with h5py.File(pFalseAlarmPath, 'r') as f:
         x = -np.log(1-f['x'][1:])

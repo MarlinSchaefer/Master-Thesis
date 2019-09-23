@@ -5,6 +5,7 @@ import os
 from latex_images_path import images_path
 
 def main():
+    FontSize = 48
     results_path = '/home/marlin/Documents/Documents/Studium/Masterarbeit/Forschungsphase/Code/Git/master_project/bns_net/saves/long_data_2/results'
     snrSensPath = os.path.join(results_path, 'new_SNR_200_steps_sensitivty.hf5')
     pSensPath = os.path.join(results_path, 'p_score_200_steps_new_log_sensitivty.hf5')
@@ -14,9 +15,9 @@ def main():
     
     #Plot sensitivity as range
     dpi = 96
-    plt.rcParams.update({'font.size': 32, 'text.usetex': 'true'})
+    plt.rcParams.update({'font.size': FontSize, 'text.usetex': 'true'})
     fig, ax = plt.subplots(figsize=(1920.0/dpi, 1440.0/dpi), dpi=dpi)
-    plt.rcParams.update({'font.size': 32, 'text.usetex': 'true'})
+    plt.rcParams.update({'font.size': FontSize, 'text.usetex': 'true'})
     
     with h5py.File(snrSensPath, 'r') as f:
         x = f['x'][:]
@@ -40,9 +41,9 @@ def main():
     
     #Plot sensitivity as percentage
     dpi = 96
-    plt.rcParams.update({'font.size': 32, 'text.usetex': 'true'})
+    plt.rcParams.update({'font.size': FontSize, 'text.usetex': 'true'})
     fig, ax = plt.subplots(figsize=(1920.0/dpi, 1440.0/dpi), dpi=dpi)
-    plt.rcParams.update({'font.size': 32, 'text.usetex': 'true'})
+    plt.rcParams.update({'font.size': FontSize, 'text.usetex': 'true'})
     
     with h5py.File(snrSensPath, 'r') as f:
         x = f['x'][:]
