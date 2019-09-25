@@ -38,6 +38,9 @@ def main():
         minIdx = np.argmin(np.abs(p - pt))
         lab = p[minIdx]
         plt.semilogy(x[0], z[minIdx], label='p-score: %.2f' % lab, color=colors[i])
+        print("False alarm rate SNR at p-score: %.2f" % lab)
+        print("Max (x, y): ({}, {})".format(x[0][0], z[minIdx][0]))
+        print("Min (x, y): ({}, {})".format(x[0][-1], z[minIdx][-1]))
     plt.xlabel('SNR')
     plt.ylabel('False alarms per month')
     #plt.plot([min(snr), max(snr)], [15500, 15500], color='black', linestyle='dotted', label='Upper limit Krastev', linewidth=2)
@@ -71,6 +74,9 @@ def main():
         minIdx = np.argmin(np.abs(snr - pt))
         lab = snr[minIdx]
         plt.semilogy(y.transpose()[0], z.transpose()[minIdx], label='SNR: %.2f' % lab, color=colors[i])
+        print("False alarm rate p-score at SNR: %.2f" % lab)
+        print("Max (x, y): ({}, {})".format(y.transpose()[0][0], z.transpose()[minIdx][0]))
+        print("Min (x, y): ({}, {})".format(y.transpose()[0][-2], z.transpose()[minIdx][-2]))
     plt.xlabel('p-score')
     plt.ylabel('False alarms per month')
     #plt.plot([min(p), max(p)], [15500, 15500], color='black', linestyle='dotted', label='Upper limit Krastev', linewidth=2)
