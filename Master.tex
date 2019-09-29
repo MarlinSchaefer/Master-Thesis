@@ -32,7 +32,7 @@
 %Provides the ability to change page layout and sizes
 \usepackage{geometry}
 %This package handles the Glossary, the option 'toc' adds it to the table of contents, 'nonumberlist' makes it so that the glossary doesn't link to the page(s) the abbreviations were used.
-\usepackage[toc,nonumberlist]{glossaries}
+\usepackage[toc, nonumberlist]{glossaries}
 %Used for better enneededumerations
 \usepackage{multicol}
 %
@@ -62,6 +62,9 @@
 \usepackage{listings}
 
 \graphicspath{ {images/} }
+
+%Forbid footnotes to spill onto next page.
+\interfootnotelinepenalty=10000
 
 %The following is a macro to handle the links within the bibliography
 \newbibmacro{string+doiurlisbn}[1]{%
@@ -170,43 +173,45 @@
 \begin{document}
 \lstset{language=Python}
 
-\newglossaryentry{sr}{name=SR, description={special relativity}}
-\newglossaryentry{gw}{name=GW, description={gravitational wave}}
-\newglossaryentry{gws}{name=GWs, description={gravitational waves}}
-\newglossaryentry{gr}{name=GR, description={general relativity}}
-\newglossaryentry{pn}{name=PN, description={post Newtonian approximation}}
+\newglossaryentry{sr}{name=SR, description={Special relativity}}
+\newglossaryentry{gw}{name=GW, description={Gravitational wave}}
+\newglossaryentry{gws}{name=GWs, description={Gravitational waves}}
+\newglossaryentry{gr}{name=GR, description={General relativity}}
+\newglossaryentry{pn}{name=PN, description={Post-Newtonian approximation}}
 \newglossaryentry{ligo}{name=LIGO, description=Laser Interferometer Gravitational-Wave Observatory (USA)}
 \newglossaryentry{utc}{name=UTC, description=Coordinated Universal Time}
 \newglossaryentry{dgl}{name=DGL, description=Differenzialgleichung/en}
-\newglossaryentry{mf}{name=MF, description=manifold}
-\newglossaryentry{tt}{name=TT, description=transversal-traceless gauge}
+\newglossaryentry{mf}{name=MF, description=Manifold}
+\newglossaryentry{tt}{name=TT, description=Transversal-traceless gauge}
 \newglossaryentry{obda}{name=o.B.d.A. , description=ohne Beschränkung der Allgemeinheit}
 \newglossaryentry{onb}{name=ONB, description=Orthonormalbasis}
 \newglossaryentry{bns}{name=BNS, description=Binary neutron star}
 \newglossaryentry{bbh}{name=BBH, description=Binary black hole}
-\newglossaryentry{isco}{name=ISCO, description=innermost stable circular orbit}
-\newglossaryentry{virgo}{name=VIRGO, description=earthbound gravitational wave detector in Italy}
-\newglossaryentry{pdf}{name=PDF, description=probability density function}
+\newglossaryentry{isco}{name=ISCO, description=Innermost stable circular orbit}
+\newglossaryentry{virgo}{name=VIRGO, description=Earthbound gravitational wave detector in Italy}
+\newglossaryentry{pdf}{name=PDF, description=Probability density function}
 \newglossaryentry{skp}{name=SKP, description=Skalarprodukt}
 \newglossaryentry{gpu}{name=GPU, description=Graphics processing unit}
-\newglossaryentry{pm}{name=PM, description=Post-Minkowski'sche Näherung}
-\newglossaryentry{eob}{name=EOB, description=effective one body problem}
+\newglossaryentry{pm}{name=PM, description=Post-Minkowskian approximation}
+\newglossaryentry{eob}{name=EOB, description=Effective one body problem}
 \newglossaryentry{nn}{name=NN, description=Neural network}
 \newglossaryentry{nns}{name=NNs, description=Neural networks}
 \newglossaryentry{cnn}{name=CNN, description=Convolutional neural network}
 \newglossaryentry{cnns}{name=CNNs, description=Convolutional neural networks}
-\newglossaryentry{ffn}{name=FFN, description=feed forward (neural) network}
-\newglossaryentry{rnn}{name=RNN, description=recurrent neural network}
-\newglossaryentry{rnns}{name=RNNs, description=recurrent neural networks}
-\newglossaryentry{snr}{name=SNR, description=signal to noise ratio}
-\newglossaryentry{mse}{name=MSE, description=mean squared error}
+\newglossaryentry{ffn}{name=FFN, description=Feed forward (neural) network}
+\newglossaryentry{rnn}{name=RNN, description=Recurrent neural network}
+\newglossaryentry{rnns}{name=RNNs, description=Recurrent neural networks}
+\newglossaryentry{snr}{name=SNR, description=Signal to noise ratio}
+\newglossaryentry{mse}{name=MSE, description=Mean squared error}
 \newglossaryentry{ilsvrc}{name=ILSVRC, description=ImageNet Large Scale Visual Recognition Challenge}
 \newglossaryentry{tcn}{name=TCN, description=Temporal convolutional network}
 \newglossaryentry{sgd}{name=SGD, description=Stochastic gradient descent}
 \newglossaryentry{psd}{name=PSD, description=Power spectral density}
 \newglossaryentry{tcin}{name=TCIN, description=TCN-collect-inception network}
 \newglossaryentry{em}{name=EM, description=Electromagnetic}
-\newglossaryentry{asd}{name=ASD, description=amplitude spectral density}
+\newglossaryentry{asd}{name=ASD, description=Amplitude spectral density}
+\newglossaryentry{relu}{name=ReLU, description=Rectified linear unit}
+\newglossaryentry{psnr}{name=pSNR, description=Peak signal-to-noise ratio}
 
 \pagenumbering{Roman}
 %\maketitle
@@ -236,7 +241,7 @@
 
 \setcounter{page}{2}
 $\ $
-\textcolor{red}{This page is intentionally left blank. LÖSCHEN!!! Damit Eigenständigkeitserklärung nicht auf Rückseite gedruckt ist.}
+%\textcolor{red}{This page is intentionally left blank. LÖSCHEN!!! Damit Eigenständigkeitserklärung nicht auf Rückseite gedruckt ist.}
 \thispagestyle{empty}
 \newpage
 
@@ -258,20 +263,21 @@ Ort, Datum & Marlin Benedikt Schäfer\\
 
 \setcounter{page}{4}
 $\ $
-\textcolor{red}{This page is intentionally left blank. LÖSCHEN!!! Damit Inhaltsverzeichnis nicht auf Rückseite gedruckt ist.}
+%\textcolor{red}{This page is intentionally left blank. LÖSCHEN!!! Damit Inhaltsverzeichnis nicht auf Rückseite gedruckt ist.}
 \thispagestyle{empty}
 \newpage
 
 \setcounter{page}{5}
 \section*{Abstract}\label{sec_abstract}
-\textcolor{red}{Put the abstract here}
+Gravitational waves are now observed routinely. Therefore, data analysis has to keep up with ever improving detectors. One relatively new tool to search for gravitational wave signals in detector data are machine learning algorithms that utilize deep neural networks. The first successful application was able to differentiate time series strain data that contains a gravitational wave from a binary black hole merger from data that consists purely of noise. This work expands the analysis to signals from binary neutron star mergers, where a rapid detection is most valuable, as electromagnetic counterparts might otherwise be missed or not observed for long enough. We showcase many different architecture, discuss what choices improved the sensitivity of our search and introduce a new multi-rate approach. We find that the final algorithm gives state of the art performance in comparison to other search pipelines that use deep neural networks. On the other hand we also conclude that our analysis is not yet able to achieve sensitivities that are on par with template based searches. We report our results at false alarm rates down to \SI[per-mode=fraction]{\sim 30}{\samples\per\month} which has not been tested by other neural network algorithms. We hope to provide information about useful architectural choices and improve our algorithm in the future to achieve sensitivities and false alarm rates that rival matched filtering based approaches on.
+%\textcolor{red}{Put the abstract here}
 
 \thispagestyle{empty}
 \newpage
 
 \setcounter{page}{6}
 $\ $
-\textcolor{red}{This page is intentionally left blank. LÖSCHEN!!! Damit Inhaltsverzeichnis nicht auf Rückseite gedruckt ist.}
+%\textcolor{red}{This page is intentionally left blank. LÖSCHEN!!! Damit Inhaltsverzeichnis nicht auf Rückseite gedruckt ist.}
 \thispagestyle{empty}
 \newpage
 
@@ -288,7 +294,7 @@ $\ $
 
 \setcounter{page}{10}
 $\ $
-\textcolor{red}{This page is intentionally left blank. LÖSCHEN!!! Damit erste Seite nicht auf Rückseite gedruckt ist.}
+%\textcolor{red}{This page is intentionally left blank. LÖSCHEN!!! Damit erste Seite nicht auf Rückseite gedruckt ist.}
 \thispagestyle{empty}
 \newpage
 
@@ -319,7 +325,8 @@ $\ $
 $\ $
 \newpage
 
-\printglossaries
+%\printglossaries
+\printglossary[title={Abbreviations}]
 
 \newpage
 $\ $

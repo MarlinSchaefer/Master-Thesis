@@ -61,7 +61,7 @@ It can be constructed from the three basic logic operations ''and'', ''or'' and 
 \begin{equation}
 x_1\veebar x_2 = \lnot\lr{\lr{x_1\land x_2}\lor\lnot\lr{x_1\lor x_2}}.
 \end{equation}
-Therefore the basic neurons from \autoref{tab:neuron_logic_gates} can be combined to create a ''XOR''-network (see \autoref{fig:xor_net}).\\
+Therefore, the basic neurons from \autoref{tab:neuron_logic_gates} can be combined to create a ''XOR''-network (see \autoref{fig:xor_net}).\\
 To simplify readability from here on out a neuron called ''XOR'' will be used. It is defined by the network of \autoref{fig:xor_net} and has to be replaced by it, whenever it is used.\\
 With this ''XOR''-neuron a network, that behaves like a full-adder, can be defined. A full-adder is a binary adder with carry in and carry out, as seen in \autoref{fig:full_adder}.
 \begin{figure}[H]
@@ -110,7 +110,7 @@ as expected. The value of $g$ at this point will be the expectation value of the
 \end{comment}
 
 \section{Deriving Custom Loss}\label{app:custom_loss}
-For this work the binary decision of ''signal'' vs. ''no-signal'' is more important for the performance of the network, than how accurate the predicted \gls{snr}-value is. Therefore we would like the network to have a bias towards underestimating the \gls{snr}-values of pure noise examples and overestimate those of \gls{gw}-signals. To achieve this behavior, we tried to use a new loss function, that exponentially penalizes overestimating pure noise samples and underestimating \gls{gw}-signals. For backpropagation to work properly, the loss will need to be differentiable and its derivative needs to be continuous everywhere.\\
+For this work the binary decision of ''signal'' vs. ''no-signal'' is more important for the performance of the network, than how accurate the predicted \gls{snr}-value is. Therefore, we would like the network to have a bias towards underestimating the \gls{snr}-values of pure noise examples and overestimate those of \gls{gw}-signals. To achieve this behavior, we tried to use a new loss function, that exponentially penalizes overestimating pure noise samples and underestimating \gls{gw}-signals. For backpropagation to work properly, the loss will need to be differentiable and its derivative needs to be continuous everywhere.\\
 As a starting point we will use the pure noise case first and adapt it to the full loss later on. We start at a distribution of values we want to achieve and later turn it into an error function. This distribution should exponentially decay for values larger than some fixed value and decay like $1/x$ for values smaller than this fixed value. The exponential part was inspired by the solution of the hydrogen atom, though the decay for this case goes like $x^2$. For this reason, we matched
 \begin{align}
 f_1(x) & = x^2 e^{-x}\\
@@ -155,7 +155,7 @@ In principle the loss for given values $a$ and $b$ could than be written as
 \begin{equation}\label{def:loss_original}
 L_\text{exp}\lr{y_\text{net}, y_\text{label}}=\text{Err}_\text{rotate}\lr{z, g(y_\text{label},a,b)},
 \end{equation}
-with $z=y_\text{net}-y_\text{label}$. There are however problems with this definition. First of all, the exponential part is smaller than the linear part for small values of $z$. This is especially true for values $\left| z\right| <2$. This is a problem, as the \gls{snr}-value assigned to pure noise and the smallest signal \gls{snr}-value are about $4$ apart. Therefore there would be an overlapping region for pure noise and small \gls{snr} signals, that is favored by the loss.\\
+with $z=y_\text{net}-y_\text{label}$. There are however problems with this definition. First of all, the exponential part is smaller than the linear part for small values of $z$. This is especially true for values $\left| z\right| <2$. This is a problem, as the \gls{snr}-value assigned to pure noise and the smallest signal \gls{snr}-value are about $4$ apart. Therefore, there would be an overlapping region for pure noise and small \gls{snr} signals, that is favored by the loss.\\
 To solve this issue one can simply introduce a squish factor $s$, which the input to the error is multiplied by
 \begin{equation}\label{def:loss_squished}
 L_\text{squish}\lr{y_\text{net}, y_\text{label}}\coloneqq \text{Err}_\text{rotate}\lr{s\cdot z, g(y_\text{label},a,b)}.
@@ -212,8 +212,8 @@ For this work, we choose values $a=4, b=8$ and $k=2.2$.
 \section{Illustrations Final Architecture}\label{app:illustrations_final_architecture}
 \begin{figure}[H]
 \centering
-\includegraphics[angle=-90, origin=c, height=0.8\textheight]{Final_architecture.png}
-\caption[Overview final architecture]{\textcolor{red}{Description, need to show auxiliary outputs}}\label{fig:high_level_final_network}
+\includegraphics[angle=-90, origin=c, height=0.69\textheight]{Final_architecture.png}
+\caption[Overview final architecture]{Shown is a high level overview of the final neural network architecture. The illustration does not show the auxilliary outputs after every \gls{tcn} and after all but the last concatenation layer. The first set of auxilliary ouputs are simply the outputs of the \gls{tcn} and trained for the pure waveform. The second set of auxilliary outputs takes the output of the concatenation layers and feeds them through an average pooling and a dimensional reduction layer, before condensing them down to a single number. This number is trained to be the \gls{snr} label. The reason or these auxilliary outputs is to combat the vanishing gradient problem.}\label{fig:high_level_final_network}
 \end{figure}
 \begin{figure}[H]
 \centering

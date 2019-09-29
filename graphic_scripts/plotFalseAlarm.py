@@ -27,6 +27,8 @@ def main():
     plt.xlabel('SNR')
     plt.ylabel('False alarms per month')
     plt.plot([min(x), max(x)], [15500, 15500], color='black', linestyle='dotted', label='Upper limit Krastev', linewidth=2)
+    y_low, y_high = plt.ylim()
+    plt.ylim(9*10**-1, y_high)
     plt.grid()
     plt.legend()
     plotName = 'FalseAlarmSNR.png'
@@ -46,6 +48,8 @@ def main():
     plt.xlabel('p-score')
     plt.ylabel('False alarms per month')
     plt.plot([min(x), max(x)], [15500, 15500], color='black', linestyle='dotted', label='Upper limit Krastev', linewidth=2)
+    y_low, y_high = plt.ylim()
+    plt.ylim(9*10**-1, y_high)
     plt.grid()
     plt.legend()
     plotName = 'FalseAlarmP.png'
@@ -65,6 +69,8 @@ def main():
     plt.plot([plt.xlim()[0], plt.xlim()[1]], [15500, 15500], color='black', linestyle='dotted', label='Upper limit Krastev', linewidth=2)
     plt.xlabel('$-\log (1-$p-score$)$')
     plt.ylabel('False alarms per month')
+    y_low, y_high = plt.ylim()
+    plt.ylim(9*10**-1, y_high)
     plt.grid()
     #plt.ylim(plt.ylim()[0], 100000)
     plt.legend()
